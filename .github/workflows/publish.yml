@@ -1,0 +1,123 @@
+# Publish the handbook as a website
+#
+# What it does: on every push to main, GitHub turns README.md and the guides
+# in guides/ into a small website with Quarto and publishes it on GitHub
+# Pages. README.md becomes the start page and each guide becomes one page,
+# with a menu between them and a search box.
+#
+# Nothing else depends on it. No project, build or test of the platform uses
+# this website, and nothing is installed on anyone's machine for it. If a run
+# fails, the guides can still be read as Markdown on github.com, and the last
+# website that was published stays online.
+#
+# Nothing it makes is kept in the repo. Everything Quarto needs besides the
+# Markdown (its project file and a copy of README.md named index.md) is
+# written at render time in the folder _build/, which exists only on GitHub's
+# machine for the length of the run. The Markdown files are not changed.
+#
+# One setting on github.com, made once by an owner of the organisation:
+# in this repo, Settings > Pages > Build and deployment > Source:
+# "GitHub Actions". Until then the publishing step fails.
+
+name: Publish the handbook
+
+on:
+  push:
+    branches: [main]
+
+# The least the run needs: read the repo, and publish to Pages.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One publication at a time. The run that is publishing finishes: it is not
+# cancelled. A run queued meanwhile waits, and a newer run queued after it
+# replaces it: the waiting run is cancelled.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Get the repo
+        uses: actions/checkout@v7
+
+      # The Quarto version is fixed, so a new Quarto release cannot change
+      # the website without someone choosing it.
+      - name: Install Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          version: 1.11.9
+
+      # Plain lines for Bash with GNU sed (the "sed -i" below is GNU's form),
+      # run at the top of the repo on GitHub's machine. To try them anywhere
+      # else, run them in a copy of the repo made outside the clone: nothing
+      # is to be rendered inside a clone.
+      - name: Render the guides
+        shell: bash
+        run: |
+          # A fresh folder for everything the render makes.
+          rm -rf _build
+          mkdir -p _build/guides
+
+          # README.md is the start page; Quarto wants it named index.md.
+          # Its first heading is dropped there, since the website's title
+          # already stands at the top of that page.
+          cp README.md _build/index.md
+          sed -i '1{/^# /d}' _build/index.md
+
+          # The guides, in this order, as far as each exists.
+          chapters="    - index.md"
+          for guide in researcher curator data claude; do
+            if [ -f "guides/$guide.md" ]; then
+              cp "guides/$guide.md" "_build/guides/$guide.md"
+              chapters="$chapters
+              - guides/$guide.md"
+            fi
+          done
+
+          # A link to README.md becomes a link to the start page.
+          for page in _build/index.md _build/guides/*.md; do
+            if [ -f "$page" ]; then
+              sed -i 's#](\(\.\./\)*README\.md#](\1index.md#g' "$page"
+            fi
+          done
+
+          # Quarto's project file. Each page takes its title from its first
+          # heading. Section names get the same anchors as on github.com, so
+          # a link such as curator.md#a-review-round works on the site.
+          cat > _build/_quarto.yml <<EOF
+          project:
+            type: book
+            output-dir: _site
+          book:
+            title: "Handbook"
+            chapters:
+          $chapters
+          format:
+            html:
+              from: markdown+gfm_auto_identifiers+autolink_bare_uris
+              number-sections: false
+              toc: true
+              lang: en-GB
+          EOF
+
+          quarto render _build
+
+      - name: Prepare GitHub Pages
+        uses: actions/configure-pages@v6
+
+      - name: Hand the website to GitHub Pages
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: _build/_site
+
+      - name: Publish the website
+        id: deployment
+        uses: actions/deploy-pages@v5

@@ -1,0 +1,8 @@
+# What the tests in tests/ write when they run: never committed
+tests/_t/
+tests/results.txt
+*.log
+
+# Local Claude settings and worktrees
+.claude/settings.local.json
+.claude/worktrees/

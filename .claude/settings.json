@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Bash(stata-se -b do run_tests.do)",
+      "PowerShell(StataSE-64.exe /e do run_tests.do)"
+    ],
+    "deny": [
+      "EnterWorktree",
+      "Agent(isolation:worktree)"
+    ]
+  },
+  "attribution": {
+    "commit": "",
+    "pr": "",
+    "sessionUrl": false
+  }
+}
