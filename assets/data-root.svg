@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 250" width="760" height="250" role="img" aria-labelledby="t d" font-family="system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <title id="t">The three folders of the data root</title>
+  <desc id="d">Data moves from raw, written by the curator alone, through intermediate, written by every member, to processed, written by a release alone.</desc>
+  <rect x="1" y="1" width="758" height="248" rx="10" fill="#ffffff" stroke="#d0d7de"/>
+  <text x="24" y="34" font-size="15" font-weight="600" fill="#1f2328">The data root on Dropbox: chair-research-data/</text>
+
+  <g>
+    <rect x="24" y="56" width="212" height="150" rx="8" fill="#eef2f6" stroke="#57606a" stroke-width="1.5"/>
+    <text x="40" y="84" font-size="17" font-weight="700" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" fill="#1f2328">raw/</text>
+    <text x="40" y="110" font-size="13" fill="#1f2328">Deliveries, exactly as</text>
+    <text x="40" y="128" font-size="13" fill="#1f2328">each provider sent them</text>
+    <rect x="40" y="150" width="180" height="40" rx="6" fill="#ffffff" stroke="#57606a"/>
+    <text x="130" y="167" font-size="12" text-anchor="middle" fill="#1f2328">Written by the curator.</text>
+    <text x="130" y="183" font-size="12" text-anchor="middle" fill="#1f2328">Members can only view.</text>
+  </g>
+
+  <g>
+    <rect x="274" y="56" width="212" height="150" rx="8" fill="#fff4d6" stroke="#9a6700" stroke-width="1.5"/>
+    <text x="290" y="84" font-size="17" font-weight="700" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" fill="#1f2328">intermediate/</text>
+    <text x="290" y="110" font-size="13" fill="#1f2328">Candidates, review sheets,</text>
+    <text x="290" y="128" font-size="13" fill="#1f2328">tables made by hand</text>
+    <rect x="290" y="150" width="180" height="40" rx="6" fill="#ffffff" stroke="#9a6700"/>
+    <text x="380" y="167" font-size="12" text-anchor="middle" fill="#1f2328">Written by every member</text>
+    <text x="380" y="183" font-size="12" text-anchor="middle" fill="#1f2328">and by a build.</text>
+  </g>
+
+  <g>
+    <rect x="524" y="56" width="212" height="150" rx="8" fill="#e3f4e8" stroke="#1a7f37" stroke-width="1.5"/>
+    <text x="540" y="84" font-size="17" font-weight="700" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" fill="#1f2328">processed/</text>
+    <text x="540" y="110" font-size="13" fill="#1f2328">Released versions,</text>
+    <text x="540" y="128" font-size="13" fill="#1f2328">never changed</text>
+    <rect x="540" y="150" width="180" height="40" rx="6" fill="#ffffff" stroke="#1a7f37"/>
+    <text x="630" y="167" font-size="12" text-anchor="middle" fill="#1f2328">Written by a release.</text>
+    <text x="630" y="183" font-size="12" text-anchor="middle" fill="#1f2328">Members can only view.</text>
+  </g>
+
+  <g stroke="#57606a" stroke-width="2" fill="none">
+    <line x1="238" y1="100" x2="264" y2="100"/>
+    <path d="M258 94 L266 100 L258 106"/>
+    <line x1="488" y1="100" x2="514" y2="100"/>
+    <path d="M508 94 L516 100 L508 106"/>
+  </g>
+  <text x="251" y="232" font-size="12" text-anchor="middle" fill="#57606a">a build</text>
+  <text x="501" y="232" font-size="12" text-anchor="middle" fill="#57606a">a release</text>
+  <g stroke="#8c959f" stroke-width="1" stroke-dasharray="3 3">
+    <line x1="251" y1="108" x2="251" y2="218"/>
+    <line x1="501" y1="108" x2="501" y2="218"/>
+  </g>
+</svg>

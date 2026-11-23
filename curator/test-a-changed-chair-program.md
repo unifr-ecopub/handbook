@@ -1,0 +1,51 @@
+# Test and copy a changed chair program
+
+The chair's five Stata programs live in `ado/c/` of `data-processing`. `project-template` holds a copy of four, and `chair_commit.ado` is in `data-processing` alone. After a change, both repos must pass their tests, and each copy must stay identical to its source.
+
+```mermaid
+flowchart LR
+  A["Change the program in data-processing"] --> B["Run the tests of data-processing"]
+  B --> C["Copy the program into project-template"]
+  C --> D["Run the template's tests, in handbook"]
+  D --> E["Push each repo"]
+```
+
+## Run the tests of data-processing
+
+**Ask Claude.** In `data-processing`:
+
+```text
+Run the tests.
+```
+
+**Check.** Claude gives the count from this line and quotes any failure in full:
+
+```text
+data tests: <n> passed, <n> failed (results.txt)
+```
+
+## Copy the program into project-template
+
+Claude tells you that `project-template/ado/c/`, in the clone beside this one, needs the same file. It copies only when you ask, for example:
+
+```text
+Copy the changed program into project-template.
+```
+
+## Run the template's tests
+
+**Ask Claude.** In `handbook`, which holds the template's tests:
+
+```text
+Run the tests.
+```
+
+**Check.** Claude reports the counts from this line, and says why any case was skipped:
+
+```text
+template tests: <n> passed, <n> failed, <n> skipped (results.txt)
+```
+
+**Only you do.** On Windows, batch mode skips each R case. To run them, start the tests in Stata's window, with the network on and the R version of the template's `renv.lock`. **Untested on Windows.**
+
+Push each repo only if no test failed. A project made earlier keeps its old copy of the program, because shared code is copied, not linked.
