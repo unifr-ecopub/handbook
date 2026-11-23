@@ -16,10 +16,14 @@
 # website that was published stays online.
 #
 # Nothing it makes is kept in the repo. Everything Quarto needs (its project
-# file, a copy of README.md named index.md, and copies of the pages and of
+# file, a copy of README.md named index.qmd, and copies of the pages and of
 # assets/) is written at render time in the folder _build/, which exists only
 # on GitHub's machine for the length of the run. The Markdown files in the
 # repo are not changed: only their copies in _build/ are.
+#
+# Each page is copied with the ending .qmd instead of .md, because Quarto
+# draws a diagram only in a .qmd file. The links between pages are changed to
+# match in the copies.
 #
 # One setting on github.com, made once by an owner of the organisation:
 # in this repo, Settings > Pages > Build and deployment > Source:
@@ -123,11 +127,11 @@ jobs:
           rm -rf _build
           mkdir -p _build
 
-          # README.md is the start page; Quarto wants it named index.md.
+          # README.md is the start page; Quarto wants it named index.qmd.
           # Its first heading is dropped there, since the website's title
           # already stands at the top of that page.
-          cp README.md _build/index.md
-          sed -i '1{/^# /d}' _build/index.md
+          cp README.md _build/index.qmd
+          sed -i '1{/^# /d}' _build/index.qmd
 
           # The pictures that the pages show.
           cp -r assets _build/assets
@@ -151,11 +155,11 @@ jobs:
           book:
             title: "Handbook"
             chapters:
-              - index.md
+              - index.qmd
           EOF
 
-          # Each page of the list is copied and added to the menu, as far as
-          # it exists. A part is written only once one of its pages exists,
+          # Each page of the list is copied, as <page>.qmd, and added to the
+          # menu, as far as it exists. A part is written only once one of its pages exists,
           # since Quarto refuses a part with no pages.
           part=""
           opened=""
@@ -169,12 +173,12 @@ jobs:
               continue
             fi
             mkdir -p "_build/$(dirname "$line")"
-            cp "$line" "_build/$line"
+            cp "$line" "_build/${line%.md}.qmd"
             if [ -z "$opened" ]; then
               printf '    - part: "%s"\n      chapters:\n' "$part" >> _build/_quarto.yml
               opened=yes
             fi
-            printf '        - %s\n' "$line" >> _build/_quarto.yml
+            printf '        - %s\n' "${line%.md}.qmd" >> _build/_quarto.yml
           done <<< "$pages"
 
           # A page in the repo that the list leaves out is not published.
@@ -187,11 +191,14 @@ jobs:
           done
 
           # In every copied page: a link to README.md becomes a link to the
-          # start page, and a diagram fenced as ```mermaid (the form that
-          # github.com draws) becomes ```{mermaid} (the form Quarto draws).
-          find _build -name '*.md' | while read -r page; do
+          # start page; a link to another page, <page>.md, becomes a link to
+          # its copy, <page>.qmd (links to other websites are left alone);
+          # and a diagram fenced as ```mermaid (the form that github.com
+          # draws) becomes ```{mermaid} (the form Quarto draws).
+          find _build -name '*.qmd' | while read -r page; do
             sed -i \
               -e 's#](\(\.\./\)*README\.md#](\1index.md#g' \
+              -e 's#](\([^):]*\)\.md\([#)]\)#](\1.qmd\2#g' \
               -e 's/^\([[:space:]]*\)```mermaid[[:space:]]*$/\1```{mermaid}/' \
               "$page"
           done
