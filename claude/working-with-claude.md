@@ -8,6 +8,8 @@ Claude is an AI model made by Anthropic. You work with it in Claude Code, a prog
 
 Each project holds written instructions for Claude, so a request such as "Run everything." means the same on every machine.
 
+The handbook's website also offers its pages for Claude: `llms-full.txt`, beside the start page, holds every page in one file, and `llms.txt` lists them. A project's own instructions still come first wherever the handbook differs.
+
 ## How a task goes
 
 ```mermaid

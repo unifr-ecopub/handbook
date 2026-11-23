@@ -18,7 +18,7 @@ The platform keeps code on GitHub and data on Dropbox, and Claude does the techn
 | ![Data curator](assets/icons/curator.svg) | the data curator | [Commit and push as the data curator](curator/commit-and-push.md) |
 | ![Assistant](assets/icons/assistant.svg) | an assistant | [Fill in a review sheet](assistant/fill-in-a-review-sheet.md) |
 | ![Data reader](assets/icons/data-reader.svg) | a reader of the shared data | [The data root](data/data-root.md) |
-| ![Claude](assets/icons/claude.svg) | the professor, or new to Claude | [Working with Claude](claude/working-with-claude.md) |
+| ![Claude](assets/icons/claude.svg) | new to Claude | [Working with Claude](claude/working-with-claude.md) |
 
 ### Researcher
 

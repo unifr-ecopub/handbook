@@ -36,6 +36,13 @@
 # a fixed version, draw each diagram (```mermaid) in the reader's browser;
 # Quarto draws none.
 #
+# For Claude and other AI models, the run also writes two files at the top
+# of the website (https://llmstxt.org): llms.txt, a list of the pages with
+# a link to each page's Markdown file, in the order of the menu; and
+# llms-full.txt, every page's Markdown in that order, in one file. Both say
+# first that a project's own instructions for Claude come before the
+# handbook wherever the two disagree.
+#
 # One setting on github.com, made once by an owner of the organisation:
 # in this repo, Settings > Pages > Build and deployment > Source:
 # "GitHub Actions". Until then the publishing step fails.
@@ -80,8 +87,15 @@ jobs:
       # run at the top of the repo on GitHub's machine. To try them anywhere
       # else, run them in a copy of the repo made outside the clone: nothing
       # is to be rendered inside a clone.
+      # Gives the website's address, which llms.txt needs for its links.
+      - name: Prepare GitHub Pages
+        id: pages
+        uses: actions/configure-pages@v6
+
       - name: Render the handbook
         shell: bash
+        env:
+          SITE: ${{ steps.pages.outputs.base_url }}
         run: |
           # The pages, in the order of the start page's menu. A line
           # "part: <name>" opens a part of the website's menu, and the pages
@@ -242,8 +256,41 @@ jobs:
             cp "$line" "_build/_site/$line"
           done <<< "$pages"
 
-      - name: Prepare GitHub Pages
-        uses: actions/configure-pages@v6
+          # llms.txt and llms-full.txt, for AI models. A page's title is its
+          # first heading.
+          title() { sed -n '/^# /{s/^# //;p;q}' "$1"; }
+          note="> The handbook of a research platform where Claude does the technical steps and people decide. Each page is a Markdown file. When Claude works inside a project or the data repo, that repo's own CLAUDE.md, skills and settings come first wherever the handbook disagrees with them."
+          {
+            echo "# Handbook"
+            echo
+            echo "$note"
+            echo
+            echo "All pages in one file: ${SITE}/llms-full.txt"
+            echo
+            echo "## Start page"
+            echo
+            echo "- [$(title README.md)](${SITE}/index.md)"
+            while read -r line; do
+              case "$line" in
+                "") continue ;;
+                "part: "*) printf '\n## %s\n\n' "${line#part: }"; continue ;;
+              esac
+              [ -f "$line" ] || continue
+              echo "- [$(title "$line")](${SITE}/$line)"
+            done <<< "$pages"
+          } > _build/_site/llms.txt
+          {
+            echo "# Handbook"
+            echo
+            echo "$note"
+            for line in README.md $(printf '%s\n' "$pages" | grep -v -e '^ *$' -e 'part: '); do
+              [ -f "$line" ] || continue
+              url="${SITE}/$line"
+              [ "$line" = README.md ] && url="${SITE}/index.md"
+              printf '\n\n---\n\nSource: %s\n\n' "$url"
+              cat "$line"
+            done
+          } > _build/_site/llms-full.txt
 
       - name: Hand the website to GitHub Pages
         uses: actions/upload-pages-artifact@v5

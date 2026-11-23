@@ -7,7 +7,7 @@ are the clones in the folder beside this repo.
 
 - **The guides,** in `guides/`: `researcher.md` for every researcher (machine setup, the daily
   routine, what never to do); `curator.md` for the data curator's tasks; `data.md` for anyone who reads
-  the shared data; `claude.md` for anyone new to working with Claude. `README.md` is the start
+  the shared data; `claude.md` for anyone new to Claude. `README.md` is the start
   page.
 - **The guides are Claude-first.** Each task says, under these labels, bold with a full stop
   inside the bold: **Ask Claude.** (the request, and the folder the session is opened on),
