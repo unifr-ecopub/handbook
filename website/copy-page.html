@@ -1,0 +1,53 @@
+<!--
+  The Copy page button beside each page's title on the website.
+
+  What it does: it copies the page as Markdown, so that the reader can paste
+  it to Claude. The Markdown is the page's file as it is in the repo, which
+  the workflow in .github/workflows/publish.yml puts beside each page of the
+  website (README.md as index.md). If the copy fails, the Markdown opens in
+  a new tab instead. Its look is in website/handbook.scss.
+-->
+<script>
+(function () {
+  var title = document.querySelector("#title-block-header .quarto-title");
+  if (!title) return;
+
+  var path = window.location.pathname;
+  var markdown = /\/$/.test(path) ? path + "index.md" : path.replace(/\.html$/, ".md");
+  if (!/\.md$/.test(markdown)) return;
+
+  var label = "Copy page";
+  var button = document.createElement("button");
+  button.type = "button";
+  button.className = "hb-copy";
+  button.title = "Copy this page as Markdown, to paste to Claude";
+  button.innerHTML =
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" ' +
+    'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+    '<rect x="9" y="9" width="12" height="12" rx="2"/>' +
+    '<path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/></svg>' +
+    "<span>" + label + "</span>";
+  var text = button.querySelector("span");
+
+  button.addEventListener("click", function () {
+    fetch(markdown)
+      .then(function (r) {
+        if (!r.ok) throw new Error(r.status);
+        return r.text();
+      })
+      .then(function (md) {
+        return navigator.clipboard.writeText(md);
+      })
+      .then(function () {
+        text.textContent = "Copied";
+        setTimeout(function () { text.textContent = label; }, 2000);
+      })
+      .catch(function () {
+        window.open(markdown, "_blank", "noopener");
+      });
+  });
+
+  title.classList.add("hb-has-copy");
+  title.appendChild(button);
+})();
+</script>

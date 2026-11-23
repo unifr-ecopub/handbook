@@ -1,0 +1,44 @@
+// The handbook's colours in dark mode. The rest of the look, the same in
+// both modes, is in handbook.scss. Quarto reads this file while the
+// workflow in .github/workflows/publish.yml renders the website.
+
+/*-- scss:defaults --*/
+
+// Warm dark paper, light ink, and one clay colour for links.
+$hb-bg: #1f1e1d;
+$hb-ink: #f0eee6;
+$hb-muted: #a8a69e;
+$hb-line: #3a3936;
+$hb-card: #2a2927;
+$hb-card-hover: #34332f;
+$hb-surface: #262624;
+$hb-accent: #e59a7c;
+$hb-button-bg: #f0eee6;
+$hb-button-fg: #1f1e1d;
+
+// The two coloured boxes: Untested on Windows., and What can go wrong.
+$hb-untested-bg: #3a3020;
+$hb-untested-line: #6b5326;
+$hb-untested-ink: #f1d9a6;
+$hb-wrong-bg: #3b2520;
+$hb-wrong-line: #7a3e30;
+$hb-wrong-ink: #f2c2b4;
+
+$body-bg: $hb-bg;
+$body-color: $hb-ink;
+$link-color: $hb-accent;
+$border-color: $hb-line;
+$code-color: $hb-ink;
+$code-bg: $hb-card;
+$code-block-bg: $hb-surface;
+
+// The diagrams take the same colours.
+$mermaid-bg-color: $hb-surface;
+$mermaid-edge-color: $hb-muted;
+$mermaid-fg-color: $hb-ink;
+$mermaid-fg-color--lighter: $hb-muted;
+$mermaid-fg-color--lightest: $hb-line;
+$mermaid-node-bg-color: $hb-card;
+$mermaid-node-fg-color: $hb-ink;
+$mermaid-label-bg-color: $hb-bg;
+$mermaid-label-fg-color: $hb-ink;

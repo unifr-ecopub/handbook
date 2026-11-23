@@ -25,6 +25,15 @@
 # draws a diagram only in a .qmd file. The links between pages are changed to
 # match in the copies.
 #
+# The website's look is in website/: its colours in light.scss and dark.scss,
+# its fonts and layout in handbook.scss, and in handbook.lua a filter that
+# turns a task's labels into a card, the start page's table of roles into
+# cards, and a list of links into rows. They change only the website, never
+# how github.com shows the pages. copy-page.html is the Copy page button
+# beside each title, which copies the page's Markdown file: the run puts each
+# page's file from the repo beside its page on the website, README.md as
+# index.md.
+#
 # One setting on github.com, made once by an owner of the organisation:
 # in this repo, Settings > Pages > Build and deployment > Source:
 # "GitHub Actions". Until then the publishing step fails.
@@ -136,6 +145,9 @@ jobs:
           # The pictures that the pages show.
           cp -r assets _build/assets
 
+          # The website's look: colours, fonts, and the filter.
+          cp -r website _build/website
+
           # Quarto's project file. Each page takes its title from its first
           # heading. Section names get the same anchors as on github.com, so
           # a link such as work-with-r-steps.md#when-masterdo-says-r-is-not-ready
@@ -151,7 +163,21 @@ jobs:
               from: markdown+gfm_auto_identifiers+autolink_bare_uris
               number-sections: false
               toc: true
+              toc-title: "On this page"
               lang: en-GB
+              theme:
+                light: [default, website/light.scss, website/handbook.scss]
+                dark: [default, website/dark.scss, website/handbook.scss]
+              respect-user-color-scheme: true
+              code-copy: true
+              code-block-border-left: false
+              grid:
+                sidebar-width: 270px
+                body-width: 760px
+                margin-width: 230px
+              filters:
+                - website/handbook.lua
+              include-after-body: website/copy-page.html
           book:
             title: "Handbook"
             chapters:
@@ -204,6 +230,16 @@ jobs:
           done
 
           quarto render _build
+
+          # Each page's Markdown file, as it is in the repo, beside its page
+          # on the website, for the Copy page button.
+          cp README.md _build/_site/index.md
+          while read -r line; do
+            case "$line" in "" | "part: "*) continue ;; esac
+            [ -f "$line" ] || continue
+            mkdir -p "_build/_site/$(dirname "$line")"
+            cp "$line" "_build/_site/$line"
+          done <<< "$pages"
 
       - name: Prepare GitHub Pages
         uses: actions/configure-pages@v6

@@ -1,0 +1,485 @@
+// The handbook's look on the website, the same in light and dark mode: its
+// fonts, its pages, and the cards and boxes that website/handbook.lua makes.
+// The colours are in light.scss and dark.scss. Quarto reads this file while
+// the workflow in .github/workflows/publish.yml renders the website.
+
+/*-- scss:defaults --*/
+
+// A serif for titles and headings, a plain sans for reading, and a mono for
+// code, all from Google Fonts.
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap");
+
+$font-family-sans-serif: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+$font-family-monospace: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+$headings-font-family: "Newsreader", Georgia, "Times New Roman", serif;
+$headings-font-weight: 500;
+$line-height-base: 1.65;
+$mermaid-font-family: $font-family-sans-serif;
+
+/*-- scss:rules --*/
+
+body {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+// The page's title, lead and headings.
+
+h1.title,
+.quarto-title .title {
+  font-family: $headings-font-family;
+  font-size: 2.5rem;
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  margin-bottom: 0.5rem;
+}
+
+@media (max-width: 767px) {
+  h1.title,
+  .quarto-title .title {
+    font-size: 2.1rem;
+  }
+}
+
+.chapter-number {
+  color: $hb-muted;
+}
+
+// Where the page sits, above its title.
+
+.quarto-page-breadcrumbs,
+.quarto-page-breadcrumbs a {
+  font-size: 0.85rem;
+  color: $hb-muted;
+  text-decoration: none;
+}
+
+.quarto-page-breadcrumbs .breadcrumb-item + .breadcrumb-item::before {
+  content: "\203A";
+  color: $hb-muted;
+}
+
+// The title, with the Copy page button beside it (website/copy-page.html).
+
+.quarto-title.hb-has-copy {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+button.hb-copy {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.55rem;
+  padding: 0.35rem 0.75rem;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: $hb-ink;
+  background: $hb-card;
+  border: 1px solid $hb-line;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+button.hb-copy:hover {
+  background: $hb-card-hover;
+}
+
+button.hb-copy svg {
+  width: 15px;
+  height: 15px;
+}
+
+.hb-lead p {
+  font-size: 1.2rem;
+  line-height: 1.5;
+  color: $hb-muted;
+  margin-bottom: 1.75rem;
+}
+
+main h2 {
+  font-size: 1.6rem;
+  font-weight: 500;
+  border-top: 1px solid $hb-line;
+  border-bottom: 0;
+  padding-top: 1.75rem;
+  margin-top: 2.25rem;
+  margin-bottom: 1rem;
+}
+
+main h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 1.75rem;
+}
+
+main h2 .hb-step {
+  color: $hb-muted;
+  font-variant-numeric: tabular-nums;
+  margin-right: 0.15em;
+}
+
+a {
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+// A task: one card, a label as a small heading in each part.
+
+.hb-task {
+  background: $hb-surface;
+  border: 1px solid $hb-line;
+  border-radius: 20px;
+  padding: 0.25rem 1.5rem;
+  margin: 1.5rem 0 1.75rem;
+}
+
+.hb-task .hb-block {
+  padding: 1.15rem 0;
+}
+
+.hb-task .hb-block + .hb-block {
+  border-top: 1px solid $hb-line;
+}
+
+.hb-label {
+  font-family: $headings-font-family;
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 0.35rem;
+}
+
+.hb-block > p:last-child,
+.hb-block > ul:last-child,
+.hb-block > ol:last-child {
+  margin-bottom: 0;
+}
+
+// The request to Claude, in a grey box like a chat message.
+
+.hb-ask div.sourceCode,
+.hb-ask pre {
+  background: $hb-card;
+  border: 0;
+  border-radius: 18px;
+  margin: 0.6rem 0 0.25rem;
+}
+
+.hb-ask pre {
+  padding: 0.85rem 1.1rem;
+}
+
+.hb-ask div.sourceCode pre {
+  padding: 0.85rem 1.1rem;
+  margin: 0;
+}
+
+.hb-ask pre code {
+  font-family: $font-family-sans-serif;
+  font-size: 1.05rem;
+  color: $hb-ink;
+  white-space: pre-wrap;
+}
+
+
+// The coloured boxes.
+
+.hb-wrong,
+.hb-untested {
+  border: 1px solid;
+  border-radius: 16px;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+}
+
+.hb-wrong {
+  background: $hb-wrong-bg;
+  border-color: $hb-wrong-line;
+  color: $hb-wrong-ink;
+}
+
+.hb-untested {
+  background: $hb-untested-bg;
+  border-color: $hb-untested-line;
+  color: $hb-untested-ink;
+}
+
+.hb-wrong a,
+.hb-untested a {
+  color: inherit;
+}
+
+.hb-wrong .hb-label,
+.hb-untested .hb-label {
+  font-family: $font-family-sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.hb-wrong ul {
+  padding-left: 1.1rem;
+}
+
+// Code, and what a program prints: a white box with a thin line. Only the
+// request to Claude, above, is grey.
+
+div.sourceCode,
+pre {
+  background: $hb-surface;
+  border: 1px solid $hb-line;
+  border-radius: 12px;
+}
+
+div.sourceCode pre {
+  border: 0;
+  background: transparent;
+}
+
+pre code {
+  font-size: 0.85rem;
+}
+
+p code,
+li code,
+td code {
+  border-radius: 5px;
+  padding: 0.1em 0.35em;
+}
+
+// Tables: thin lines between rows, the first column in bold.
+
+main table {
+  border-top: 0;
+  margin: 1.25rem 0 1.75rem;
+}
+
+main table thead th {
+  font-weight: 600;
+  color: $hb-muted;
+  border-bottom: 1px solid $hb-line;
+}
+
+main table td,
+main table th {
+  padding: 0.6rem 0.75rem 0.6rem 0;
+  border-color: $hb-line;
+  vertical-align: top;
+}
+
+main table tbody td:first-child {
+  font-weight: 600;
+  padding-right: 1.5rem;
+}
+
+main table > :not(caption) > * > * {
+  background: transparent;
+  box-shadow: none;
+}
+
+// A list of links: rows in a grey box, each with an arrow.
+
+.hb-links ul {
+  list-style: none;
+  background: $hb-card;
+  border-radius: 16px;
+  padding: 0.35rem;
+  margin: 0.75rem 0 1.5rem;
+}
+
+.hb-links li {
+  margin: 0;
+}
+
+.hb-links li + li {
+  border-top: 1px solid $hb-line;
+}
+
+.hb-links li a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: 11px;
+  color: $hb-ink;
+  text-decoration: none;
+}
+
+.hb-links li a::after {
+  content: "\203A";
+  font-size: 1.4rem;
+  line-height: 1;
+  color: $hb-muted;
+}
+
+.hb-links li a:hover {
+  background: $hb-card-hover;
+}
+
+// The start page: one card per role.
+
+.hb-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+  margin: 1.25rem 0 2rem;
+}
+
+.hb-card {
+  display: flex;
+  flex-direction: column;
+  background: $hb-surface;
+  border: 1px solid $hb-line;
+  border-radius: 20px;
+  padding: 1.15rem;
+}
+
+.hb-card-head {
+  display: flex;
+  gap: 0.85rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.hb-card-icon {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border: 1px solid $hb-line;
+  border-radius: 12px;
+  background: $hb-bg;
+}
+
+.hb-card-icon img {
+  width: 24px;
+  height: 24px;
+  margin: 0;
+}
+
+.hb-card-title {
+  font-family: $headings-font-family;
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.hb-card-meta {
+  font-size: 0.9rem;
+  color: $hb-muted;
+  line-height: 1.35;
+}
+
+.hb-card-start {
+  margin-top: auto;
+  font-size: 0.8rem;
+  color: $hb-muted;
+  margin-bottom: 0.35rem;
+}
+
+a.hb-button {
+  display: block;
+  text-align: center;
+  background: $hb-button-bg;
+  color: $hb-button-fg;
+  border-radius: 999px;
+  padding: 0.7rem 1rem;
+  font-weight: 500;
+  line-height: 1.3;
+  text-decoration: none;
+}
+
+a.hb-button:hover {
+  opacity: 0.88;
+  color: $hb-button-fg;
+}
+
+// The menu on the left, the contents on the right, and the links to the
+// previous and next page.
+
+.sidebar-navigation .sidebar-item a,
+.sidebar-navigation .sidebar-item .sidebar-item-text {
+  font-size: 0.92rem;
+}
+
+.sidebar-navigation .sidebar-link {
+  color: $hb-muted;
+}
+
+.sidebar-navigation .sidebar-link:hover {
+  color: $hb-ink;
+}
+
+.sidebar-navigation .sidebar-item-section > .sidebar-item-container .sidebar-item-text {
+  color: $hb-ink;
+  font-weight: 600;
+}
+
+#quarto-search .aa-DetachedSearchButton,
+.sidebar-search .aa-DetachedSearchButton {
+  border: 1px solid $hb-line;
+  border-radius: 10px;
+  background: $hb-surface;
+}
+
+.sidebar-navigation .sidebar-link.active {
+  background: $hb-card;
+  border-radius: 8px;
+  font-weight: 500;
+  color: $hb-ink;
+}
+
+.sidebar-navigation .sidebar-link {
+  padding: 0.2rem 0.5rem;
+}
+
+.sidebar-title {
+  font-family: $headings-font-family;
+  font-size: 1.35rem;
+  font-weight: 600;
+}
+
+#TOC #toc-title,
+#toc-title {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: $hb-muted;
+}
+
+#TOC ul,
+#TOC a.nav-link {
+  border-left: 0;
+}
+
+#TOC a.nav-link {
+  color: $hb-muted;
+  font-size: 0.85rem;
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+}
+
+#TOC a.nav-link.active,
+#TOC a.nav-link:hover {
+  color: $hb-ink;
+  font-weight: 500;
+}
+
+.page-navigation .nav-page a {
+  display: inline-block;
+  border: 1px solid $hb-line;
+  border-radius: 14px;
+  padding: 0.6rem 0.9rem;
+  background: $hb-surface;
+  text-decoration: none;
+}
