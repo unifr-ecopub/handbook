@@ -42,4 +42,4 @@ chair_use: <dataset>/<file> v<N>
 
 ## A withdrawn version
 
-A withdrawn version holds a file named `WITHDRAWN`, with the curator's reason and the version to use. It loads as before, so old results can be reproduced. Each load prints [a warning](../reference/messages-project-run.md#loading-a-dataset) and the curator's text.
+A withdrawn version holds a file named `WITHDRAWN`, with the data curator's reason and the version to use. It loads as before, so old results can be reproduced. Each load prints [a warning](../reference/messages-project-run.md#loading-a-dataset) and the data curator's text.

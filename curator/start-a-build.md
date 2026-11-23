@@ -32,7 +32,7 @@ For municipal data, Claude also asks which list the numbers follow, which bounda
 
 ## Read what the run left, then commit and push
 
-On the curator's machine, a candidate now waits. It was made from code that is not yet committed, so do not release it. On any other machine, nothing is staged. [Commit and push](commit-and-push.md) the build's folder and `datamap.csv`, then ask for the build again, for example:
+On the data curator's machine, a candidate now waits. It was made from code that is not yet committed, so do not release it. On any other machine, nothing is staged. [Commit and push](commit-and-push.md) the build's folder and `datamap.csv`, then ask for the build again, for example:
 
 ```text
 Run the build for <dataset> again.

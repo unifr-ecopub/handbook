@@ -8,7 +8,7 @@ Some tables are read by a step and cannot be rebuilt by code: a crosswalk, or fi
 
 **Check.** Claude tells you the copy's place. The step reads the table from there.
 
-**Only you do.** If Claude cannot write the folder, it says what failed. Then copy the file yourself in Explorer. If that fails too, ask the curator.
+**Only you do.** If Claude cannot write the folder, it says what failed. Then copy the file yourself in Explorer. If that fails too, ask the data curator.
 
 Claude never edits the table. Change it yourself, in the copy.
 

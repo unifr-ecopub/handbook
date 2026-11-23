@@ -1,4 +1,4 @@
-# Commit and push as the curator
+# Commit and push as the data curator
 
 In a project, in `project-template` and in `handbook`, Claude commits and pushes when you ask "Commit and push." In `data-processing`, both are still yours, in GitHub Desktop.
 

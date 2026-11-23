@@ -91,7 +91,7 @@ jobs:
           researcher/review-code-and-paper.md
           researcher/start-or-get-a-project.md
           researcher/move-an-existing-project-in.md
-          part: Curator
+          part: Data curator
           curator/commit-and-push.md
           curator/add-a-delivery.md
           curator/save-a-table-made-by-hand.md

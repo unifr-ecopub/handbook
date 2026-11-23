@@ -15,7 +15,7 @@ The platform keeps code on GitHub and data on Dropbox, and Claude does the techn
 | | If you are | Start with |
 |---|---|---|
 | ![Researcher](assets/icons/researcher.svg) | a researcher | [The daily routine](researcher/daily-routine.md) |
-| ![Curator](assets/icons/curator.svg) | the curator | [Commit and push as the curator](curator/commit-and-push.md) |
+| ![Data curator](assets/icons/curator.svg) | the data curator | [Commit and push as the data curator](curator/commit-and-push.md) |
 | ![Assistant](assets/icons/assistant.svg) | an assistant | [Fill in a review sheet](assistant/fill-in-a-review-sheet.md) |
 | ![Data reader](assets/icons/data-reader.svg) | a reader of the shared data | [The data root](data/data-root.md) |
 | ![Claude](assets/icons/claude.svg) | the professor, or new to Claude | [Working with Claude](claude/working-with-claude.md) |
@@ -33,10 +33,10 @@ The platform keeps code on GitHub and data on Dropbox, and Claude does the techn
 - [Start a project, or get one](researcher/start-or-get-a-project.md)
 - [Move an existing project in](researcher/move-an-existing-project-in.md)
 
-### Curator
+### Data curator
 
 - [Set up your machine](start/set-up-your-machine.md)
-- [Commit and push as the curator](curator/commit-and-push.md)
+- [Commit and push as the data curator](curator/commit-and-push.md)
 - [Add a raw delivery](curator/add-a-delivery.md)
 - [Save a table made by hand](curator/save-a-table-made-by-hand.md)
 - [Start a build](curator/start-a-build.md)

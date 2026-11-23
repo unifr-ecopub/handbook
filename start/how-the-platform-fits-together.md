@@ -43,7 +43,7 @@ flowchart LR
   E --> P["Paper"]
 ```
 
-A provider's files arrive as a delivery and stay as received. A build cleans them into a dataset, which the curator releases as a version. A project names the version it reads on one line, its pin. Its steps write the paper's exhibits: its tables, figures and numbers.
+A provider's files arrive as a delivery and stay as received. A build cleans them into a dataset, which the data curator releases as a version. A project names the version it reads on one line, its pin. Its steps write the paper's exhibits: its tables, figures and numbers.
 
 ## Why it is built this way
 

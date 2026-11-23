@@ -2,7 +2,7 @@
 
 ## Start a new project
 
-**Only you do.** Give the curator the project's bare name and nothing more. The names `data`, `data-processing`, `handbook` and `project-template` are taken. The curator [makes the repo from the template](../curator/manage-repos-and-people.md#create-a-project-repo-from-the-template).
+**Only you do.** Give the data curator the project's bare name and nothing more. The names `data`, `data-processing`, `handbook` and `project-template` are taken. The data curator [makes the repo from the template](../curator/manage-repos-and-people.md#create-a-project-repo-from-the-template).
 
 ## Get a project of the chair onto your machine
 

@@ -16,6 +16,6 @@ The build's `checklist.md` is your list.
 - Each variable has a label, and the key in the data map identifies a row.
 - Each judgement call cites a D-number in the build's `decisions.md`.
 
-Tell the curator what you found.
+Tell the data curator what you found.
 
-**What can go wrong.** Each full run on the curator's machine replaces the candidate, and your look does not cover the new one. Compare the date in `staged.txt` with the day you looked.
+**What can go wrong.** Each full run on the data curator's machine replaces the candidate, and your look does not cover the new one. Compare the date in `staged.txt` with the day you looked.

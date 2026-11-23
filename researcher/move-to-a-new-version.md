@@ -2,7 +2,7 @@
 
 A project keeps the version named on its [pin](../data/versions-and-pins.md#a-pin) until you ask for another. You need not move.
 
-The curator tells the chair after each release. The build's `README.md` in `data-processing` says in one line what changed in each version.
+The data curator tells the chair after each release. The build's `README.md` in `data-processing` says in one line what changed in each version.
 
 **Ask Claude.** In the project:
 
@@ -18,4 +18,4 @@ Claude changes the dataset's line in `code/pins.do`, runs everything, and says w
 chair_use: <dataset>/<file> v<N>
 ```
 
-If the version does not load, [Loading a dataset](../reference/messages-project-run.md#loading-a-dataset) quotes each message. A withdrawn version still loads, and the message shows the curator's reason.
+If the version does not load, [Loading a dataset](../reference/messages-project-run.md#loading-a-dataset) quotes each message. A withdrawn version still loads, and the message shows the data curator's reason.

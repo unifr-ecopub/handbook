@@ -30,6 +30,6 @@ With R steps, Claude also names each exhibit whose row or column order changed. 
 
 ## Finish what stays open
 
-- **An input that the data root lacks.** The curator adds it, and the steps that read it wait.
-- **Data that the old project built for others.** It becomes a build, about half a day's work with the curator.
+- **An input that the data root lacks.** The data curator adds it, and the steps that read it wait.
+- **Data that the old project built for others.** It becomes a build, about half a day's work with the data curator.
 - **Rule gaps in the old code.** Claude lists them. Ask for [a code review](review-code-and-paper.md) next.

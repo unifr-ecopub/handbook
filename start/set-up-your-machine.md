@@ -4,9 +4,9 @@ Do this once per machine. At the end, a full run of your first repo ends `Run co
 
 **Untested on Windows.** Nobody has yet done these steps on a university machine, or checked that each program installs without administrator rights.
 
-## Before you start: what the curator arranges
+## Before you start: what the data curator arranges
 
-- **GitHub.** The curator [adds you](../curator/manage-repos-and-people.md#add-a-member) to the chair's organisation. GitHub emails you an invitation: open its link and accept.
+- **GitHub.** The data curator [adds you](../curator/manage-repos-and-people.md#add-a-member) to the chair's organisation. GitHub emails you an invitation: open its link and accept.
 - **The data root,** the one folder of shared data, `chair-research-data`. Your machine needs it as a folder that Dropbox syncs.
 - **A Claude account.**
 - **The name of your first repo.** For a researcher, it is a practice project.
@@ -32,7 +32,7 @@ A clone is your own copy of a repo, on your machine.
 
 A path that holds `Dropbox` or `OneDrive` syncs. Nobody has checked whether a university machine also syncs `Documents` and `Desktop`, so avoid both.
 
-[Claude clones each further project](../researcher/start-or-get-a-project.md). The curator keeps all clones in one folder, where the tests and two routines look for them.
+[Claude clones each further project](../researcher/start-or-get-a-project.md). The data curator keeps all clones in one folder, where the tests and two routines look for them.
 
 ## Open your first session and answer the trust question
 
@@ -40,7 +40,7 @@ A path that holds `Dropbox` or `OneDrive` syncs. Nobody has checked whether a un
 2. Claude Code asks whether you trust this folder. Accept. Unless you accept, Claude Code ignores the repo's permission rules. The question comes the first time you open each clone.
 3. Choose Auto mode, in which Claude asks no question before each command. In the app, pick **Auto** in the mode selector under the prompt box. In a terminal, press Shift+Tab until `auto mode on` shows.
 
-Step 3 follows Claude Code's documentation, and no trial here has confirmed it. If **Auto** is missing, tell the curator.
+Step 3 follows Claude Code's documentation, and no trial here has confirmed it. If **Auto** is missing, tell the data curator.
 
 ## Give Claude the data root and run everything
 

@@ -27,7 +27,7 @@ Claude proposes the smallest change at the cause, and waits for your word.
 - **A fault in the code.** Say yes, and Claude changes it.
 - **A scientific choice,** such as which rows to keep. Claude lists the options and adds an Open question to [`decisions.md`](record-a-scientific-choice.md).
 - **A fault in a raw delivery.** A cleaning step corrects it, under a D-number.
-- **A fault in a version.** Only the curator can correct it, in a new version.
+- **A fault in a version.** Only the data curator can correct it, in a new version.
 
 ## Check the fix
 

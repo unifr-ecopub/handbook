@@ -5,7 +5,7 @@ One line per question, with a link to the page that covers it.
 ## Getting started
 
 - **What do I install?** [Four programs](start/set-up-your-machine.md#install-the-programs-and-sign-in), and Dropbox.
-- **Who gives me access?** [The curator](start/set-up-your-machine.md#before-you-start-what-the-curator-arranges).
+- **Who gives me access?** [The data curator](start/set-up-your-machine.md#before-you-start-what-the-data-curator-arranges).
 - **What is the trust question?** Claude Code asks it once per clone, and [you accept](start/set-up-your-machine.md#open-your-first-session-and-answer-the-trust-question).
 
 ## Every day
@@ -34,7 +34,7 @@ One line per question, with a link to the page that covers it.
 - **Does my data go to Anthropic?** [What Claude reads](data/terms-of-use.md#sources-that-may-not-reach-an-outside-service) does.
 - **Can Claude be wrong?** Yes. See [How you keep control](claude/working-with-claude.md#how-you-keep-control).
 
-## For the curator
+## For the data curator
 
 - **Who commits in `data-processing`?** [You do](curator/commit-and-push.md), in GitHub Desktop.
 - **How do I undo a release?** You cannot. You [withdraw the version](curator/withdraw-a-version.md).

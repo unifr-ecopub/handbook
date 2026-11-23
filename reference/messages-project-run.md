@@ -51,7 +51,7 @@ Failed: R is not ready for this project, for the reason just above. If no R was 
 Failed: pins.do pins raw/<delivery>, which is not in the data root, <folder>. Check the line in pins.do; if it is right, let Dropbox finish syncing (r(601))
 ```
 
-**You:** check the delivery's name with the curator, or wait for Dropbox.
+**You:** check the delivery's name with the data curator, or wait for Dropbox.
 
 ## Loading a dataset
 
@@ -81,7 +81,7 @@ chair_use: <dataset> v<N> holds no file <file>.dta here (<folder>). Check the na
 chair_use: warning: <dataset> v<N> is withdrawn. It still loads; the curator wrote:
 ```
 
-The curator's reason follows. **You:** decide whether to [move to another version](../researcher/move-to-a-new-version.md).
+The data curator's reason follows. **You:** decide whether to [move to another version](../researcher/move-to-a-new-version.md).
 
 ## During the steps
 

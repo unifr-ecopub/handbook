@@ -1,12 +1,12 @@
 # handbook
 
 The guides to the chair's research platform, which GitHub renders as a public website, and the
-tests of `project-template`. The curator writes here, and is not a programmer: say what you do in
+tests of `project-template`. The data curator writes here, and is not a programmer: say what you do in
 one plain sentence. `data-processing` and `project-template`
 are the clones in the folder beside this repo.
 
 - **The guides,** in `guides/`: `researcher.md` for every researcher (machine setup, the daily
-  routine, what never to do); `curator.md` for the curator's tasks; `data.md` for anyone who reads
+  routine, what never to do); `curator.md` for the data curator's tasks; `data.md` for anyone who reads
   the shared data; `claude.md` for anyone new to working with Claude. `README.md` is the start
   page.
 - **The guides are Claude-first.** Each task says, under these labels, bold with a full stop
@@ -20,15 +20,15 @@ are the clones in the folder beside this repo.
   replication package runs without Claude. The opening paragraph of each guide says, in the same
   words: "Claude commits and pushes when you ask, and never on its own; it asks before
   `release.do`. Scientific choices are yours, and Claude writes them into `decisions.md`." (the
-  curator's guide: "yours, or the build author's", "the build's `decisions.md`"), and the
-  curator's guide adds, once, that in `data-processing` the commit and the push are still the
-  curator's, in GitHub Desktop. A task that a repo's rule or skill still leaves to the person
+  data curator's guide: "yours, or the build author's", "the build's `decisions.md`"), and the
+  data curator's guide adds, once, that in `data-processing` the commit and the push are still the
+  data curator's, in GitHub Desktop. A task that a repo's rule or skill still leaves to the person
   says so under **Only you do.**, and no more.
 - **The guides follow, and never own,** the skills, `CLAUDE.md` files, settings and messages of
   `data-processing` and `project-template`. Every sentence must be true of them as they stand: a
   request is one a skill's description or a `CLAUDE.md` answers, and a message is quoted only as
   the code prints it, in a fenced block marked `text`, with `<…>` for the parts that vary. Where
-  they disagree with a guide, change the guide, or tell the curator what the other repo should
+  they disagree with a guide, change the guide, or tell the data curator what the other repo should
   change.
 - **Public.** No data, no names of people, no email, no dataset or source of the chair, nothing
   of the chair's own: use placeholders (`<dataset>`, `<source>`, `<project>`, `<you>`). Plain
@@ -41,13 +41,13 @@ are the clones in the folder beside this repo.
   `tests/run_tests.log`, written by your run. The R cases need R at the minor version the
   template's `renv.lock` names and the network for their one restore; without them, and on
   Windows in batch mode, each writes `TEST SKIP` with the reason. Report the counts, quote any
-  failure in full, and say why cases were skipped: on Windows the curator runs the tests in
+  failure in full, and say why cases were skipped: on Windows the data curator runs the tests in
   Stata's window to run the R cases.
 - The website is rendered only by the workflow on GitHub (`.github/workflows/`): install nothing
   and render nothing here.
 - This repo holds no data, and no task here reads or writes the data root.
-- **Git: commit and push when the curator asks, never on your own.** A task still ends with the
-  files changed and a one-line summary in plain words; the curator then asks, or does not. When
+- **Git: commit and push when the data curator asks, never on your own.** A task still ends with the
+  files changed and a one-line summary in plain words; the data curator then asks, or does not. When
   asked: show what `git status` lists, commit those files to `main` with the summary, push, and
   say that it is pushed and that the website follows a push by a few minutes. The commit's message
   is the one-line summary and nothing else: no co-author line and no mention of Claude is added to
@@ -56,6 +56,6 @@ are the clones in the folder beside this repo.
 - **Pull when asked, and before you commit.** Say in one sentence what the pull brought.
 - **A rejected push** means someone pushed first: pull, say what came, and push again.
 - **A conflict:** show, for each file, both versions in plain words and ask which to keep, or how
-  to combine them. Change nothing until the curator answers; then finish the merge and push.
+  to combine them. Change nothing until the data curator answers; then finish the merge and push.
 - **Never** a force push, never a rewrite of commits already pushed, never a branch, never a
-  commit of a file the curator has not seen listed.
+  commit of a file the data curator has not seen listed.

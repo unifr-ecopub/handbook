@@ -33,4 +33,4 @@ Four checklist items need a person. No program enforces them, and Claude's revie
 - A colleague other than the author reruns the project from a fresh clone and matches the main results.
 - A person reads the PDF in full, and the checklist names who and when.
 - An author records the licences in `decisions.md`, by their own hand.
-- The curator [assembles the replication package](../curator/assemble-a-replication-package.md) and tests it.
+- The data curator [assembles the replication package](../curator/assemble-a-replication-package.md) and tests it.
