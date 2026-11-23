@@ -114,7 +114,6 @@ jobs:
           curator/manage-repos-and-people.md
           part: Assistant
           assistant/fill-in-a-review-sheet.md
-          assistant/look-over-a-candidate.md
           part: Reader of the shared data
           data/data-root.md
           data/data-map.md

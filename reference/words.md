@@ -28,5 +28,5 @@ Each thing on the platform has one name.
 | Boundary year | The list of municipalities in force on 1 January of a year. |
 | Own-territory file | A file whose figures cover each year's own territory. |
 | Data curator | Who adds deliveries, releases and withdraws versions, assembles replication packages, and looks after the shared repos. Messages and Claude say "curator" for short. |
-| Assistant | Who fills review sheets or looks over candidates. |
+| Assistant | Who fills review sheets. |
 | Build author | Who writes a build and decides its choices. |

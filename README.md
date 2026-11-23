@@ -51,7 +51,6 @@ The platform keeps code on GitHub and data on Dropbox, and Claude does the techn
 ### Assistant
 
 - [Fill in a review sheet](assistant/fill-in-a-review-sheet.md)
-- [Look over a candidate](assistant/look-over-a-candidate.md)
 
 ### Reader of the shared data
 

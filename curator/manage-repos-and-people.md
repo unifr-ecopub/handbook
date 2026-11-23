@@ -25,7 +25,7 @@ Step 3 is not yet settled. The data root is to be a Dropbox team folder, where m
 2. Open **Members** and click **Add a member**.
 3. Type the person's GitHub user name, or their email address, and confirm.
 
-Someone new to the organisation gets an invitation by email, and joins on accepting it. An assistant also joins the assistants team, which writes `data-processing`.
+Someone new to the organisation gets an invitation by email, and joins on accepting it.
 
 ## Add an outside co-author
 

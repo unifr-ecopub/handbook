@@ -19,7 +19,7 @@ flowchart TD
 ## Before you ask
 
 - Commit and push everything in `data-processing`.
-- If a candidate waits, Claude releases that one and does not rebuild. A rebuild would replace a candidate that someone may have [looked over](../assistant/look-over-a-candidate.md).
+- If a candidate waits, Claude releases that one and does not rebuild. A rebuild would replace a candidate that someone may have looked over.
 - If a review sheet was filled since the last build, [ask for the build first](run-a-review-round.md#apply-the-filled-sheet).
 
 ## Ask Claude
