@@ -2,7 +2,7 @@
 
 A build is the folder `builds/<dataset>/` in `data-processing`: the code that turns a raw source into a dataset. Claude writes and runs it with you, the build author. A release is [a request of its own](release-a-version.md).
 
-## Ask Claude
+## Ask Claude to start it
 
 First [add the delivery](add-a-delivery.md), so that it has its row in the data map.
 

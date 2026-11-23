@@ -2,7 +2,7 @@
 
 Claude turns an old project's code into steps of a new repo, runs them, and compares the new exhibits with the old ones. You need [a fresh repo for the project](start-or-get-a-project.md), cloned, and the old folder's full path.
 
-## Ask Claude
+## Ask Claude to bring it in
 
 **Ask Claude.** In the new project, with the path:
 

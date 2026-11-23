@@ -5,17 +5,19 @@ tests of `project-template`. The data curator writes here, and is not a programm
 one plain sentence. `data-processing` and `project-template`
 are the clones in the folder beside this repo.
 
-- **The guides,** in `guides/`: `researcher.md` for every researcher (machine setup, the daily
-  routine, what never to do); `curator.md` for the data curator's tasks; `data.md` for anyone who reads
-  the shared data; `claude.md` for anyone new to Claude. `README.md` is the start
-  page.
+- **The guides,** one task or topic per page: `start/` (machine setup, the first day, how the
+  platform fits together), `researcher/`, `curator/` (the data curator's tasks), `assistant/`,
+  `data/` (for anyone who reads the shared data), `claude/` (for anyone new to Claude),
+  `reference/` (words, folders, messages, what never to do) and `faq.md`. `README.md` is the start
+  page; it links each page by its title. A new page is also added to the list of pages in
+  `.github/workflows/publish.yml`.
 - **The guides are Claude-first.** Each task says, under these labels, bold with a full stop
   inside the bold: **Ask Claude.** (the request, and the folder the session is opened on),
   **Claude will ask you.**, **Only you do.**, **Check.**, and **What can go wrong.** where a limit
-  of the design must be known. A task that asks Claude something carries all four; where Claude
-  asks nothing, "**Claude will ask you.** Nothing."; where a task is the person's alone, "**Ask
-  Claude.** Nothing: …". The order is Ask Claude, Claude will ask you, Only you do, Check; **Only
-  you do.** comes first where the person must act before any session can be opened. A guide never
+  of the design must be known. A label is used only where it carries something. The order is Ask
+  Claude, Claude will ask you, Only you do, Check; **Only you do.** comes first where the person must
+  act before any session can be opened, and after **Check.** where it acts on what the check
+  shows. **Untested on Windows.** opens a paragraph of its own. A guide never
   repeats a procedure, never gives a by-hand version and never calls Claude optional; only a
   replication package runs without Claude. The opening paragraph of each guide says, in the same
   words: "Claude commits and pushes when you ask, and never on its own; it asks before
@@ -28,7 +30,8 @@ are the clones in the folder beside this repo.
   `data-processing` and `project-template`. Every sentence must be true of them as they stand: a
   request is one a skill's description or a `CLAUDE.md` answers, and a message is quoted only as
   the code prints it, in a fenced block marked `text`, with `<…>` for the parts that vary. A
-  request to Claude is quoted in a fenced block marked `prompt`, wherever it stands. Where
+  request the reader is meant to type is quoted in a fenced block marked `prompt`, wherever it
+  stands; a request mentioned in passing in a sentence stays in quotes there. Where
   they disagree with a guide, change the guide, or tell the data curator what the other repo should
   change.
 - **Public.** No data, no names of people, no email, no dataset or source of the chair, nothing

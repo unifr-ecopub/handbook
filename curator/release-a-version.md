@@ -22,7 +22,7 @@ flowchart TD
 - If a candidate waits, Claude releases that one and does not rebuild. A rebuild would replace a candidate that someone may have looked over.
 - If a review sheet was filled since the last build, [ask for the build first](run-a-review-round.md#apply-the-filled-sheet).
 
-## Ask Claude
+## Ask Claude to release it
 
 **Ask Claude.** In `data-processing`:
 

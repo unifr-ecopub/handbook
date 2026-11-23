@@ -23,14 +23,14 @@ The platform keeps code on GitHub and data on Dropbox, and Claude does the techn
 ### Researcher
 
 - [Follow the daily routine](researcher/daily-routine.md)
-- [Find why a run failed](researcher/find-why-a-run-failed.md)
+- [Find out why a run failed or a number looks wrong](researcher/find-why-a-run-failed.md)
 - [Fix a rejected push or a conflict](researcher/fix-a-rejected-push-or-a-conflict.md)
 - [Record a scientific choice](researcher/record-a-scientific-choice.md)
-- [Move to a new version](researcher/move-to-a-new-version.md)
-- [Use a table you made by hand](researcher/use-a-table-made-by-hand.md)
+- [Move to a new version of a dataset](researcher/move-to-a-new-version.md)
+- [Use a table you made by hand in a project](researcher/use-a-table-made-by-hand.md)
 - [Work on a project with R steps](researcher/work-with-r-steps.md)
-- [Have your code and paper reviewed](researcher/review-code-and-paper.md)
-- [Start a project, or get one](researcher/start-or-get-a-project.md)
+- [Have your code and your paper reviewed](researcher/review-code-and-paper.md)
+- [Start a new project, or get one onto your machine](researcher/start-or-get-a-project.md)
 - [Move an existing project in](researcher/move-an-existing-project-in.md)
 
 ### Data curator
@@ -38,14 +38,14 @@ The platform keeps code on GitHub and data on Dropbox, and Claude does the techn
 - [Set up your machine](start/set-up-your-machine.md)
 - [Commit and push as the data curator](curator/commit-and-push.md)
 - [Add a raw delivery](curator/add-a-delivery.md)
-- [Save a table made by hand](curator/save-a-table-made-by-hand.md)
+- [Save a table made by hand for a build](curator/save-a-table-made-by-hand.md)
 - [Start a build](curator/start-a-build.md)
 - [Run a review round](curator/run-a-review-round.md)
 - [Release a version](curator/release-a-version.md)
 - [Withdraw a version](curator/withdraw-a-version.md)
 - [Add the register's January list](curator/add-the-yearly-register-list.md)
 - [Assemble a replication package](curator/assemble-a-replication-package.md)
-- [Test a changed chair program](curator/test-a-changed-chair-program.md)
+- [Test and copy a changed chair program](curator/test-a-changed-chair-program.md)
 - [Manage repos and people](curator/manage-repos-and-people.md)
 
 ### Assistant
@@ -63,8 +63,10 @@ The platform keeps code on GitHub and data on Dropbox, and Claude does the techn
 ## Look something up
 
 - [How the platform fits together](start/how-the-platform-fits-together.md)
-- [Words](reference/words.md) and [folders](reference/folders.md)
-- Messages of [a project run](reference/messages-project-run.md), and of [a build and a release](reference/messages-build-and-release.md)
+- [Words](reference/words.md)
+- [Folders](reference/folders.md)
+- [Messages of a project run](reference/messages-project-run.md)
+- [Messages of a build, a release and the tests](reference/messages-build-and-release.md)
 - [What never to do](reference/never-do.md)
 - [Questions people ask](faq.md)
 

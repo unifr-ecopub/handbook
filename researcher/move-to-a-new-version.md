@@ -7,7 +7,7 @@ The data curator tells the chair after each release. The build's `README.md` in 
 **Ask Claude.** In the project:
 
 ```prompt
-Move to the new version of the register.
+Move to the new version of <dataset>.
 ```
 
 Claude changes the dataset's line in `code/pins.do`, runs everything, and says which results changed. On Windows, with R steps, [you start that run yourself](work-with-r-steps.md#run-the-project-on-windows).

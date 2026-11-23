@@ -1,6 +1,6 @@
 # Add the register's January list
 
-Each January, the Federal Statistical Office publishes its list of municipalities as of 1 January. The list is a new delivery, and leads to a new version of the municipality register.
+Each January, `<source>` publishes its list of municipalities as of 1 January. The list is a new delivery, and leads to a new version of the municipality register.
 
 1. Copy the list into `raw/` and have it recorded, as [a raw delivery](add-a-delivery.md).
 2. Ask Claude, in `data-processing`:
@@ -14,6 +14,6 @@ Each January, the Federal Statistical Office publishes its list of municipalitie
 4. Ask Claude to run the register's build again. The first run used code that was not yet committed, so its candidate names the wrong commit.
 5. Ask Claude to [release](release-a-version.md) the register.
 
-**Claude will ask you.** How many municipalities the new list has. Take the figure from the Federal Statistical Office's own publication. Claude never takes it from a run.
+**Claude will ask you.** How many municipalities the new list has. Take the figure from the publication of `<source>`. Claude never takes it from a run.
 
 Each dataset that the register touches is released again when you ask.

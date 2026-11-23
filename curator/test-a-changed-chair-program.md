@@ -46,6 +46,8 @@ Run the tests.
 template tests: <n> passed, <n> failed, <n> skipped (results.txt)
 ```
 
-**Only you do.** On Windows, batch mode skips each R case. To run them, start the tests in Stata's window, with the network on and the R version of the template's `renv.lock`. **Untested on Windows.**
+**Only you do.** On Windows, batch mode skips each R case. To run them, start the tests in Stata's window, with the network on and the R version of the template's `renv.lock`.
+
+**Untested on Windows.** Nobody has yet run the R cases this way on a university Windows machine.
 
 Push each repo only if no test failed. A project made earlier keeps its old copy of the program, because shared code is copied, not linked.

@@ -9,7 +9,7 @@
 **Ask Claude.** In a project that you already have:
 
 ```prompt
-Get me the project <name>.
+Get me the project <project>.
 ```
 
 Claude clones the project and tells you where the clone is. You clone only [the first repo on a machine](../start/set-up-your-machine.md#clone-your-first-repo) yourself.
@@ -22,6 +22,12 @@ Claude clones the project and tells you where the clone is. You clone only [the 
 
 1. Open a new session on the new clone's top folder.
 2. Claude Code asks whether you trust this folder. Accept. Unless you accept, Claude Code ignores the repo's permission rules.
-3. Ask "Run everything." On Windows, with R steps, [you start the run yourself](work-with-r-steps.md#run-the-project-on-windows).
+3. Ask:
 
-**Check.** The run ends `Run complete`, and no file of the repo changed. If exhibits changed, your run differs from the committed results, and Claude names them before any commit.
+   ```prompt
+   Run everything.
+   ```
+
+   On Windows, with R steps, [you start the run yourself](work-with-r-steps.md#run-the-project-on-windows).
+
+**Check.** The run ends `Run complete`, and no file in your clone changed. If exhibits changed, your run differs from the committed results, and Claude names them before any commit.

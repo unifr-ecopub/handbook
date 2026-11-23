@@ -19,7 +19,7 @@ Nobody else works on a practice project, so Claude answers that the pull brought
 A step is one file of code. An exhibit is what a step writes for the paper: a table, a figure or a number. Our step saves one number, and that number is a scientific choice.
 
 ```prompt
-Write a step that saves one number as an exhibit: the smallest population a municipality needs to be in our sample. I choose 2,000.
+Write a step that saves one number as an exhibit: the smallest number of observations a group needs to be in my sample. I choose 30.
 ```
 
 Claude asks whose name to write beside the decision, and we give ours. Claude then says that our choice is `D1` in `decisions.md`, and that the step is a new file in `code/analysis/`.

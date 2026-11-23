@@ -8,13 +8,13 @@ The messages that a build, a review round and a release print, and who acts afte
 Run complete at commit <commit>. Staged in the data root's intermediate/<dataset>/ with staged.txt, <date>: the candidate for release, by release.do in code/ beside builds/.
 ```
 
-A full build finished on the data curator's machine, and a candidate waits.
+A full run of the build finished on the data curator's machine, and a candidate waits.
 
 ```text
 Run complete at commit <commit>. Not staged: only the curator's machine, which can write the data root's processed/, stages; the finished files are in this build's temp/.
 ```
 
-A full build finished on another machine. **The build author:** commit and push.
+A full run of the build finished on another machine. **The build author:** commit and push.
 
 ```text
 Withdrew the candidate that was waiting in the data root's intermediate/<dataset>/: the files its staged.txt listed, and staged.txt. This run stages a new one when it ends with 'Run complete'; until then nothing is staged for <dataset>.
@@ -71,11 +71,11 @@ Both rows together would count one territory twice. **The build author:** say wh
 chair_boundary: these numbers are split between several numbers on the list of <yyyy>, and split() gives no rule or weight: <numbers>. The FSO's list holds no weights; the build decides them (split(equal) or split(<file.dta>)).
 ```
 
-FSO is the Federal Statistical Office. **The build author:** choose equal shares, or [make a table of shares](../curator/save-a-table-made-by-hand.md).
+"The FSO" is `<source>`, whose list the register follows. **The build author:** choose equal shares, or [make a table of shares](../curator/save-a-table-made-by-hand.md).
 
 ## A release
 
-A release that worked ends with the two lines quoted in [Release a version](../curator/release-a-version.md#ask-claude). Every refusal ends `Nothing was released.`
+A release that worked ends with the two lines quoted in [Release a version](../curator/release-a-version.md#ask-claude-to-release-it). Every refusal ends `Nothing was released.`
 
 ```text
 release.do: <dataset> v<N> is released and cannot be changed. Release the next number. Nothing was released.

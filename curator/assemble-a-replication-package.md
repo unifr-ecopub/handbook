@@ -4,7 +4,7 @@ A journal asks for one folder, `<project>-replication/`: the project, the code t
 
 Before you ask, the project's commit with the paper's results must be pushed. What may be shared, and the licences, are the authors' to say.
 
-## Ask Claude
+## Ask Claude to assemble it
 
 **Ask Claude.** In `data-processing`:
 
@@ -27,9 +27,9 @@ Claude looks for the project's clone beside your clone of `data-processing`, and
 
 **Check.** Claude tests a copy of the package from its `README.md` alone. Its report names:
 
-- each version as `shipped`, or as `rebuild` if the package makes it again from its inputs
-- the last line of each test run, and whether every file in `paper/results/` came out the same
-- each placeholder that an unanswered question left for the authors
+- each version as `shipped`, or as `rebuild` if the package makes it again from its inputs;
+- the last line of each test run, and whether every file in `paper/results/` came out the same;
+- each placeholder that an unanswered question left for the authors.
 
 ## Before you send it
 
@@ -46,4 +46,5 @@ After you send the package, delete the working folder, `<project>-work/`: it may
 
 - Claude stops if the package needs two versions of one dataset and may not ship both.
 - A table made by hand is shipped as it is today, which may differ from what the release read.
-- **Untested on Windows.** The test runs Stata in batch mode, and a project with R steps needs Stata's window there.
+
+**Untested on Windows.** The test runs Stata in batch mode, and a project with R steps needs Stata's window there.

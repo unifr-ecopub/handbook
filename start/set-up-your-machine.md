@@ -58,6 +58,6 @@ The first run stops because [the data root was not found](../reference/messages-
 
 **Only you do.** In Explorer, open `chair-research-data`, copy the path from the address bar, and give it to Claude. Claude writes the data-root file and runs again.
 
-**Check.** The run ends `Run complete`, and no file of the repo changed.
+**Check.** The run ends `Run complete`, and no file in your clone changed.
 
 On Windows, [you start the run yourself](../researcher/work-with-r-steps.md#run-the-project-on-windows) if the repo has R steps. In `data-processing`, say that the machine is new and give Claude the path.

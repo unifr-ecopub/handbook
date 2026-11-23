@@ -1,14 +1,14 @@
 # Municipal data and boundary years
 
-Swiss municipalities merge and split, so one number can mean different territories in different years. The shared data states which territory each file uses.
+Municipalities merge and split, so one number can mean different territories in different years. The shared data states which territory each file uses.
 
 ## Standard keys
 
 | Variable | Meaning |
 |---|---|
-| `gdenr_<yyyy>` | The municipality's number on the Federal Statistical Office's (FSO) list of 1 January `<yyyy>` |
+| `gdenr_<yyyy>` | The municipality's number on the list of 1 January `<yyyy>` that `<source>` publishes |
 | `year` | The year of the figures, in a panel |
-| `ctn` | The canton at that boundary year |
+| `ctn` | The region that the municipality belongs to at that boundary year |
 
 ## A boundary year
 
@@ -28,4 +28,4 @@ A merge with such a file sets two territories side by side on its flagged rows. 
 
 ## The municipality register
 
-The municipality register is the first processed dataset. For each boundary year it holds the numbers, names and cantons valid then, and the crosswalk between boundary years. Each January's list leads to a new version. A release checks a file's municipality numbers against it.
+The municipality register is the first processed dataset. For each boundary year it holds the numbers, names and regions valid then, and the crosswalk between boundary years. Each January's list leads to a new version. A release checks a file's municipality numbers against it.

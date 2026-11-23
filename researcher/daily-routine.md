@@ -14,8 +14,8 @@ flowchart LR
 | When | Ask Claude | Check |
 |---|---|---|
 | You start | "Pull." | One sentence on what came. |
-| You want code | "Write a step that merges the finances with the population." | The D-number of each choice Claude asked you. |
-| You want to see data | "How many municipalities have no turnout in 2019?" | The answer. No result changed. |
+| You want code | "Write a step that merges these two datasets." | The D-number of each choice Claude asked you. |
+| You want to see data | "How many rows have no value for 2019?" | The answer. No result changed. |
 | You try a step | "Run only the step that makes the main table." | `Step complete: <step>` |
 | Before you commit results | "Run everything." | `Run complete` |
 | You stop | "Commit and push." | Claude lists the files, and says that it is pushed. |

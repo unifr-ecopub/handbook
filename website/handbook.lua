@@ -9,7 +9,8 @@
 --   2. A task's labels (Ask Claude., Claude will ask you., Only you do.,
 --      Check.) become one card, with each label as a small heading and the
 --      request in a grey box like a chat message. The code blocks and lists
---      just after a label belong to it.
+--      just after a label belong to it, and so does plain text that leads on
+--      to the task's next label.
 --   3. What can go wrong. and Untested on Windows. become coloured boxes.
 --   4. A heading such as "1. Pull" shows its number in grey.
 --   5. A list whose every line is one link becomes a list of rows.
@@ -74,34 +75,67 @@ local function labelled(blocks, i)
       break
     end
   end
-  return pandoc.Div(inner, pandoc.Attr("", { "hb-block", "hb-" .. kind })), kind, i
+  return inner, kind, i
+end
+
+local function block_div(inner, kind)
+  return pandoc.Div(inner, pandoc.Attr("", { "hb-block", "hb-" .. kind }))
+end
+
+-- Where blocks[i] starts plain text that leads on to another label of the
+-- same task, the index of that label; nil otherwise.
+local function next_task_label(blocks, i)
+  local j = i
+  while j <= #blocks do
+    local b = blocks[j]
+    local _, kind = label_of(b)
+    if kind then return IN_TASK[kind] and j or nil end
+    if b.t ~= "Para" and b.t ~= "CodeBlock" and b.t ~= "BulletList"
+        and b.t ~= "OrderedList" then
+      return nil
+    end
+    j = j + 1
+  end
+  return nil
 end
 
 -- Labels in a row of blocks: each labelled block is built, and those that
--- follow one another and belong to a task are put in one card.
+-- follow one another and belong to a task are put in one card. Plain text
+-- between two labels of a task stays in the card, with the label before it.
 local function labels(blocks)
   local out = pandoc.Blocks{}
   local card = nil
   local function close_card()
-    if card then out:insert(pandoc.Div(card, pandoc.Attr("", { "hb-task" }))) end
+    if card then
+      local divs = pandoc.Blocks{}
+      for _, part in ipairs(card) do divs:insert(block_div(part.inner, part.kind)) end
+      out:insert(pandoc.Div(divs, pandoc.Attr("", { "hb-task" })))
+    end
     card = nil
   end
   local i = 1
   while i <= #blocks do
     if label_of(blocks[i]) then
-      local div, kind, next_i = labelled(blocks, i)
+      local inner, kind, next_i = labelled(blocks, i)
       if IN_TASK[kind] then
-        card = card or pandoc.Blocks{}
-        card:insert(div)
+        card = card or {}
+        table.insert(card, { inner = inner, kind = kind })
       else
         close_card()
-        out:insert(div)
+        out:insert(block_div(inner, kind))
       end
       i = next_i
     else
-      close_card()
-      out:insert(blocks[i])
-      i = i + 1
+      local j = card and next_task_label(blocks, i)
+      if j then
+        local last = card[#card].inner
+        for k = i, j - 1 do last:insert(blocks[k]) end
+        i = j
+      else
+        close_card()
+        out:insert(blocks[i])
+        i = i + 1
+      end
     end
   end
   close_card()

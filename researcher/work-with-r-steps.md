@@ -16,7 +16,7 @@
 **Ask Claude.** In the project:
 
 ```prompt
-Add an R step that makes the map of turnout.
+Add an R step that makes a map.
 ```
 
 **Claude will ask you.** Before the first R step, two things. Does the machine have the R version that `code/templates/r-project/renv.lock` names, and is the network on? With your yes, Claude sets the project up for R. From then on, the project's own `renv.lock` names the version.
