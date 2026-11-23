@@ -26,7 +26,7 @@ flowchart TD
 
 **Ask Claude.** In `data-processing`:
 
-```text
+```prompt
 Release <dataset>.
 ```
 

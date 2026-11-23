@@ -8,7 +8,7 @@ Before you ask, the project's commit with the paper's results must be pushed. Wh
 
 **Ask Claude.** In `data-processing`:
 
-```text
+```prompt
 Assemble the replication package for <project>.
 ```
 

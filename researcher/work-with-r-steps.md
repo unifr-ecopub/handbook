@@ -15,7 +15,7 @@
 
 **Ask Claude.** In the project:
 
-```text
+```prompt
 Add an R step that makes the map of turnout.
 ```
 

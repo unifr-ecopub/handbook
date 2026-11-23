@@ -46,11 +46,11 @@ Step 3 follows Claude Code's documentation, and no trial here has confirmed it. 
 
 **Ask Claude.** Say that the machine is new, then ask for a full run:
 
-```text
+```prompt
 This is a new computer.
 ```
 
-```text
+```prompt
 Run everything.
 ```
 

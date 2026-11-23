@@ -20,7 +20,7 @@ Tell the assistant, whose page is [Fill in a review sheet](../assistant/fill-in-
 
 **Ask Claude.** In `data-processing`:
 
-```text
+```prompt
 The assistant has filled the sheet for <dataset>. Apply it.
 ```
 

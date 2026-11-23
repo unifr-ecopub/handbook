@@ -16,7 +16,7 @@ You copy a provider's files into the data root, and Claude records them in the d
 
 **Ask Claude.** In `data-processing`:
 
-```text
+```prompt
 I added a delivery of <source>.
 ```
 

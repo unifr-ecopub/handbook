@@ -6,7 +6,7 @@ The data curator tells the chair after each release. The build's `README.md` in 
 
 **Ask Claude.** In the project:
 
-```text
+```prompt
 Move to the new version of the register.
 ```
 

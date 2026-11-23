@@ -6,7 +6,7 @@ Claude turns an old project's code into steps of a new repo, runs them, and comp
 
 **Ask Claude.** In the new project, with the path:
 
-```text
+```prompt
 Bring my old project in from this folder.
 ```
 

@@ -14,7 +14,7 @@ flowchart LR
 
 **Ask Claude.** In `data-processing`:
 
-```text
+```prompt
 Run the tests.
 ```
 
@@ -28,7 +28,7 @@ data tests: <n> passed, <n> failed (results.txt)
 
 Claude tells you that `project-template/ado/c/`, in the clone beside this one, needs the same file. It copies only when you ask, for example:
 
-```text
+```prompt
 Copy the changed program into project-template.
 ```
 
@@ -36,7 +36,7 @@ Copy the changed program into project-template.
 
 **Ask Claude.** In `handbook`, which holds the template's tests:
 
-```text
+```prompt
 Run the tests.
 ```
 

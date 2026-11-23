@@ -8,7 +8,7 @@
 
 **Ask Claude.** In a project that you already have:
 
-```text
+```prompt
 Get me the project <name>.
 ```
 

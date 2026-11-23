@@ -4,7 +4,7 @@ A released version is never changed or deleted. If it is wrong, you withdraw it:
 
 **Ask Claude.** In `data-processing`:
 
-```text
+```prompt
 Withdraw <dataset> v<N>.
 ```
 

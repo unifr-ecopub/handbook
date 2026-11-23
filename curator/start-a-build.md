@@ -8,7 +8,7 @@ First [add the delivery](add-a-delivery.md), so that it has its row in the data 
 
 **Ask Claude.** In `data-processing`:
 
-```text
+```prompt
 Start a build for <dataset> from <source>.
 ```
 
@@ -34,6 +34,6 @@ For municipal data, Claude also asks which list the numbers follow, which bounda
 
 On the data curator's machine, a candidate now waits. It was made from code that is not yet committed, so do not release it. On any other machine, nothing is staged. [Commit and push](commit-and-push.md) the build's folder and `datamap.csv`, then ask for the build again, for example:
 
-```text
+```prompt
 Run the build for <dataset> again.
 ```

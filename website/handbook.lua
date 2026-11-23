@@ -17,7 +17,8 @@
 --      becomes one card per role, with a button to its first page.
 --   7. Each code block goes in a box that names its language, with buttons
 --      to wrap its lines and copy it (website/code-boxes.html adds them).
---      The request to Claude is a grey box with only the copy button.
+--      A request to Claude, a block marked ```prompt in the page, is a grey
+--      box with only the copy button.
 --   8. Each diagram (```mermaid) is left for pele to draw in the browser
 --      (website/diagrams.html), instead of Quarto.
 --
@@ -67,9 +68,6 @@ local function labelled(blocks, i)
   while i <= #blocks do
     local t = blocks[i].t
     if t == "CodeBlock" or t == "BulletList" or t == "OrderedList" then
-      if t == "CodeBlock" and kind == "ask" then
-        blocks[i].classes:insert("hb-request")
-      end
       inner:insert(blocks[i])
       i = i + 1
     else
@@ -214,11 +212,11 @@ local function code_box(block)
     return pandoc.RawBlock("html",
       '<pre class="hb-mermaid">' .. escape_html(block.text) .. "</pre>")
   end
-  if lang == "plaintext" or lang == "hb-request" then lang = "text" end
   local classes = { "hb-code" }
-  if block.classes:includes("hb-request") then
+  if lang == "prompt" then
     table.insert(classes, "hb-request-box")
   end
+  if lang == "plaintext" then lang = "text" end
   return pandoc.Div({ block }, pandoc.Attr("", classes, { ["data-lang"] = lang }))
 end
 

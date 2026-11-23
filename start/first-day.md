@@ -8,7 +8,7 @@ We need a machine that is [set up](set-up-your-machine.md), and one session on o
 
 A pull brings in what other people pushed. We say:
 
-```text
+```prompt
 Pull.
 ```
 
@@ -18,7 +18,7 @@ Nobody else works on a practice project, so Claude answers that the pull brought
 
 A step is one file of code. An exhibit is what a step writes for the paper: a table, a figure or a number. Our step saves one number, and that number is a scientific choice.
 
-```text
+```prompt
 Write a step that saves one number as an exhibit: the smallest population a municipality needs to be in our sample. I choose 2,000.
 ```
 
@@ -26,7 +26,7 @@ Claude asks whose name to write beside the decision, and we give ours. Claude th
 
 ## 3. Run one step
 
-```text
+```prompt
 Run only the step that saves the threshold.
 ```
 
@@ -40,11 +40,11 @@ Step complete: <step>
 
 A full run runs every step from empty working files. Results count only after one. A project with R steps [runs differently on Windows](../researcher/work-with-r-steps.md#run-the-project-on-windows).
 
-```text
+```prompt
 Run everything.
 ```
 
-```text
+```prompt
 Did my run finish?
 ```
 
@@ -60,7 +60,7 @@ The results page, `paper/results/README.md`, now lists our number and the step t
 
 A commit records the changed files with a summary. A push sends the commit to GitHub.
 
-```text
+```prompt
 Commit and push.
 ```
 

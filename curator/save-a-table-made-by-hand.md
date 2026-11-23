@@ -4,7 +4,7 @@ A build may read a table that a person made, such as a crosswalk or the shares f
 
 **Ask Claude.** In `data-processing`:
 
-```text
+```prompt
 Where do I put a table I made by hand?
 ```
 

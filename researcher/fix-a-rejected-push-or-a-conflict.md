@@ -6,7 +6,7 @@ Both mean that someone pushed to the project before you.
 
 **Ask Claude.** In the project:
 
-```text
+```prompt
 My push was rejected.
 ```
 
@@ -18,7 +18,7 @@ A conflict means that you and a colleague changed the same lines.
 
 **Ask Claude.**
 
-```text
+```prompt
 There is a conflict.
 ```
 

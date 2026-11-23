@@ -4,17 +4,17 @@ Claude reviews against every item of the project's `checklist.md`. A review read
 
 **Ask Claude.** In the project, for the code:
 
-```text
+```prompt
 Review my code.
 ```
 
 For the paper, first ask "Run everything.", because only a full run in this session shows Claude that the exhibits are current. On Windows, with R steps, [you start that run yourself](work-with-r-steps.md#run-the-project-on-windows). Then:
 
-```text
+```prompt
 Review my paper.
 ```
 
-```text
+```prompt
 Do the numbers in my paper match the tables?
 ```
 

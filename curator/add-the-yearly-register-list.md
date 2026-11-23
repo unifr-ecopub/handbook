@@ -5,7 +5,7 @@ Each January, the Federal Statistical Office publishes its list of municipalitie
 1. Copy the list into `raw/` and have it recorded, as [a raw delivery](add-a-delivery.md).
 2. Ask Claude, in `data-processing`:
 
-   ```text
+   ```prompt
    The new January list of the municipalities is in raw/.
    ```
 

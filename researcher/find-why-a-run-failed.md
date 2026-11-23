@@ -6,11 +6,11 @@ When a run ends `Failed:`, or an exhibit is not what you expect, Claude finds th
 
 **Ask Claude.** In the project:
 
-```text
+```prompt
 The run failed: why?
 ```
 
-```text
+```prompt
 This number looks wrong.
 ```
 

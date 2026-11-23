@@ -27,7 +27,8 @@ are the clones in the folder beside this repo.
 - **The guides follow, and never own,** the skills, `CLAUDE.md` files, settings and messages of
   `data-processing` and `project-template`. Every sentence must be true of them as they stand: a
   request is one a skill's description or a `CLAUDE.md` answers, and a message is quoted only as
-  the code prints it, in a fenced block marked `text`, with `<…>` for the parts that vary. Where
+  the code prints it, in a fenced block marked `text`, with `<…>` for the parts that vary. A
+  request to Claude is quoted in a fenced block marked `prompt`, wherever it stands. Where
   they disagree with a guide, change the guide, or tell the data curator what the other repo should
   change.
 - **Public.** No data, no names of people, no email, no dataset or source of the chair, nothing
