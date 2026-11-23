@@ -1,0 +1,73 @@
+<!--
+  The buttons of the code boxes on the website.
+
+  What it does: website/handbook.lua puts each code block in a box that
+  names its language. This script adds, at the top of each box, that name
+  and two buttons: one wraps long lines, the other copies the code. The
+  request to Claude, a grey box, gets only the copy button. Without the
+  script, the boxes show the code alone. Their look is in
+  website/handbook.scss.
+-->
+<script>
+(function () {
+  var ICONS = {
+    copy: '<rect x="9" y="9" width="12" height="12" rx="2"/>' +
+      '<path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/>',
+    done: '<path d="M5 12l5 5L20 7"/>',
+    wrap: '<path d="M3 6h18M3 12h15a3 3 0 0 1 0 6h-4"/><path d="M16 16l-2 2 2 2"/><path d="M3 18h7"/>'
+  };
+
+  function icon(name) {
+    return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" ' +
+      'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + ICONS[name] + "</svg>";
+  }
+
+  function button(name, label) {
+    var b = document.createElement("button");
+    b.type = "button";
+    b.className = "hb-code-button";
+    b.title = label;
+    b.setAttribute("aria-label", label);
+    b.innerHTML = icon(name);
+    return b;
+  }
+
+  document.querySelectorAll(".hb-code").forEach(function (box) {
+    var code = box.querySelector("pre code") || box.querySelector("pre");
+    if (!code) return;
+
+    var copy = button("copy", "Copy");
+    copy.addEventListener("click", function () {
+      navigator.clipboard.writeText(code.innerText.replace(/\n$/, "")).then(function () {
+        copy.innerHTML = icon("done");
+        setTimeout(function () { copy.innerHTML = icon("copy"); }, 1500);
+      });
+    });
+
+    var bar = document.createElement("div");
+    bar.className = "hb-code-bar";
+
+    if (box.classList.contains("hb-request-box")) {
+      bar.appendChild(copy);
+    } else {
+      var lang = document.createElement("span");
+      lang.className = "hb-code-lang";
+      lang.textContent = box.getAttribute("data-lang") || "text";
+
+      var wrap = button("wrap", "Wrap long lines");
+      wrap.addEventListener("click", function () {
+        box.classList.toggle("hb-wrap");
+        wrap.classList.toggle("hb-on");
+      });
+
+      var actions = document.createElement("span");
+      actions.className = "hb-code-actions";
+      actions.appendChild(wrap);
+      actions.appendChild(copy);
+      bar.appendChild(lang);
+      bar.appendChild(actions);
+    }
+    box.insertBefore(bar, box.firstChild);
+  });
+})();
+</script>

@@ -10,7 +10,7 @@
 
 ## How code runs
 
-6. **Never run a file through Stata's menu.** **File › Open** runs it in Stata's current folder, which may be another project's.
+6. **Never run a file through Stata's menu.** **File › Open** runs it in Stata's current folder, which may be another project's. With two copies of one project on your machine, close Stata first, then double-click the `master.do` you mean.
 7. **Never type a path into code.** A typed path works on one machine only.
 8. **Never edit `code/pins.do` during a run.** With R steps, the run then mixes two versions, with no error.
 9. **Never edit `code/_config.R`.** It must stay the same in every project.

@@ -45,8 +45,8 @@ are the clones in the folder beside this repo.
   Stata's window to run the R cases.
 - The website is rendered only by the workflow on GitHub (`.github/workflows/`): install nothing
   and render nothing here. Its look is in `website/` (colours, fonts, a filter that turns the
-  labels into cards on the website only, and the Copy page button); a page never carries markup
-  for the website.
+  labels into cards, the code boxes, the Copy page button, and pele, which draws the diagrams),
+  on the website only; a page never carries markup for the website.
 - This repo holds no data, and no task here reads or writes the data root.
 - **Git: commit and push when the data curator asks, never on your own.** A task still ends with the
   files changed and a one-line summary in plain words; the data curator then asks, or does not. When

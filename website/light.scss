@@ -12,6 +12,7 @@ $hb-line: #e6e3d9;
 $hb-card: #f0eee6;
 $hb-card-hover: #e8e5da;
 $hb-surface: #ffffff;
+$hb-diagram-border: #cdcac0;
 $hb-accent: #a8492b;
 $hb-button-bg: #1f1e1d;
 $hb-button-fg: #faf9f5;
@@ -32,13 +33,3 @@ $code-color: $hb-ink;
 $code-bg: $hb-card;
 $code-block-bg: $hb-surface;
 
-// The diagrams take the same colours.
-$mermaid-bg-color: $hb-surface;
-$mermaid-edge-color: $hb-muted;
-$mermaid-fg-color: $hb-ink;
-$mermaid-fg-color--lighter: $hb-muted;
-$mermaid-fg-color--lightest: $hb-line;
-$mermaid-node-bg-color: $hb-card;
-$mermaid-node-fg-color: $hb-ink;
-$mermaid-label-bg-color: $hb-bg;
-$mermaid-label-fg-color: $hb-ink;

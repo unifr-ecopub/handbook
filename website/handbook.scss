@@ -14,7 +14,6 @@ $font-family-monospace: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, C
 $headings-font-family: "Newsreader", Georgia, "Times New Roman", serif;
 $headings-font-weight: 500;
 $line-height-base: 1.65;
-$mermaid-font-family: $font-family-sans-serif;
 
 /*-- scss:rules --*/
 
@@ -161,33 +160,6 @@ a {
   margin-bottom: 0;
 }
 
-// The request to Claude, in a grey box like a chat message.
-
-.hb-ask div.sourceCode,
-.hb-ask pre {
-  background: $hb-card;
-  border: 0;
-  border-radius: 18px;
-  margin: 0.6rem 0 0.25rem;
-}
-
-.hb-ask pre {
-  padding: 0.85rem 1.1rem;
-}
-
-.hb-ask div.sourceCode pre {
-  padding: 0.85rem 1.1rem;
-  margin: 0;
-}
-
-.hb-ask pre code {
-  font-family: $font-family-sans-serif;
-  font-size: 1.05rem;
-  color: $hb-ink;
-  white-space: pre-wrap;
-}
-
-
 // The coloured boxes.
 
 .hb-wrong,
@@ -228,23 +200,141 @@ a {
   padding-left: 1.1rem;
 }
 
-// Code, and what a program prints: a white box with a thin line. Only the
-// request to Claude, above, is grey.
+// Code boxes (website/code-boxes.html adds their top bar): a white box with
+// a thin line, its language and two buttons at the top. The request to
+// Claude is a grey box, like a chat message, with only the copy button.
 
-div.sourceCode,
-pre {
+.hb-code {
+  position: relative;
   background: $hb-surface;
   border: 1px solid $hb-line;
   border-radius: 12px;
+  margin: 0.75rem 0 1.1rem;
+  overflow: hidden;
 }
 
-div.sourceCode pre {
-  border: 0;
+.hb-code div.sourceCode,
+.hb-code pre,
+.hb-code pre.sourceCode {
   background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  margin: 0;
 }
 
-pre code {
+.hb-code pre {
+  padding: 0.3rem 1rem 0.9rem;
+  overflow-x: auto;
+}
+
+.hb-code pre code {
   font-size: 0.85rem;
+  line-height: 1.6;
+  white-space: pre;
+}
+
+.hb-code.hb-wrap pre code {
+  white-space: pre-wrap;
+}
+
+.hb-code-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.45rem 0.5rem 0.2rem 1rem;
+}
+
+.hb-code-lang {
+  font-family: $font-family-monospace;
+  font-size: 0.75rem;
+  color: $hb-muted;
+}
+
+.hb-code-actions {
+  display: flex;
+  gap: 0.15rem;
+}
+
+button.hb-code-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: $hb-muted;
+  cursor: pointer;
+}
+
+button.hb-code-button:hover,
+button.hb-code-button.hb-on {
+  background: $hb-card;
+  color: $hb-ink;
+}
+
+button.hb-code-button svg {
+  width: 15px;
+  height: 15px;
+}
+
+.hb-code.hb-request-box {
+  background: $hb-card;
+  border: 0;
+  border-radius: 18px;
+  margin: 0.6rem 0 0.25rem;
+}
+
+.hb-request-box .hb-code-bar {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.4rem;
+  padding: 0;
+}
+
+.hb-request-box button.hb-code-button:hover {
+  background: $hb-card-hover;
+}
+
+.hb-request-box pre {
+  padding: 0.85rem 2.75rem 0.85rem 1.1rem;
+}
+
+.hb-request-box pre code {
+  font-family: $font-family-sans-serif;
+  font-size: 1.05rem;
+  color: $hb-ink;
+  white-space: pre-wrap;
+}
+
+// The diagrams, drawn by pele (website/diagrams.html), in the same colours
+// and fonts. Before pele draws one, or if it cannot, its text shows.
+
+.hb-diagram {
+  --pele-bg: #{$hb-bg};
+  --pele-fg: #{$hb-ink};
+  --pele-muted: #{$hb-muted};
+  --pele-line: #{$hb-muted};
+  --pele-surface: #{$hb-surface};
+  --pele-surface-alt: #{$hb-card};
+  --pele-border: #{$hb-diagram-border};
+  --pele-accent: #{$hb-accent};
+  --pele-font: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --pele-radius: 6px;
+  margin: 1.5rem 0 2rem;
+  overflow-x: auto;
+}
+
+pre.hb-mermaid {
+  font-size: 0.8rem;
+  color: $hb-muted;
+  background: $hb-surface;
+  border: 1px solid $hb-line;
+  border-radius: 12px;
+  padding: 1rem;
 }
 
 p code,

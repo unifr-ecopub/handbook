@@ -11,6 +11,8 @@ These tasks need an owner of the chair's organisation, because members cannot cr
 5. In the new repo, open **Settings**, then **Collaborators & teams**, and click **Add teams**.
 6. Pick the team of all members, and give it the role **Write**.
 
+The new repo gets the template's files as they are, and nothing is edited before its first run. A later change to the template does not reach it, so each project keeps the `ado/` and the rules its results were made with.
+
 ## Welcome a new researcher
 
 1. [Add the person as a member](#add-a-member).

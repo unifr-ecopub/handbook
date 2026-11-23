@@ -1,0 +1,31 @@
+<!--
+  The diagrams on the website, drawn by pele (https://pele.run).
+
+  What it does: pele reads each diagram written as ```mermaid in a page,
+  the same text that github.com draws, and draws it in the handbook's
+  colours and fonts, which are in website/handbook.scss. pele is fetched
+  from jsDelivr at a fixed version, and the browser checks that the file is
+  the one expected. If pele cannot be fetched, the diagram's text stays in
+  its place.
+-->
+<script src="https://cdn.jsdelivr.net/npm/pele@1.13.0/dist/pele.global.js"
+        integrity="sha384-vDPV1LDXGIwjU5/gMUtHbn/WAmwRmOgkQpiq+Rm4d/BPTsdfpIUpvi2xVET6z85W"
+        crossorigin="anonymous"></script>
+<script>
+(function () {
+  if (typeof pele === "undefined") return;
+  document.querySelectorAll("pre.hb-mermaid").forEach(function (pre) {
+    var text = pre.textContent;
+    var diagram = document.createElement("div");
+    diagram.className = "hb-diagram";
+    pre.replaceWith(diagram);
+    try {
+      pele.mount(diagram, text, {
+        onError: function () { diagram.replaceWith(pre); }
+      });
+    } catch (e) {
+      diagram.replaceWith(pre);
+    }
+  });
+})();
+</script>

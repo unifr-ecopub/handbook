@@ -21,9 +21,8 @@
 # on GitHub's machine for the length of the run. The Markdown files in the
 # repo are not changed: only their copies in _build/ are.
 #
-# Each page is copied with the ending .qmd instead of .md, because Quarto
-# draws a diagram only in a .qmd file. The links between pages are changed to
-# match in the copies.
+# Each page is copied with the ending .qmd, Quarto's own ending for a page,
+# instead of .md. The links between pages are changed to match in the copies.
 #
 # The website's look is in website/: its colours in light.scss and dark.scss,
 # its fonts and layout in handbook.scss, and in handbook.lua a filter that
@@ -32,7 +31,10 @@
 # how github.com shows the pages. copy-page.html is the Copy page button
 # beside each title, which copies the page's Markdown file: the run puts each
 # page's file from the repo beside its page on the website, README.md as
-# index.md.
+# index.md. code-boxes.html adds to each code box its language and the
+# buttons to wrap and copy it. diagrams.html has pele (https://pele.run), at
+# a fixed version, draw each diagram (```mermaid) in the reader's browser;
+# Quarto draws none.
 #
 # One setting on github.com, made once by an owner of the organisation:
 # in this repo, Settings > Pages > Build and deployment > Source:
@@ -168,7 +170,7 @@ jobs:
                 light: [default, website/light.scss, website/handbook.scss]
                 dark: [default, website/dark.scss, website/handbook.scss]
               respect-user-color-scheme: true
-              code-copy: true
+              code-copy: false
               code-block-border-left: false
               grid:
                 sidebar-width: 270px
@@ -176,7 +178,10 @@ jobs:
                 margin-width: 230px
               filters:
                 - website/handbook.lua
-              include-after-body: website/copy-page.html
+              include-after-body:
+                - website/copy-page.html
+                - website/code-boxes.html
+                - website/diagrams.html
           book:
             title: "Handbook"
             chapters:
@@ -217,14 +222,11 @@ jobs:
 
           # In every copied page: a link to README.md becomes a link to the
           # start page; a link to another page, <page>.md, becomes a link to
-          # its copy, <page>.qmd (links to other websites are left alone);
-          # and a diagram fenced as ```mermaid (the form that github.com
-          # draws) becomes ```{mermaid} (the form Quarto draws).
+          # its copy, <page>.qmd (links to other websites are left alone).
           find _build -name '*.qmd' | while read -r page; do
             sed -i \
               -e 's#](\(\.\./\)*README\.md#](\1index.md#g' \
               -e 's#](\([^):]*\)\.md\([#)]\)#](\1.qmd\2#g' \
-              -e 's/^\([[:space:]]*\)```mermaid[[:space:]]*$/\1```{mermaid}/' \
               "$page"
           done
 

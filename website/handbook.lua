@@ -15,6 +15,11 @@
 --   5. A list whose every line is one link becomes a list of rows.
 --   6. The start page's table of roles (a picture in the first column)
 --      becomes one card per role, with a button to its first page.
+--   7. Each code block goes in a box that names its language, with buttons
+--      to wrap its lines and copy it (website/code-boxes.html adds them).
+--      The request to Claude is a grey box with only the copy button.
+--   8. Each diagram (```mermaid) is left for pele to draw in the browser
+--      (website/diagrams.html), instead of Quarto.
 --
 -- The look of each of these is in website/handbook.scss.
 
@@ -62,6 +67,9 @@ local function labelled(blocks, i)
   while i <= #blocks do
     local t = blocks[i].t
     if t == "CodeBlock" or t == "BulletList" or t == "OrderedList" then
+      if t == "CodeBlock" and kind == "ask" then
+        blocks[i].classes:insert("hb-request")
+      end
       inner:insert(blocks[i])
       i = i + 1
     else
@@ -195,6 +203,25 @@ local function role_cards(tbl)
   return pandoc.Div(cards, pandoc.Attr("", { "hb-cards" }))
 end
 
+local function escape_html(text)
+  return (text:gsub("&", "&amp;"):gsub("<", "&lt;"):gsub(">", "&gt;"))
+end
+
+-- A diagram, for pele; any other code block, in its box.
+local function code_box(block)
+  local lang = block.classes[1] or "text"
+  if lang == "mermaid" then
+    return pandoc.RawBlock("html",
+      '<pre class="hb-mermaid">' .. escape_html(block.text) .. "</pre>")
+  end
+  if lang == "plaintext" or lang == "hb-request" then lang = "text" end
+  local classes = { "hb-code" }
+  if block.classes:includes("hb-request") then
+    table.insert(classes, "hb-request-box")
+  end
+  return pandoc.Div({ block }, pandoc.Attr("", classes, { ["data-lang"] = lang }))
+end
+
 return {
   {
     Header = numbered,
@@ -206,5 +233,8 @@ return {
       doc.blocks = labels(lead(doc.blocks))
       return doc
     end,
+  },
+  {
+    CodeBlock = code_box,
   },
 }
