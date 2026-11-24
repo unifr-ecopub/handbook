@@ -18,4 +18,4 @@ Claude changes the dataset's line in `code/pins.do`, runs everything, and says w
 chair_use: <dataset>/<file> v<N>
 ```
 
-If the version does not load, [Loading a dataset](../reference/messages-project-run.md#loading-a-dataset) quotes each message. A withdrawn version still loads, and the message shows the data curator's reason.
+If the version does not load, [Loading a dataset](../reference/messages-project-run.md#loading-a-dataset) quotes each message. A version marked as wrong still loads, with no warning: its line in the build's `README.md` says why and which version to use instead, and the data curator tells the chair.

@@ -15,7 +15,6 @@ stateDiagram-v2
   [*] --> Candidate: a full run of the build on the data curator's machine
   Candidate --> Candidate: a rebuild replaces it
   Candidate --> Version: the curator releases
-  Version --> Withdrawn: the curator saves WITHDRAWN
 ```
 
 A candidate is a build's finished files. It waits in `intermediate/<dataset>/`, where `staged.txt` lists its files, its commit and its date. No project can pin a candidate.
@@ -40,6 +39,6 @@ pins.do: <pin> "<value>"
 chair_use: <dataset>/<file> v<N>
 ```
 
-## A withdrawn version
+## A version that is wrong
 
-A withdrawn version holds a file named `WITHDRAWN`, with the data curator's reason and the version to use. It loads as before, so old results can be reproduced. Each load prints [a warning](../reference/messages-project-run.md#loading-a-dataset) and the data curator's text.
+A version found to be wrong stays as it is, so old results can be reproduced. The data curator [marks it](../curator/mark-a-wrong-version.md) on its line in the build's `README.md`, with the version to use instead. It loads as before, with no warning.

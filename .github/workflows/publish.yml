@@ -123,7 +123,7 @@ jobs:
           curator/start-a-build.md
           curator/run-a-review-round.md
           curator/release-a-version.md
-          curator/withdraw-a-version.md
+          curator/mark-a-wrong-version.md
           curator/assemble-a-replication-package.md
           curator/test-a-changed-chair-program.md
           curator/manage-repos-and-people.md

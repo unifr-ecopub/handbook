@@ -42,7 +42,7 @@ The platform keeps code on GitHub and data on Dropbox, and Claude does the techn
 - [Start a build](curator/start-a-build.md)
 - [Run a review round](curator/run-a-review-round.md)
 - [Release a version](curator/release-a-version.md)
-- [Withdraw a version](curator/withdraw-a-version.md)
+- [Mark a version that is wrong](curator/mark-a-wrong-version.md)
 - [Assemble a replication package](curator/assemble-a-replication-package.md)
 - [Test and copy a changed chair program](curator/test-a-changed-chair-program.md)
 - [Manage repos and people](curator/manage-repos-and-people.md)
