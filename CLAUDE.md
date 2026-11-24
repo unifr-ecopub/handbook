@@ -23,8 +23,7 @@ are the clones in the folder beside this repo.
   words: "Claude commits and pushes when you ask, and never on its own; it asks before
   `release.do`. Scientific choices are yours, and Claude writes them into `decisions.md`." (the
   data curator's guide: "yours, or the build author's", "the build's `decisions.md`"), and the
-  data curator's guide adds, once, that in `data-processing` the commit and the push are still the
-  data curator's, in GitHub Desktop. A task that a repo's rule or skill still leaves to the person
+  data curator's guide adds, once, that this holds in `data-processing` too. A task that a repo's rule or skill still leaves to the person
   says so under **Only you do.**, and no more.
 - **The guides follow, and never own,** the skills, `CLAUDE.md` files, settings and messages of
   `data-processing` and `project-template`. Every sentence must be true of them as they stand: a

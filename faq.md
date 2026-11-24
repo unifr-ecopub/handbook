@@ -35,6 +35,6 @@ One line per question, with a link to the page that covers it.
 
 ## For the data curator
 
-- **Who commits in `data-processing`?** [You do](curator/commit-and-push.md), in GitHub Desktop.
+- **Who commits in `data-processing`?** Claude, [when you ask](curator/commit-and-push.md), and never on its own.
 - **How do I undo a release?** You cannot. You [mark the version as wrong](curator/mark-a-wrong-version.md) in its build's `README.md`.
 - **How do I welcome a new researcher?** In [three steps](curator/manage-repos-and-people.md#welcome-a-new-researcher).

@@ -1,24 +1,31 @@
 # Commit and push as the data curator
 
-In a project, in `project-template` and in `handbook`, Claude commits and pushes when you ask "Commit and push." In `data-processing`, both are still yours, in GitHub Desktop.
+In every repo, `data-processing` too, Claude commits and pushes when you ask "Commit and push.", and never on its own. It asks before `release.do`. Scientific choices are yours, or the build author's, and Claude writes them into the build's `decisions.md`.
 
-**Untested on Windows.** Until Claude's git works there, [GitHub Desktop's buttons](../researcher/fix-a-rejected-push-or-a-conflict.md#if-claude-cannot-use-git-on-your-machine) stand in.
+**Untested on Windows.** Until Claude's git works there, [GitHub Desktop's buttons](../researcher/fix-a-rejected-push-or-a-conflict.md#if-claude-cannot-use-git-on-your-machine) stand in: Claude names the files and the summary to type.
 
-## Commit and push data-processing in GitHub Desktop
+## Commit and push data-processing
 
-Claude ends each task that changed a file there with the files, a summary of one line, and the words "Commit and Push in GitHub Desktop".
+Claude ends each task that changed a file with the files and a summary of one line.
 
-**Only you do.** The button names follow GitHub's documentation.
+**Ask Claude.** In `data-processing`:
 
-1. Before Claude edits the data map, pull: click **Fetch origin**, and **Pull origin** when that button appears.
-2. After Claude's task, look through the files under **Changes**.
-3. Type Claude's summary into **Summary**.
-4. Click **Commit to main**, then **Push origin**.
+```prompt
+Commit and push.
+```
 
-**Check.** On github.com, `data-processing` shows your commit.
+**Claude will ask you.** For your yes, if the list of changed files holds one that Claude did not name to you. A file you say to leave out stays out.
 
-If GitHub refuses the push, someone pushed first. Pull as in step 1, then click **Push origin** again. No rule of `data-processing` covers a conflict yet.
+**Only you do.** If a window opens to sign in to GitHub, sign in with your GitHub account.
+
+**Check.** Claude says what its pull brought and that the commit is pushed. On github.com, `data-processing` shows your commit.
+
+**What can go wrong.**
+
+- Someone pushed first: Claude pulls, says what came, and pushes again.
+- A conflict: Claude shows both versions of each file and changes nothing until you choose. Until the merge is finished, it runs no build and no release.
+- A pull that brought commits while a candidate waits: Claude says whether they touch the code that makes that dataset. If they do, its build runs again before a release.
 
 ## Run the tests before a push that changed code
 
-If `code/`, `ado/` or `tests/` changed, Claude runs [the repo's tests](test-a-changed-chair-program.md) and gives the count before it ends. Push only if none failed.
+If `code/`, `ado/` or `tests/` changed, here or by a pull, Claude runs [the repo's tests](test-a-changed-chair-program.md) and gives the count before it pushes. If one fails, nothing is pushed.
