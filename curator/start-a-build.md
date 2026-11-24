@@ -14,7 +14,7 @@ Start a build for <dataset> from <source>.
 
 **Claude will ask you.** Everything in one message.
 
-- The dataset's name and each finished file's name: lower case, under 28 characters. A file's name takes no hyphen.
+- The dataset's name and each finished file's name. The dataset's name is lower case, with hyphens between words, and at most 28 characters, or 27 if it begins with a digit.
 - What one row is, its key, and which variables to keep.
 - The finished file's terms of use.
 - The cases that code cannot decide, which go to [a review round](run-a-review-round.md).
@@ -24,12 +24,10 @@ Start a build for <dataset> from <source>.
 
 **Check.** Claude shows the counts that the steps printed, the rows written to `logs/qa/`, and each finished file's first ten rows.
 
-**What can go wrong.** Those rows reach Anthropic's servers. Nothing in Claude's instructions stops this display for [a source that bars outside services](../data/terms-of-use.md#sources-that-may-not-reach-an-outside-service).
+For [a source that bars outside services](../data/terms-of-use.md#sources-that-may-not-reach-an-outside-service), Claude shows only the counts and the variables' names and types. You look at the rows yourself.
 
 ## Read what the run left, then commit and push
 
-On the data curator's machine, a candidate now waits. It was made from code that is not yet committed, so do not release it. On any other machine, nothing is staged. [Commit and push](commit-and-push.md) the build's folder and `datamap.csv`, then ask for the build again, for example:
+On the data curator's machine, a candidate now waits, made from code that is not yet committed. On any other machine, nothing is staged.
 
-```prompt
-Run the build for <dataset> again.
-```
+Ask Claude to [commit and push](commit-and-push.md) the build's folder and `datamap.csv`. Once they are pushed exactly as they were when the build ran, that candidate may be [released](release-a-version.md), with no new build. If the code that makes the dataset changes after the run, the build runs again first: `release.do` refuses the candidate otherwise.

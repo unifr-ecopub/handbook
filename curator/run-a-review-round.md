@@ -14,6 +14,8 @@ flowchart LR
 
 A full run writes each case that no sheet lists yet into a new sheet, in `intermediate/<dataset>/`. Claude reports the line that names the sheet.
 
+If this machine cannot write that folder, the sheet goes to the build's `logs/`, and Claude copies it into `intermediate/<dataset>/` when you ask.
+
 Tell the assistant, whose page is [Fill in a review sheet](../assistant/fill-in-a-review-sheet.md). The sheet stays in its folder.
 
 ## Apply the filled sheet
@@ -33,4 +35,4 @@ Review sheets: <n> read. Cases: <n>. Decided: <n> (<n> yes, <n> no). Not decided
 Decisions that match no current case, not used: <n>.
 ```
 
-The build stops on a sheet with a wrong entry, and on two sheets that decide one case differently. Claude says which sheets, and the assistant corrects them in Excel. Then ask for the build again. See [A review round](../reference/messages-build-and-release.md#a-review-round).
+The build stops on a sheet with a wrong entry, and on two sheets that decide one case differently. Claude says which sheets; for a source that [bars outside services](../data/terms-of-use.md#sources-that-may-not-reach-an-outside-service), you read them in the build's log. The assistant corrects them in Excel. Then ask for the build again. See [A review round](../reference/messages-build-and-release.md#a-review-round).

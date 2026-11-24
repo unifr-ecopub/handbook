@@ -1,39 +1,35 @@
 # Add a raw delivery
 
-You copy a provider's files into the data root, and Claude records them in the data map.
+Claude copies a provider's files into the data root when you ask, and records them in the data map.
 
-## Copy the delivery into raw/
-
-**Only you do.** Claude never writes under `raw/`.
-
-1. In Explorer, make the folder `raw/<source>/<date>/` in the data root.
-2. Copy the files into it as received.
-3. In GitHub Desktop, pull `data-processing`.
-
-`<source>` is lower case, with hyphens between words, and under 28 characters. `<date>` is written `yyyy-mm-dd`.
-
-## Ask Claude to record it
+## Ask Claude to copy it
 
 **Ask Claude.** In `data-processing`:
 
 ```prompt
-I added a delivery of <source>.
+Copy the delivery of <source> in <folder> into raw/.
 ```
 
-**Claude will ask you.** In one message, whatever the files leave unclear. That can be the sender, the terms of use, and what one row is.
+If you copied the files into `raw/<source>/<date>/` yourself, say "I added a delivery of <source>." instead, and Claude checks that folder.
 
-**What can go wrong.** For a new source, Claude looks at the first rows of each text file, and asks for the terms afterwards. Those rows reach Anthropic's servers. Claude's instructions keep the files closed only if the source's `README.md` or its row in the data map already [bars outside services](../data/terms-of-use.md#sources-that-may-not-reach-an-outside-service).
+**Claude will ask you.**
 
-## Save the terms beside the files
+- First, whatever you did not say: the folder that holds the delivery, the source's name and the date it came. Claude proposes the name.
+- For a new source, its terms of use, in a message of their own. Claude opens no file of the delivery until you answer.
+- Then, in one message, what the files leave unclear, such as the sender and what one row is.
 
-**Only you do.** If the terms are not `open`, Claude gives you the text of a `README.md` that repeats them.
+Claude copies every file untouched into `raw/<source>/<date>/`, and checks that the number of files and their sizes match. If that date folder is there already, it copies nothing and asks whether this is a second delivery of that date, which goes into `<date>-2`.
 
-1. Paste the text into Notepad.
-2. Choose **File › Save as**, and pick `raw/<source>/` in the data root.
-3. Name the file `README.md`, and set **Save as type** to **All Files**.
+`<source>` is lower case, with hyphens between words, and at most 28 characters, or 27 if it begins with a digit. Claude renames a folder that breaks this only on your yes, and never a delivered file.
+
+**What can go wrong.** Once the terms allow it, Claude reads the header and first rows of each text file, and those rows reach Anthropic's servers. `unknown` and `chair only` allow it. Only terms that [bar outside services](../data/terms-of-use.md#sources-that-may-not-reach-an-outside-service) keep the files closed: say them in your request, or when Claude asks.
+
+## The terms beside the files
+
+If the terms are anything but `open` or `unknown`, Claude writes them as `raw/<source>/README.md` in the data root, in your words or the provider's, and shows you its text.
 
 ## Check the row, then commit and push
 
-**Check.** Claude shows the source's row of `datamap.csv`, with every field filled, and names each build that reads the source. Then [commit and push](commit-and-push.md) `datamap.csv`.
+**Check.** Claude shows the source's row of `datamap.csv`, with every field filled, and names each build that reads the source. Then ask Claude to [commit and push](commit-and-push.md) `datamap.csv`. A raw source's row does not make a dataset, so a candidate that waits stays releasable.
 
-A build keeps the delivery on its pin. Ask Claude to move the build to the new delivery: it changes that line and runs the whole build again.
+A build keeps the delivery on its pin. Ask Claude to move the build to the new delivery: it changes that line and the build's `README.md`, and runs the whole build again. That candidate is released only once both files are committed and pushed as they were when the build ran.
