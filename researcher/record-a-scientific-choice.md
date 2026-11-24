@@ -1,6 +1,6 @@
 # Record a scientific choice
 
-A scientific choice is yours: which sample, which threshold, which boundary year, how to cluster. Claude writes each one into `decisions.md`, the project's record.
+A scientific choice is yours: which sample, which threshold, how to cluster. Claude writes each one into `decisions.md`, the project's record.
 
 ```mermaid
 stateDiagram-v2

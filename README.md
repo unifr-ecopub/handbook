@@ -43,7 +43,6 @@ The platform keeps code on GitHub and data on Dropbox, and Claude does the techn
 - [Run a review round](curator/run-a-review-round.md)
 - [Release a version](curator/release-a-version.md)
 - [Withdraw a version](curator/withdraw-a-version.md)
-- [Add the register's January list](curator/add-the-yearly-register-list.md)
 - [Assemble a replication package](curator/assemble-a-replication-package.md)
 - [Test and copy a changed chair program](curator/test-a-changed-chair-program.md)
 - [Manage repos and people](curator/manage-repos-and-people.md)
@@ -57,7 +56,6 @@ The platform keeps code on GitHub and data on Dropbox, and Claude does the techn
 - [The data root](data/data-root.md)
 - [The data map](data/data-map.md)
 - [Versions and pins](data/versions-and-pins.md)
-- [Municipal data and boundary years](data/municipal-data.md)
 - [Terms of use](data/terms-of-use.md)
 
 ## Look something up

@@ -16,6 +16,4 @@ Claude names the folder and gives you the header line to type. It asks which bui
 - Save it as `.csv` or `.dta`. A build takes each `.xlsx` in that folder for a review sheet.
 - Give it a short name of its own, in lower case. It may not have the name of a file that the build makes.
 
-A table of shares has four columns: `gdenr`, `from_year`, `to_gdenr` and `share`. The shares of one number in one year add up to 1.
-
 **What can go wrong.** The table has neither a version nor a pin. If it changes, the next build's result changes with no error.

@@ -20,7 +20,7 @@ You copy a provider's files into the data root, and Claude records them in the d
 I added a delivery of <source>.
 ```
 
-**Claude will ask you.** In one message, whatever the files leave unclear. That can be the sender, the terms of use, the list that municipality numbers follow, and what one row is.
+**Claude will ask you.** In one message, whatever the files leave unclear. That can be the sender, the terms of use, and what one row is.
 
 **What can go wrong.** For a new source, Claude looks at the first rows of each text file, and asks for the terms afterwards. Those rows reach Anthropic's servers. Claude's instructions keep the files closed only if the source's `README.md` or its row in the data map already [bars outside services](../data/terms-of-use.md#sources-that-may-not-reach-an-outside-service).
 

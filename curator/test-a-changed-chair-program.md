@@ -1,6 +1,6 @@
 # Test and copy a changed chair program
 
-The chair's five Stata programs live in `ado/c/` of `data-processing`. `project-template` holds a copy of four, and `chair_commit.ado` is in `data-processing` alone. After a change, both repos must pass their tests, and each copy must stay identical to its source.
+The chair's five Stata programs live in `ado/c/` of `data-processing`. `project-template` holds a copy of three, `chair_use`, `chair_rstep` and `chair_results`; `chair_commit.ado` and `chair_fingerprint.ado` are in `data-processing` alone. After a change, both repos must pass their tests, and each copy must stay identical to its source.
 
 ```mermaid
 flowchart LR

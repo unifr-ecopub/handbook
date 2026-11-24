@@ -124,7 +124,6 @@ jobs:
           curator/run-a-review-round.md
           curator/release-a-version.md
           curator/withdraw-a-version.md
-          curator/add-the-yearly-register-list.md
           curator/assemble-a-replication-package.md
           curator/test-a-changed-chair-program.md
           curator/manage-repos-and-people.md
@@ -134,7 +133,6 @@ jobs:
           data/data-root.md
           data/data-map.md
           data/versions-and-pins.md
-          data/municipal-data.md
           data/terms-of-use.md
           part: Working with Claude
           claude/working-with-claude.md

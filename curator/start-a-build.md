@@ -20,10 +20,6 @@ Start a build for <dataset> from <source>.
 - The cases that code cannot decide, which go to [a review round](run-a-review-round.md).
 - Your name, for the build's `decisions.md`.
 
-For municipal data, Claude also asks which list the numbers follow, which boundary year you choose, and how figures are added up, averaged or split.
-
-`chair_boundary`, which brings municipality numbers to one boundary year, stops if the data can be read two ways. Claude shows you [the sentence](../reference/messages-build-and-release.md#stops-of-the-boundary-command) and the rows, and your answer becomes a D-number.
-
 ## Check the result
 
 **Check.** Claude shows the counts that the steps printed, the rows written to `logs/qa/`, and each finished file's first ten rows.

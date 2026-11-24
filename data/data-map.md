@@ -17,11 +17,10 @@ A dataset's own page is `builds/<dataset>/README.md` in the same repo. It says w
 | `received` | The dates of its deliveries | A pointer to the build's `README.md` |
 | `unit` | The unit of observation | The same |
 | `key` | The columns that identify a row | The same |
-| [`boundary_year`](municipal-data.md) | The list or date that its municipality numbers follow | `<yyyy>`, or `<yyyy>, own territory` |
 | [`terms`](terms-of-use.md) | The terms of use | The same |
 | `built_from` | `none` | The sources, datasets and `intermediate/` folders behind it |
 
-`unknown` means that nobody knows. `none` means that the field does not apply. A release refuses a processed file whose `key`, `boundary_year` or `terms` is blank or `unknown`.
+`unknown` means that nobody knows. `none` means that the field does not apply. A release refuses a processed file whose `key` or `terms` is blank or `unknown`, and a file whose key does not identify each row.
 
 No row describes a table made by hand. The processed file made with it names the table's folder under `built_from`.
 
