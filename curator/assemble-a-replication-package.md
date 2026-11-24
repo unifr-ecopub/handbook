@@ -2,7 +2,7 @@
 
 A journal asks for one folder, `<project>-replication/`: the project, the code that made each shared dataset it reads, and the data that may be shared. A replicator runs it from its `README.md` alone, without Claude.
 
-Before you ask, the project's commit with the paper's results must be pushed. What may be shared, and the licences, are the authors' to say.
+What may be shared, the licences and the statements are the authors' to say. The project's commit with the paper's results must be pushed before the package is sent; Claude names a commit that is not.
 
 ## Ask Claude to assemble it
 
@@ -12,16 +12,18 @@ Before you ask, the project's commit with the paper's results must be pushed. Wh
 Assemble the replication package for <project>.
 ```
 
-Claude looks for the project's clone beside your clone of `data-processing`, and asks for its folder if it finds none.
+Claude looks for the project's clone beside your clone of `data-processing`, and one folder further down. A short question comes first only if it finds no clone, or if a version's commit is missing.
 
-**Claude will ask you.** Everything at once, so that you can pass the message to the authors.
+**Claude will ask you.** Everything in one message, so that you can pass it to the authors.
 
-- Is the commit it found the one with the paper's results?
+- Is the state it found the one with the paper's results?
 - Which new folder, outside every clone and every synced folder, takes the package?
-- May the package share each delivery, each version and each table made by hand? If not, who grants access?
+- May the package share each delivery, each version and each table made by hand? If not, who grants access? And may Claude copy each input marked no into its test copy, for the test only?
 - The paper's title, its label for each exhibit, and the licences for the data and the code.
 - Two statements about rights: may the authors use the data, and may they pass it on?
 - Which statement fits: all data, some data, or no data can be made publicly available.
+- Shall the package's `README.md` carry a line on AI use? The line names no tool. If the project's history does not name the AI tool and model, which ones the authors used.
+- May Claude bring `data-processing` up to date from GitHub, to see a version marked as wrong since its release?
 
 ## Read the report
 
@@ -29,16 +31,19 @@ Claude looks for the project's clone beside your clone of `data-processing`, and
 
 - each version as `shipped`, or as `rebuild` if the package makes it again from its inputs;
 - the last line of each test run, and whether every file in `paper/results/` came out the same;
-- each placeholder that an unanswered question left for the authors.
+- each placeholder that an unanswered question left for the authors;
+- each version whose line in its build's `README.md` says it is not to be used. The package still uses it: moving to another version is the authors' decision;
+- each file of the package in which the word Claude is left;
+- a draft of the paper's statement on AI use. It is also saved in the working folder, and in no file of the package. The authors decide its words and where it goes.
+
+A package holds no `CLAUDE.md`, no `AGENTS.md` and no `.claude/`. In the package's copies, Claude also drops the sentences that name Claude, and in `decisions.md` the words that say who wrote a row down; a row under Provisional and a person's quoted words stay.
 
 ## Before you send it
 
-A package holds no `CLAUDE.md` and no `.claude/` folder. Claude still copies them today, because it copies the project as it was committed. Until Claude leaves them out, you remove them.
-
-**Only you do.** In the package folder:
+**Only you do.**
 
 - Look through `data/` for anything that the authors refused.
-- Delete every `CLAUDE.md` file and every `.claude/` folder, at any depth. Then check that none is left.
+- If the report names a file where the word Claude is left, other than a row under Provisional or a person's quoted words in a `decisions.md`, decide on it before the package is sent.
 
 After you send the package, delete the working folder, `<project>-work/`: it may hold inputs that the package omits.
 
@@ -47,4 +52,4 @@ After you send the package, delete the working folder, `<project>-work/`: it may
 - Claude stops if the package needs two versions of one dataset and may not ship both.
 - A table made by hand is shipped as it is today, which may differ from what the release read.
 
-**Untested on Windows.** The test runs Stata in batch mode, and a project with R steps needs Stata's window there.
+**Untested on Windows.** For a project with R steps, Claude asks you to start the test run there: double-click `code/master.do` of the test copy, click **Do**, and tell Claude when it has ended.

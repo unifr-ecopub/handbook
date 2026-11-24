@@ -62,4 +62,4 @@ The repo holds no data.
 
 In a package, the data root is the folder `data/`. A replicator sets no path.
 
-A package holds no `CLAUDE.md` and no `.claude/`. Until Claude leaves them out, the data curator removes them [before sending it](../curator/assemble-a-replication-package.md#before-you-send-it).
+A package holds no `CLAUDE.md`, no `AGENTS.md` and no `.claude/`: Claude [leaves them out](../curator/assemble-a-replication-package.md#read-the-report).
