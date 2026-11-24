@@ -31,10 +31,10 @@ Claude looks for the project's clone beside your clone of `data-processing`, and
 
 **Check.** Claude tests a copy of the package from its `README.md` alone. Its report names:
 
+- before anything else, each version whose line in its build's `README.md` says it is not to be used. The package is assembled all the same and still uses it: moving to another version is the authors' decision, to be made before the paper is sent;
 - each version as `shipped`, or as `rebuild` if the package makes it again from its inputs;
 - the last line of each test run, and whether every file in `paper/results/` came out the same;
 - each placeholder that an unanswered question left for the authors;
-- each version whose line in its build's `README.md` says it is not to be used. The package still uses it: moving to another version is the authors' decision;
 - each file of the package in which the word Claude is left;
 - a draft of the paper's statement on AI use. It is also saved in the working folder, and in no file of the package. The authors decide its words and where it goes.
 

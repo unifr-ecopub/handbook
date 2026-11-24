@@ -24,12 +24,12 @@ Start a build for <dataset> from <source>.
 
 **Check.** Claude shows the counts that the steps printed, the rows written to `logs/qa/`, and each finished file's first ten rows.
 
-For [a source that bars outside services](../data/terms-of-use.md#sources-that-may-not-reach-an-outside-service), Claude shows only the counts and the variables' names and types.
+For a source whose terms [bar outside services](../data/terms-of-use.md#sources-that-may-not-reach-an-outside-service), or say not to open its files, Claude shows only the counts and the variables' names and types.
 
 **Only you do.** For such a source, look at the rows yourself.
 
 ## Read what the run left, then commit and push
 
-On the data curator's machine, a candidate now waits, made from code that is not yet committed. On any other machine, nothing is staged.
+On the data curator's machine, a run that ended `Run complete` and `Staged` left a candidate, made from code that is not yet committed. On any other machine, nothing is staged.
 
 Ask Claude to [commit and push](commit-and-push.md) the build's folder and `datamap.csv`. Once they are pushed exactly as they were when the build ran, that candidate may be [released](release-a-version.md), with no new build. If the code that makes the dataset changes after the run, the build runs again first: `release.do` refuses the candidate otherwise.

@@ -12,8 +12,8 @@ A release writes the manifest last. A folder that has none is a release that sto
 
 ```mermaid
 stateDiagram-v2
-  [*] --> Candidate: a full run of the build on the data curator's machine
-  Candidate --> Candidate: a full build that ends Run complete on the data curator's machine replaces it
+  [*] --> Candidate: a full build on the data curator's machine that ends Run complete and Staged
+  Candidate --> Candidate: another such build replaces it
   Candidate --> Version: the curator releases
 ```
 

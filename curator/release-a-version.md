@@ -9,7 +9,7 @@ flowchart TD
   B -->|"no"| C{"A candidate waits?"}
   C -->|"no"| R["Claude says so, and runs the build when you ask"]
   R -->|"it stages a candidate"| B
-  R -->|"it fails"| X["Claude says so, and does not release"]
+  R -->|"it fails, or ends Not staged"| X["Claude says so, and does not release"]
   C -->|"yes"| K{"Claude's checks of the candidate pass?"}
   K -->|"no"| N["Claude says why, and does not ask"]
   K -->|"yes"| Q["Claude shows the command and asks"]
@@ -25,7 +25,7 @@ Claude's checks of a waiting candidate: its `staged.txt` holds a fingerprint, a 
 
 - A build may run before or after its code is committed. Its candidate is released only once that code is committed and pushed exactly as it was when the build ran. `release.do` refuses the candidate if the code that makes the dataset changed since the build.
 - That code is the build's `code/` (except its logs and `code/explore/`), `code/build.do`, `ado/`, and the first line and the dataset's rows of `datamap.csv`. A README, `decisions.md`, another build or a raw source's row is not, so committing them leaves a candidate releasable.
-- If a candidate waits, Claude releases that one and does not rebuild. A rebuild would replace a candidate that someone may have looked over.
+- If a candidate waits and passes Claude's checks, Claude asks for your yes to release that one, and does not rebuild. A rebuild would replace a candidate that someone may have looked over.
 - If a review sheet was filled since the last build, [ask for the build first](run-a-review-round.md#apply-the-filled-sheet).
 
 ## Ask Claude to release it

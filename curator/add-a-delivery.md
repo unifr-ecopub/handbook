@@ -32,7 +32,7 @@ Claude copies every file untouched into `raw/<source>/<date>/`, and checks that 
 
 ## The terms beside the files
 
-If the terms are anything but `open` or `unknown`, Claude writes them as `raw/<source>/README.md` in the data root, in your words or the provider's, and shows you its text.
+If the terms are anything but `open` or `unknown`, Claude writes them as `raw/<source>/README.md` in the data root, in your words or the provider's, and shows you its text. If a `README.md` is there already, Claude shows it and changes it only as you say.
 
 ## Check the row, then commit and push
 

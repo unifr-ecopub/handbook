@@ -29,4 +29,4 @@ Commit and push.
 
 ## Run the tests before a push that changed code
 
-If the files to commit, the commits not yet pushed, or what a pull or a merge brought touch `code/`, `ado/` or `tests/`, Claude runs [the repo's tests](test-a-changed-chair-program.md) and gives the count before it pushes. If one fails, nothing is pushed.
+If the files to commit, the commits not yet pushed, or what a pull or a merge brought touch `code/`, `ado/` or `tests/`, Claude runs [the repo's tests](test-a-changed-chair-program.md) and gives the count: before the commit, where the change was made here, and again before the push, after a pull or a merge that brought such changes. If one fails before the commit, nothing is committed; if one fails after, nothing is pushed.
