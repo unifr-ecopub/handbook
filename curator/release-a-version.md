@@ -8,17 +8,23 @@ flowchart TD
   B -->|"yes"| S["Claude stops and tells you"]
   B -->|"no"| C{"A candidate waits?"}
   C -->|"no"| R["Claude says so, and runs the build when you ask"]
-  C -->|"yes"| Q["Claude shows the command and asks"]
+  R -->|"it stages a candidate"| B
+  R -->|"it fails"| X["Claude says so, and does not release"]
+  C -->|"yes"| K{"Claude's checks of the candidate pass?"}
+  K -->|"no"| N["Claude says why, and does not ask"]
+  K -->|"yes"| Q["Claude shows the command and asks"]
   Q -->|"you say yes"| D{"release.do"}
   D -->|"every check passes"| E["Released"]
   D -->|"a check fails"| F["Nothing was released."]
   E --> L["Claude asks what changed, and writes it in the build's README"]
 ```
 
+Claude's checks of a waiting candidate: its `staged.txt` holds a fingerprint, a value computed from every file of the code that made it, which changes when any of those files changes; and its files are not, byte for byte, what the highest version already holds.
+
 ## Before you ask
 
 - A build may run before or after its code is committed. Its candidate is released only once that code is committed and pushed exactly as it was when the build ran. `release.do` refuses the candidate if the code that makes the dataset changed since the build.
-- That code is the build's `code/` (but its logs and `code/explore/`), `code/build.do`, `ado/`, and the first line and the dataset's rows of `datamap.csv`. A README, `decisions.md`, another build or a raw source's row is not, so committing them leaves a candidate releasable.
+- That code is the build's `code/` (except its logs and `code/explore/`), `code/build.do`, `ado/`, and the first line and the dataset's rows of `datamap.csv`. A README, `decisions.md`, another build or a raw source's row is not, so committing them leaves a candidate releasable.
 - If a candidate waits, Claude releases that one and does not rebuild. A rebuild would replace a candidate that someone may have looked over.
 - If a review sheet was filled since the last build, [ask for the build first](run-a-review-round.md#apply-the-filled-sheet).
 

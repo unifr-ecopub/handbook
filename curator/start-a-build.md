@@ -24,7 +24,9 @@ Start a build for <dataset> from <source>.
 
 **Check.** Claude shows the counts that the steps printed, the rows written to `logs/qa/`, and each finished file's first ten rows.
 
-For [a source that bars outside services](../data/terms-of-use.md#sources-that-may-not-reach-an-outside-service), Claude shows only the counts and the variables' names and types. You look at the rows yourself.
+For [a source that bars outside services](../data/terms-of-use.md#sources-that-may-not-reach-an-outside-service), Claude shows only the counts and the variables' names and types.
+
+**Only you do.** For such a source, look at the rows yourself.
 
 ## Read what the run left, then commit and push
 

@@ -10,8 +10,8 @@ Each machine names its place in the data-root file: `chair-research-data.txt` in
 
 | Folder | Holds | Who writes |
 |---|---|---|
-| `raw/<source>/<date>/` | A delivery: a source's files as the provider sent them. | Claude, on the data curator's machine and word, copies a delivery there untouched. Nobody edits a file there. |
-| `intermediate/<dataset>/` | A build's candidate and review sheets, and any table made by hand for the build. | A build, an assistant in Excel, a member by hand, or Claude when asked to copy a table there. |
+| `raw/<source>/<date>/` | A delivery: a source's files as the provider sent them. | The data curator, or Claude on their machine and word: a delivery copied in untouched, and the terms `README.md` in `raw/<source>/`. Nobody edits a delivered file. |
+| `intermediate/<dataset>/` | A build's candidate and review sheets, and any table made by hand for the build. | A build, an assistant in Excel, a member by hand, or Claude when asked to copy a table there, or to copy, move or rename a review sheet. |
 | `intermediate/<project>/` | Tables made by hand for one project. | A member by hand, or Claude with the member's yes. |
 | `processed/<dataset>/v<N>/` | A released version: `.dta` files and `manifest.txt`. | A release, on the data curator's machine. |
 

@@ -8,7 +8,9 @@ A build may read a table that a person made, such as a lookup table or figures t
 Where do I put a table I made by hand?
 ```
 
-Claude names the folder and gives you the header line to type. It asks which build will read the table, if you did not say. If no step reads such a table yet, Claude asks you for its columns and proposes none.
+Claude names the folder and gives you the header line to type.
+
+**Claude will ask you.** Which build will read the table, if you did not say. If no step reads such a table yet, its columns: Claude proposes none.
 
 **Only you do.** Make the table. Claude never changes its content.
 

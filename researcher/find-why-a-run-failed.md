@@ -18,7 +18,7 @@ Claude reads the run's log, makes the fault appear again through `master.do`, an
 
 **Claude will ask you.** The value you expected, if neither the log nor git shows it.
 
-**What can go wrong.** An explore file can print rows of the data into the session, also for [a source that bars outside services](../data/terms-of-use.md#sources-that-may-not-reach-an-outside-service).
+**What can go wrong.** An explore file can print rows of the data into the session; for [a source that bars outside services](../data/terms-of-use.md#sources-that-may-not-reach-an-outside-service), or whose `README.md` says not to open its files, Claude's instructions allow only counts, but they are instructions, not a lock.
 
 ## Decide what Claude proposes
 

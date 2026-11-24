@@ -36,13 +36,13 @@ A failed step and a single step print the same lines as in [a project run](messa
 
 ## Before a build runs
 
-A build checks the data root and the pins [as a project does](messages-project-run.md#before-anything-runs-the-machine-checks).
+A build stops with a project's sentences when [the data root was not found](messages-project-run.md#before-anything-runs-the-machine-checks) and when [a pinned raw delivery is not there](messages-project-run.md#the-pins). Unlike a project, a build has opened its dated log before these checks, so such a stop leaves one.
 
 ```text
 Failed: intermediate/<dataset>/<file>.dta in the data root is not a file of the candidate: no staged.txt there lists it. This build makes a file of that name, so nothing was run and nothing was staged. A hand-made table needs another name: rename it or move it away, and run the whole build again (r(602))
 ```
 
-Claude deletes nothing. **The data curator:** say whether Claude may rename the file or move it away; it does so only on your yes for that file.
+Claude does not delete that file. **The data curator:** say whether Claude may rename the file or move it away; it does so only on your yes for that file.
 
 ## A review round
 
@@ -56,7 +56,7 @@ Wrote intermediate/<dataset>/<dataset>-review-<n>.xlsx in the data root, with <n
 Wrote this build's logs/<dataset>-review-<n>.xlsx with <n> cases: this machine cannot write intermediate/<dataset>/ in the data root, so copy the file into that folder; the assistant fills in decision (1, 0 or blank) and note there.
 ```
 
-**The data curator:** ask Claude to copy the sheet into `intermediate/<dataset>/`, then tell the assistant.
+**The data curator:** ask Claude to copy the sheet into `intermediate/<dataset>/`, then tell the assistant. Claude copies it if this machine can write that folder; if it cannot, Claude says so.
 
 ```text
 <n> rows of the sheets in <folder> hold a decision that is not 1, 0 or blank. The assistant corrects them in Excel; then run again.
@@ -95,7 +95,7 @@ release.do: <dataset> v<N> is released and cannot be changed. Release the next n
 release.do: nothing is staged for <dataset>: <folder>/ holds no staged.txt. A full run of the build's master.do on the data curator's machine stages its files there. What to do: put right, or undo, what this sentence names; then run the build's master.do again; then commit and push whatever is not yet committed and pushed, exactly as it is then; then run release.do again. Nothing was released.
 ```
 
-**The data curator:** ask for the build, then for the release.
+**The data curator:** ask for the build, then for a commit and push of whatever is not yet committed and pushed, exactly as it is then, then for the release.
 
 ```text
 release.do: the map's row for <dataset>/<file> does not name its <fields> (blank, or unknown): a release needs the key and the terms of use. Nothing was released.

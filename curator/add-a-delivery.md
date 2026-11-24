@@ -10,7 +10,13 @@ Claude copies a provider's files into the data root when you ask, and records th
 Copy the delivery of <source> in <folder> into raw/.
 ```
 
-If you copied the files into `raw/<source>/<date>/` yourself, say "I added a delivery of <source>." instead, and Claude checks that folder.
+If you copied the files into `raw/<source>/<date>/` yourself, say instead:
+
+```prompt
+I added a delivery of <source>.
+```
+
+Claude then checks that folder.
 
 **Claude will ask you.**
 
@@ -22,7 +28,7 @@ Claude copies every file untouched into `raw/<source>/<date>/`, and checks that 
 
 `<source>` is lower case, with hyphens between words, and at most 28 characters, or 27 if it begins with a digit. Claude renames a folder that breaks this only on your yes, and never a delivered file.
 
-**What can go wrong.** Once the terms allow it, Claude reads the header and first rows of each text file, and those rows reach Anthropic's servers. `unknown` and `chair only` allow it. Only terms that [bar outside services](../data/terms-of-use.md#sources-that-may-not-reach-an-outside-service) keep the files closed: say them in your request, or when Claude asks.
+**What can go wrong.** Once the terms allow it, Claude reads the header and first rows of each text file, and those rows reach Anthropic's servers. `unknown` and `chair only` allow it. Only terms that [bar outside services](../data/terms-of-use.md#sources-that-may-not-reach-an-outside-service), or that say not to open the files, keep the files closed: say them in your request, or when Claude asks.
 
 ## The terms beside the files
 
@@ -30,6 +36,6 @@ If the terms are anything but `open` or `unknown`, Claude writes them as `raw/<s
 
 ## Check the row, then commit and push
 
-**Check.** Claude shows the source's row of `datamap.csv`, with every field filled, and names each build that reads the source. Then ask Claude to [commit and push](commit-and-push.md) `datamap.csv`. A raw source's row does not make a dataset, so a candidate that waits stays releasable.
+**Check.** Claude shows the source's row of `datamap.csv`, with every field filled, and names each build that reads the source. Then ask Claude to [commit and push](commit-and-push.md) `datamap.csv`. A raw source's row does not make a dataset: it is not among the code that `release.do` checks against a candidate, so a candidate that waits stays releasable.
 
 A build keeps the delivery on its pin. Ask Claude to move the build to the new delivery: it changes that line and the build's `README.md`, and runs the whole build again. That candidate is released only once both files are committed and pushed as they were when the build ran.

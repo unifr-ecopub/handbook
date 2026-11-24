@@ -4,7 +4,7 @@ A dataset is released in versions, and each project names the version it reads.
 
 ## A version
 
-A version is the folder `processed/<dataset>/v<N>/` in the data root. It holds the dataset's `.dta` files and `manifest.txt`, which gives the version's date, its files, and the commit of `data-processing` checked out at the release. Claude releases only with everything committed and pushed, so that commit holds the code that made the files. A version is never changed.
+A version is the folder `processed/<dataset>/v<N>/` in the data root. It holds the dataset's `.dta` files and `manifest.txt`, which gives the version's date, its files, and the commit of `data-processing` checked out at the release: the saved state of the repo that the data curator's clone stood at. Claude releases only with everything committed and pushed, so that commit holds the code that made the files. A version is never changed.
 
 A release writes the manifest last. A folder that has none is a release that stopped part-way, and nothing loads from it.
 
@@ -13,11 +13,11 @@ A release writes the manifest last. A folder that has none is a release that sto
 ```mermaid
 stateDiagram-v2
   [*] --> Candidate: a full run of the build on the data curator's machine
-  Candidate --> Candidate: a rebuild replaces it
+  Candidate --> Candidate: a full build that ends Run complete on the data curator's machine replaces it
   Candidate --> Version: the curator releases
 ```
 
-A candidate is a build's finished files. It waits in `intermediate/<dataset>/`, where `staged.txt` lists its files, the commit checked out when the build ran, a fingerprint of the code that made them, and the date. No project can pin a candidate.
+A candidate is a build's finished files. It waits in `intermediate/<dataset>/`, where `staged.txt` lists its files, the commit checked out when the build ran, a fingerprint of the code that made them (a value computed from every file of that code, which changes when any of those files changes), and the date. No project can pin a candidate.
 
 ## A pin
 

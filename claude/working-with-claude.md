@@ -53,7 +53,7 @@ Claude can be wrong. Four things stand between a mistake and a paper.
 
 ## Locks and instructions
 
-A setting is a lock: Claude Code refuses the command, or asks you first, whatever Claude intends. In the repo that makes the shared data, a setting refuses a commit. A setting matches a command's wording, so the same action inside a script gets past it.
+A setting is a lock: Claude Code refuses the command, or asks you first, whatever Claude intends. In the repo that makes the shared data, a setting refuses Claude's own edit of a file under the data root's `processed/`. A setting matches a command's wording, so the same action inside a script gets past it.
 
 An instruction is what Claude is told. Claude follows it nearly always, and without a guarantee. Most rules here are instructions. The question before a release is one too, and a setting backs it only where Claude Code applies that setting.
 

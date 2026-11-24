@@ -12,17 +12,19 @@ What may be shared, the licences and the statements are the authors' to say. The
 Assemble the replication package for <project>.
 ```
 
-Claude looks for the project's clone beside your clone of `data-processing`, and one folder further down. A short question comes first only if it finds no clone, or if a version's commit is missing.
+Claude looks for the project's clone beside your clone of `data-processing`, and one folder further down. A short question comes first only if it finds no clone or finds it twice, or if a version's commit is missing.
 
 **Claude will ask you.** Everything in one message, so that you can pass it to the authors.
 
 - Is the state it found the one with the paper's results?
 - Which new folder, outside every clone and every synced folder, takes the package?
-- May the package share each delivery, each version and each table made by hand? If not, who grants access? And may Claude copy each input marked no into its test copy, for the test only?
+- May the package share each delivery, each version, each version's decisions and each table made by hand? If not, who grants access, and how does one apply? And may Claude copy each input marked no into its test copy, for the test only?
 - The paper's title, its label for each exhibit, and the licences for the data and the code.
+- Where no log gave them, the Stata version and edition of the authors' run.
 - Two statements about rights: may the authors use the data, and may they pass it on?
 - Which statement fits: all data, some data, or no data can be made publicly available.
 - Shall the package's `README.md` carry a line on AI use? The line names no tool. If the project's history does not name the AI tool and model, which ones the authors used.
+- Does the journal ask for anything beyond the standard `README.md` and folder?
 - May Claude bring `data-processing` up to date from GitHub, to see a version marked as wrong since its release?
 
 ## Read the report
@@ -36,13 +38,14 @@ Claude looks for the project's clone beside your clone of `data-processing`, and
 - each file of the package in which the word Claude is left;
 - a draft of the paper's statement on AI use. It is also saved in the working folder, and in no file of the package. The authors decide its words and where it goes.
 
-A package holds no `CLAUDE.md`, no `AGENTS.md` and no `.claude/`. In the package's copies, Claude also drops the sentences that name Claude, and in `decisions.md` the words that say who wrote a row down; a row under Provisional and a person's quoted words stay.
+A package holds no `CLAUDE.md`, no `AGENTS.md` and no `.claude/`. In the package's copies, Claude also drops the passages that name Claude at the top of `checklist.md` and `decisions.md`, the comment at the top of the README, and the lines of `.gitignore` and `.gitattributes` that name `.claude`, `CLAUDE.md` or `AGENTS.md`; in each `decisions.md` it drops the words that say who wrote a row down, and a row under Provisional and a person's quoted words stay. Any other mention of Claude it names in the report, for you to decide on.
 
 ## Before you send it
 
 **Only you do.**
 
 - Look through `data/` for anything that the authors refused.
+- Do not send the package while the report names a file or folder that holds the name `data-processing`.
 - If the report names a file where the word Claude is left, other than a row under Provisional or a person's quoted words in a `decisions.md`, decide on it before the package is sent.
 
 After you send the package, delete the working folder, `<project>-work/`: it may hold inputs that the package omits.

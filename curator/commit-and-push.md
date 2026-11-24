@@ -16,7 +16,7 @@ Commit and push.
 
 **Claude will ask you.** For your yes, if the list of changed files holds one that Claude did not name to you. A file you say to leave out stays out.
 
-**Only you do.** If a window opens to sign in to GitHub, sign in with your GitHub account.
+**Only you do.** If a window opens to sign in to GitHub, sign in with your GitHub account. If the pull or the push fails for want of a sign-in, press **Pull** or **Push** in GitHub Desktop, which shows the commit.
 
 **Check.** Claude says what its pull brought and that the commit is pushed. On github.com, `data-processing` shows your commit.
 
@@ -24,8 +24,9 @@ Commit and push.
 
 - Someone pushed first: Claude pulls, says what came, and pushes again.
 - A conflict: Claude shows both versions of each file and changes nothing until you choose. Until the merge is finished, it runs no build and no release.
-- A pull that brought commits while a candidate waits: Claude says whether they touch the code that makes that dataset. If they do, its build runs again before a release.
+- A pull that git refuses because of changes not yet committed: Claude stops, lists those files and discards nothing. The commit is made, stays on this machine and is not pushed.
+- A pull that brought commits while a candidate waits: Claude says whether they touch the code that makes that dataset. If they do, Claude says that its build must be run again before a release, and runs it when you ask.
 
 ## Run the tests before a push that changed code
 
-If `code/`, `ado/` or `tests/` changed, here or by a pull, Claude runs [the repo's tests](test-a-changed-chair-program.md) and gives the count before it pushes. If one fails, nothing is pushed.
+If the files to commit, the commits not yet pushed, or what a pull or a merge brought touch `code/`, `ado/` or `tests/`, Claude runs [the repo's tests](test-a-changed-chair-program.md) and gives the count before it pushes. If one fails, nothing is pushed.

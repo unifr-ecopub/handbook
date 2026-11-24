@@ -6,7 +6,7 @@ Some cases cannot be decided by code, such as an uncertain match. An assistant d
 flowchart LR
   A["The build writes a sheet of new cases"] --> B["The assistant fills in decision and note"]
   B --> C["The build runs again and reads every sheet"]
-  C --> D["The candidate is replaced"]
+  C -->|"it ends Run complete on your machine"| D["The candidate is replaced"]
   C -->|"new cases"| A
 ```
 
@@ -14,7 +14,7 @@ flowchart LR
 
 A full run writes each case that no sheet lists yet into a new sheet, in `intermediate/<dataset>/`. Claude reports the line that names the sheet.
 
-If this machine cannot write that folder, the sheet goes to the build's `logs/`, and Claude copies it into `intermediate/<dataset>/` when you ask.
+If this machine cannot write that folder, the sheet goes to the build's `logs/`. When you ask, Claude copies it into `intermediate/<dataset>/` if this machine can write that folder; if it cannot, Claude says so.
 
 Tell the assistant, whose page is [Fill in a review sheet](../assistant/fill-in-a-review-sheet.md). The sheet stays in its folder.
 
@@ -26,7 +26,7 @@ Tell the assistant, whose page is [Fill in a review sheet](../assistant/fill-in-
 The assistant has filled the sheet for <dataset>. Apply it.
 ```
 
-Claude runs the whole build. On your machine, that run replaces the candidate. The build saves the decisions it used as the file `decisions`, which is released with the version.
+Claude runs the whole build. If it ends `Run complete` on your machine, it replaces the candidate. The build saves the decisions it used as the file `decisions`, which is released with the version.
 
 **Check.** Claude reports these two lines:
 
@@ -35,4 +35,6 @@ Review sheets: <n> read. Cases: <n>. Decided: <n> (<n> yes, <n> no). Not decided
 Decisions that match no current case, not used: <n>.
 ```
 
-The build stops on a sheet with a wrong entry, and on two sheets that decide one case differently. Claude says which sheets; for a source that [bars outside services](../data/terms-of-use.md#sources-that-may-not-reach-an-outside-service), you read them in the build's log. The assistant corrects them in Excel. Then ask for the build again. See [A review round](../reference/messages-build-and-release.md#a-review-round).
+The build stops on a sheet with a wrong entry, and on two sheets that decide one case differently. Claude says which sheets. See [A review round](../reference/messages-build-and-release.md#a-review-round).
+
+**Only you do.** For a source that [bars outside services](../data/terms-of-use.md#sources-that-may-not-reach-an-outside-service), read in the build's log which sheets they are. The assistant corrects them in Excel; then ask for the build again.
