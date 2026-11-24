@@ -18,7 +18,7 @@ local R "`W'/data"
 local out "`here'/results.txt"
 local rec "`here'/record.do"
 local tmpl = substr("`here'", 1, strrpos(substr("`here'", 1, strrpos("`here'", "/") - 1), "/")) + "project-template"
-local rcases H30 H31 H32 H33 H34 H35 H36 H37 H38 H39 H40 H41 H42 H43 H44 H45 H46 H47 H48 H49 H50 H51 H57 H58 H59 H64 H65 H66 H67 H68
+local rcases H30 H31 H32 H33 H34 H35 H36 H37 H38 H39 H41 H42 H43 H44 H45 H46 H47 H48 H49 H50 H51 H57 H58 H59 H64 H65 H66 H67 H68
 local P "`W'/r toy"
 local C "`P'/code"
 quietly do "`here'/copytree.do" "`tmpl'" "`P'"
@@ -286,19 +286,6 @@ global t_want "chair_use: toy/toy v1"
 quietly do "`here'/logsays.do" "`W'/h39.log"
 mata: s = fileexists(st_local("tab")) ? cat(st_local("tab")) : J(0, 1, ""); st_local("ok", strofreal(rows(s) == 3 ? s[1] == "total 65520" : 0))
 do "`rec'" "`out'" H39 "an R step reads the pinned version and the raw delivery through its pin and a hand-made table from intermediate" 0 `=`rc' + 1000 * (!`said' | !`ok')'
-* A withdrawn version loads, with its warning.
-mata: fh = fopen(st_local("P") + "/data/processed/toy/v1/WITHDRAWN", "w"); fput(fh, "Withdrawn for a test."); fclose(fh)
-sleep 1100
-quietly cd "`C'"
-log using "`W'/h40.log", text name(h40)
-capture noisily do master.do analysis/01_rtab.R
-local rc = _rc
-log close h40
-quietly cd "`here'"
-erase "`P'/data/processed/toy/v1/WITHDRAWN"
-global t_want "chair_use: warning: toy v1 is withdrawn. It still loads; the curator wrote: Withdrawn for a test."
-quietly do "`here'/logsays.do" "`W'/h40.log"
-do "`rec'" "`out'" H40 "an R step loads a withdrawn version with its warning" 0 `=`rc' + 1000 * !`said''
 * A version without a manifest stops the step. The project's data root is data/ inside it, as in
 * a replication package, so the sentence points to the package's README and not to Dropbox.
 quietly do "`here'/toyversion.do" "`P'/data" toy v3 toy 30

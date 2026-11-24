@@ -487,8 +487,8 @@ do "`rec'" "`out'" H16 "a full run empties temp and temp/explore and the results
 * and the three results folders, with the exhibits and working files, show nothing was cleared.
 mata: st_local("before", strofreal(rows(dir(st_local("P") + "/paper/results/figures", "files", "*.png")) + rows(dir(st_local("P") + "/temp", "files", "*.dta"))))
 quietly do "`here'/markers.do" "`P'" plant
-copy "`P'/ado/c/chair_boundary.ado" "`W'/chair_boundary.keep", replace
-erase "`P'/ado/c/chair_boundary.ado"
+copy "`P'/ado/c/chair_results.ado" "`W'/chair_results.keep", replace
+erase "`P'/ado/c/chair_results.ado"
 sleep 1100
 quietly cd "`C'"
 log using "`W'/h14.log", text name(h14)
@@ -498,8 +498,8 @@ log close h14
 quietly cd "`here'"
 mata: st_local("after", strofreal(rows(dir(st_local("P") + "/paper/results/figures", "files", "*.png")) + rows(dir(st_local("P") + "/temp", "files", "*.dta"))))
 quietly do "`here'/markers.do" "`P'" check
-copy "`W'/chair_boundary.keep" "`P'/ado/c/chair_boundary.ado", replace
-mata: s = cat(st_local("W") + "/h14.log"); f = select(s, substr(s, 1, 7) :== "Failed:"); st_local("said", strofreal(rows(f) == 1 ? strpos(f[1], "Failed: ado/c/chair_boundary.ado is missing from this project. ") == 1 : 0))
+copy "`W'/chair_results.keep" "`P'/ado/c/chair_results.ado", replace
+mata: s = cat(st_local("W") + "/h14.log"); f = select(s, substr(s, 1, 7) :== "Failed:"); st_local("said", strofreal(rows(f) == 1 ? strpos(f[1], "Failed: ado/c/chair_results.ado is missing from this project. ") == 1 : 0))
 do "`rec'" "`out'" H14 "a package missing from ado stops the run with one sentence that names it" 601 `=`rc' + 1000 * !`said''
 do "`rec'" "`out'" H15 "that stop comes before anything is cleared: the exhibits and working files and the markers are still there" 1 `=`before' > 0 & `before' == `after' & `kept''
 
