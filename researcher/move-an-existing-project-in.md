@@ -32,4 +32,5 @@ With R steps, Claude also names each exhibit whose row or column order changed. 
 
 - **An input that the data root lacks.** The data curator adds it, and the steps that read it wait.
 - **Data that the old project built for others.** It becomes a build, about half a day's work with the data curator.
+- **The README.** Claude proposes its text: the project's name, what it studies in one sentence and who works on it. Give the names, and confirm the text.
 - **Rule gaps in the old code.** Claude lists them. Ask for [a code review](review-code-and-paper.md) next.
