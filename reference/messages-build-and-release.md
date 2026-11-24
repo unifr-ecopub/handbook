@@ -51,28 +51,6 @@ Wrote intermediate/<dataset>/<dataset>-review-<n>.xlsx in the data root, with <n
 
 A third stop names a sheet that lacks a column. The two lines of counts are quoted in [Run a review round](../curator/run-a-review-round.md#apply-the-filled-sheet).
 
-## Stops of the boundary command
-
-Each stop of `chair_boundary` is a choice for the build author. The answer goes into the build's `decisions.md`.
-
-```text
-chair_boundary: <n> number(s) are on no list of the register: <numbers>. Correct the source or the build; nothing was changed.
-```
-
-A wrong number, or a row that is no municipality. **The build author:** say which rows to drop.
-
-```text
-chair_boundary: numbers of different lists go to one number of <yyyy> for the same <variables> (<n> rows): <numbers> into <numbers>. The source lists a number beside its successor; keep the rows you mean (a decision of the build), then run chair_boundary again.
-```
-
-Both rows together would count one territory twice. **The build author:** say which rows to keep.
-
-```text
-chair_boundary: these numbers are split between several numbers on the list of <yyyy>, and split() gives no rule or weight: <numbers>. The FSO's list holds no weights; the build decides them (split(equal) or split(<file.dta>)).
-```
-
-"The FSO" is `<source>`, whose list the register follows. **The build author:** choose equal shares, or [make a table of shares](../curator/save-a-table-made-by-hand.md).
-
 ## A release
 
 A release that worked ends with the two lines quoted in [Release a version](../curator/release-a-version.md#ask-claude-to-release-it). Every refusal ends `Nothing was released.`
@@ -90,15 +68,13 @@ release.do: nothing is staged for <dataset>: <folder>/ holds no staged.txt. Run 
 **The data curator:** ask for the build, then for the release.
 
 ```text
-release.do: the map's row for <dataset>/<file> does not name its <fields> (blank, or unknown): a release needs the key, the boundary year (none for a file without municipality numbers) and the terms of use. Nothing was released.
+release.do: the map's row for <dataset>/<file> does not name its <fields> (blank, or unknown): a release needs the key and the terms of use. Nothing was released.
 ```
 
 **The data curator:** give Claude the missing fields, commit, and ask for the build again.
 
 ```text
 release.do: <key> does not identify the rows of <dataset>/<file>, or is missing in some. Nothing was released.
-release.do: <n> numbers of <dataset>/<file> are not in the register (v<N>) at boundary year <yyyy>. Nothing was released.
-release.do: <dataset>/<file> is <yyyy>, own territory in the map but has no variable own_territory (chair_boundary, own() writes it). Nothing was released.
 ```
 
 The fault is in the build. **The build author:** correct the step with Claude.

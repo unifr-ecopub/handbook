@@ -77,12 +77,6 @@ chair_use: <dataset> v<N> holds no file <file>.dta here (<folder>). Check the na
 
 **You:** check the version or the name in [the data map](../data/data-map.md), then wait for Dropbox.
 
-```text
-chair_use: warning: <dataset> v<N> is withdrawn. It still loads; the curator wrote:
-```
-
-The data curator's reason follows. **You:** decide whether to [move to another version](../researcher/move-to-a-new-version.md).
-
 ## During the steps
 
 ```text
