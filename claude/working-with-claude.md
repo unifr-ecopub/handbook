@@ -8,7 +8,7 @@ Claude is an AI model made by Anthropic. You work with it in Claude Code, a prog
 
 Each project holds written instructions for Claude: the rules in `AGENTS.md`, which `CLAUDE.md` loads, and the procedures of rarer tasks in `.claude/`. So a request such as "Run everything." means the same on every machine.
 
-The handbook's website also offers its pages for Claude: `llms-full.txt`, beside the start page, holds every page in one file, and `llms.txt` lists them. A project's own instructions still come first wherever the handbook differs.
+Beyond a project's own files, the handbook website publishes `llms-full.txt` (every page in one file) and `llms.txt` (the page list) beside the start page. A project's own instructions still come first wherever the handbook differs.
 
 ## How a task goes
 
@@ -45,9 +45,9 @@ sequenceDiagram
 
 ## How you keep control
 
-Claude can be wrong. Four things stand between a mistake and a paper.
+Claude can be wrong. Four things stand between a mistake and a paper:
 
-1. **Records.** Each task ends with the files changed. Each run leaves a dated log (unless a check stops it before a log is opened), each choice a row in `decisions.md`, and each commit a line in GitHub's history.
+1. **Records.** Each task ends with the files changed. Each run leaves a dated log unless a check stops it before `master.do` opens one. Each choice adds a row to `decisions.md`, and each commit adds a line to GitHub's history.
 2. **Full runs.** A result comes only from code that `master.do` ran, and a full run makes every table and figure afresh.
 3. **Reviews.** On request, Claude checks the code, and each number typed in the paper, against a written checklist.
 4. **People.** Before submission, a colleague reruns the project from a fresh copy, and a person reads the paper in full. No program enforces this rule.
@@ -56,7 +56,7 @@ Claude can be wrong. Four things stand between a mistake and a paper.
 
 A setting is a lock: Claude Code refuses the command, or asks you first, whatever Claude intends. In the repo that makes the shared data, a setting refuses Claude's own edit of a file under the data root's `processed/`. A setting matches a command's wording, so the same action inside a script gets past it.
 
-An instruction is what Claude is told. Claude follows it nearly always, and without a guarantee. Most rules here are instructions. The question before a release is one too, and a setting backs it only where Claude Code applies that setting.
+An instruction is what Claude is told. Claude follows an instruction without a hard guarantee. Most rules here are instructions. The question before a release is one too, and a setting backs it only where Claude Code applies that setting.
 
 ## Where Claude is not used
 

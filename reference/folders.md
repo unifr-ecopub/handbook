@@ -31,7 +31,16 @@ The layout of a project, of `data-processing` and of a replication package. [The
 └── logs/                  a dated log per run
 ```
 
-A project with R steps also holds `renv.lock` (and its `renv/` files) at the top; one with Python steps holds `.python-version`, `pyproject.toml` and `uv.lock`. Git ignores `temp/`, `logs/`, `renv/library/`, `.venv/` and Python cache files, `old-data-folder.txt` (this machine's path of an old project's folder), compiled PDFs in `paper/draft/` and `paper/presentation/`, and data files. Only code writes `paper/results/` and `temp/`, and a full run empties `temp/` first.
+A project with R steps also holds `renv.lock` (and its `renv/` files) at the top; one with Python steps holds `.python-version`, `pyproject.toml` and `uv.lock`. Git ignores:
+
+- `temp/` and `logs/`
+- `renv/library/`
+- `.venv/` and Python cache files
+- `old-data-folder.txt` (this machine's path of an old project's folder)
+- compiled PDFs in `paper/draft/` and `paper/presentation/`
+- data files
+
+Only code writes `paper/results/` and `temp/`, and a full run empties `temp/` first.
 
 ## data-processing
 

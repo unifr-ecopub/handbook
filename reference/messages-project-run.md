@@ -63,7 +63,7 @@ Failed: pins.do sets <pin> twice, on lines <line> and <line>. A dataset, a raw d
 pins.do, line <n>, is not a pin that can be read: <line> . Write it as  global pin_<dataset> "v<N>" ,  global raw_<name> "<source>/<date>"  or  global old_<name> "<file or folder in the old folder>" , with the double quotes.
 ```
 
-Printed by R and Python steps when a line of `code/pins.do` is malformed. **Claude:** fixes the line in `code/pins.do` and runs again.
+R and Python steps print this when a line of `code/pins.do` is malformed. **Claude:** fixes the line in `code/pins.do` and runs again.
 
 ```text
 Failed: pins.do pins raw/<delivery>, which is not in the data root, <folder>. Check the line in pins.do; if it is right, let Dropbox finish syncing (r(601))
@@ -88,7 +88,7 @@ Failed: pins.do pins old_<name> "<path>", which is not in the old folder, <folde
 Failed: pins.do still reads from the project's old folder (<pins>), which a replication package does not hold: a package is made once the curator has delivered each of these inputs to the data root and its line in pins.do is a raw_ or pin_ line (r(601))
 ```
 
-**You:** ask the data curator to deliver each input to the data root, have Claude replace its `old_` line with a `raw_` or `pin_` line and rerun everything, and only then ask the data curator to assemble the package.
+**You:** ask the data curator to deliver each input to the data root, then have Claude replace its `old_` line with a `raw_` or `pin_` line and rerun everything. Only then ask the data curator to assemble the package.
 
 ```text
 Provisional: this project reads <n> inputs from its old folder, <folder>: its results stay provisional until each is a delivery in the data root.
@@ -98,13 +98,13 @@ For one input, the line reads `1 input`. Every result stays provisional until th
 
 ## Loading a dataset
 
-`chair_use` prints these, with slightly other words in an R or Python step.
+`chair_use` prints these, with slightly different wording in an R or Python step.
 
 ```text
 chair_use: <dataset>/<file> v<N>
 ```
 
-The file was loaded at this version.
+`chair_use` loads the file at this version.
 
 ```text
 chair_use: pins.do pins no version of <dataset>. Add the line  global pin_<dataset> "v<N>"  to code/pins.do.
@@ -132,7 +132,7 @@ Failed: the file <file> cannot be erased: close it where it is open, as in Excel
 This step needs this project's settings, which master.do sets: from this project's code folder type  do master.do <folder>/<this file>  (after that, its lines also run on their own in the same Stata).
 ```
 
-A step was started on its own. **You:** ask Claude to run it.
+You ran a step outside `master.do`. **You:** ask Claude to run it.
 
 A step can stop with Stata's own message that a command is unknown:
 
@@ -140,9 +140,9 @@ A step can stop with Stata's own message that a command is unknown:
 command <name> is unrecognized
 ```
 
-**You:** tell Claude, which names the package and asks whether to [put it into `ado/`](../researcher/add-a-stata-package.md).
+**You:** tell Claude. Claude names the package and asks whether to [put it into `ado/`](../researcher/add-a-stata-package.md).
 
-A step can also stop with Stata's own message `grmap not yet activated`, and the advice to type `grmap, activate`. Never type it: in Stata's window it writes to a folder that no run reads. **You:** tell Claude, which activates the command inside the project, with your yes.
+A step can also stop with Stata's own message `grmap not yet activated`, and the advice to type `grmap, activate`. Never type it: in Stata's window it writes to a folder that no run reads. **You:** tell Claude; with your yes, Claude activates the command inside the project.
 
 ## R steps
 

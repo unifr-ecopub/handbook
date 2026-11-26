@@ -1,5 +1,7 @@
 # What never to do
 
+Rules that prevent broken runs, lost work and untracked changes across projects and shared data.
+
 ## Where files go
 
 1. **Never clone into Dropbox, OneDrive or any folder that syncs.** A sync changes files while Stata and git use them.

@@ -4,7 +4,7 @@ The data map says what each source and each dataset of the chair is.
 
 It is the file `datamap.csv` at the top of `data-processing`. Members of the chair's organisation open it on github.com, which shows it as a table with a search box. It has one row for each raw source and one for each processed file.
 
-A dataset's build has a `README.md` of its own, `builds/<dataset>/README.md` in the same repo. It says what the build reads, and what changed in each version.
+A dataset's build has a `README.md` of its own, `builds/<dataset>/README.md` in the same repo. It says what the build reads, and what changed in each version. Each project's `code/pins.do` shows which versions and deliveries the project reads.
 
 ## The map as pages
 
@@ -34,5 +34,3 @@ Nobody edits these pages: GitHub rebuilds them from the map after each push that
 `unknown` means that nobody knows. `none` means that the field does not apply. A release refuses a processed file whose `key` or `terms` is blank or `unknown`, and a file whose key does not identify each row.
 
 No row describes a table made by hand. The processed file made with it names the table's folder under `built_from`.
-
-Each project's `code/pins.do` shows which versions and deliveries the project reads.

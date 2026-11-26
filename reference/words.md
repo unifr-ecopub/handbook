@@ -5,7 +5,7 @@ Each thing on the platform has one name.
 | Word | Meaning |
 |---|---|
 | Repo | One project's code on GitHub, with its history. |
-| Template | `project-template`, the repo from which each project's repo is made. |
+| Template | `project-template`, the repo that starts every project. |
 | Clone | Your copy of a repo on your machine. |
 | Pull | Bring in what others pushed. |
 | Commit | Record the changed files, with a summary. |
