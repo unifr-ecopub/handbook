@@ -24,7 +24,7 @@ One line per question, with a link to the page that covers it.
 
 ## The data
 
-- **What is this dataset?** Its row in [the data map](data/data-map.md) says.
+- **What is this dataset?** Its row in [the data map](data/data-map.md) says, and so does [its page in `docs/`](data/data-map.md#the-map-as-pages).
 - **Which version does my project read?** [The one on its line](data/versions-and-pins.md#which-version-a-run-read) in `code/pins.do`.
 - **How do I get the new version?** Ask Claude to [move](researcher/move-to-a-new-version.md).
 

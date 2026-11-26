@@ -27,6 +27,12 @@ Commit and push.
 - A pull that git refuses because of changes not yet committed: Claude stops, lists those files and discards nothing. The commit is made, stays on this machine and is not pushed.
 - A pull that brought commits while a candidate waits: Claude says whether they touch the code that makes that dataset. If they do, Claude says that its build must be run again before a release, and runs it when you ask.
 
+## A commit you did not make
+
+GitHub adds a commit of its own to `data-processing` when [the pages of the data map](../data/data-map.md#the-map-as-pages) change. It rebuilds the pages after a push that changes `datamap.csv`, or a build's `README.md` or `decisions.md`. Where the pages differ, it commits them to `main` as `github-actions[bot]`, with the message `Rebuild docs from the data map`.
+
+Your next pull can bring that commit. GitHub can also reject a push you make before pulling: Claude then pulls, says what came, and pushes again, as above. The commit changes only the pages in `docs/`, which make no dataset, so no build needs to run again.
+
 ## Run the tests before a push that changed code
 
 If the files to commit, the commits not yet pushed, or what a pull or a merge brought touch `code/`, `ado/` or `tests/`, Claude runs [the repo's tests](test-a-changed-chair-program.md) and gives the count: before the commit, where the change was made here, and again before the push, after a pull or a merge that brought such changes. If one fails before the commit, nothing is committed; if one fails after, nothing is pushed.

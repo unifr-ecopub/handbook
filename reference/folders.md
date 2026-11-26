@@ -35,6 +35,7 @@ Git holds everything but `temp/` and `logs/`. Only code writes `paper/results/` 
 ```plaintext
 data-processing/
 ├── datamap.csv            the data map
+├── docs/                  the data map as pages, rebuilt by GitHub
 ├── builds/<dataset>/      one build
 │   ├── README.md          what it reads, and one line per version
 │   ├── decisions.md       the build author's choices
@@ -47,7 +48,7 @@ data-processing/
 └── tests/
 ```
 
-The repo holds no data.
+The repo holds no data. Nobody edits `docs/`: it shows [the data map as pages](../data/data-map.md#the-map-as-pages).
 
 ## A replication package
 
