@@ -64,7 +64,7 @@ A commit records the changed files with a summary. A push sends the commit to Gi
 Commit and push.
 ```
 
-Claude pulls, lists the changed files in plain words, and commits them to `main`. Before its first push from this machine, it warns us that GitHub will ask for a sign-in, and waits. We sign in with our GitHub Desktop account. Claude then says that it is pushed.
+Claude pulls, lists the changed files in plain words, and commits them to `main`. Before its first push in a session, it tells us that the first push from this machine opens a window to sign in to GitHub, and waits. We sign in with our GitHub Desktop account. Claude then says that it is pushed.
 
 **Untested on Windows.** If git or the sign-in fails, [GitHub Desktop's buttons](../researcher/fix-a-rejected-push-or-a-conflict.md#if-claude-cannot-use-git-on-your-machine) stand in.
 

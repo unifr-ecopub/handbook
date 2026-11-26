@@ -22,6 +22,8 @@ flowchart LR
 
 If you do not know how a run ended, ask "Did my run finish?"
 
+"Commit." alone commits and does not push; "Push." alone pushes what is committed. Either way Claude pulls first, and before a commit it lists the files and commits them in the same go.
+
 **On Windows, with R steps,** Claude cannot start a run: [you start it yourself](work-with-r-steps.md#run-the-project-on-windows).
 
 **Untested on Windows.** Until Claude's git works there, [GitHub Desktop's buttons](fix-a-rejected-push-or-a-conflict.md#if-claude-cannot-use-git-on-your-machine) stand in.
@@ -30,11 +32,11 @@ If you do not know how a run ended, ask "Did my run finish?"
 
 Claude proposes a full run, and you decide, in three cases.
 
-- Before one step, if an earlier step or [a version](../data/versions-and-pins.md) changed since your last full run.
-- After a pull that brought code, versions or results.
+- Before one step, if an earlier step or [a version](../data/versions-and-pins.md) changed since your last full run, or no full run finished on this machine.
+- After "Pull." alone, if it brought code, versions or results.
 - Before a commit, if results changed and no full run made them.
 
-One case has no question. If a pull on the way to a commit brings code, versions or results, Claude runs everything first. Its instructions disagree on whether it lists the rewritten exhibits again before that commit, so look at the commit on github.com.
+One case has no question. If the pull on the way to a commit or a push that you asked for brings code, versions or results, Claude runs everything first. It names each file the run rewrote and why it changed, and commits those files too, in the same go.
 
 ## What a single step does not tell you
 
