@@ -59,8 +59,8 @@ Wrote this build's logs/<dataset>-review-<n>.xlsx with <n> cases: this machine c
 **The data curator:** ask Claude to copy the sheet into `intermediate/<dataset>/`, then tell the assistant. Claude copies it if this machine can write that folder; if it cannot, Claude says so.
 
 ```text
-<n> rows of the sheets in <folder> hold a decision that is not 1, 0 or blank. The assistant corrects them in Excel; then run again.
-<n> rows of the sheets in <folder> decide the same case differently (two sheets, a conflicted copy from Dropbox, or one case listed twice). The assistant settles them in Excel; then run again.
+<n> rows of the sheets in <folder> hold a decision that is not 1, 0 or blank: <sheets and rows>. The assistant corrects them in Excel; then run again.
+<n> rows of the sheets in <folder> decide the same case differently (two sheets, a conflicted copy from Dropbox, or one case listed twice): <sheets and rows>. The assistant settles them in Excel; then run again.
 ```
 
 **The assistant:** correct the sheet in Excel. **The data curator:** ask for the build again.

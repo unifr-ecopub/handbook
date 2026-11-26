@@ -16,7 +16,7 @@ Start a build for <dataset> from <source>.
 
 - The dataset's name and each finished file's name. The dataset's name is lower case, with hyphens between words, and at most 28 characters, or 27 if it begins with a digit.
 - What one row is, its key, and which variables to keep.
-- The finished file's terms of use.
+- The finished file's terms of use. Where a build reads several inputs whose terms differ (at its start or when another input is added), the finished file's terms are the build author's choice, including whether reading part of a restricted dataset passes its terms on: Claude asks you, proposes carrying every restriction that any input carries unless you name another, and records your answer under Decided in the build's `decisions.md` and in `datamap.csv`.
 - The cases that code cannot decide, which go to [a review round](run-a-review-round.md).
 - Your name, for the build's `decisions.md`.
 
