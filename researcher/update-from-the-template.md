@@ -61,6 +61,6 @@ Claude pulls, takes the files, makes the edits you agreed to, and runs everythin
 
 **Check.** The run ends `Run complete`, and Claude names each exhibit that changed, is new or is gone, with the change of the template that may explain it. Claude commits nothing until you ask "Commit and push."
 
-**What can go wrong.** One of your steps may still use a template file that the update removes. Claude names each affected step before you answer, and that step fails until you change it in a separate task.
+**What can go wrong.** One of your steps may still use a template file that the update removes. Claude names each affected step before you answer, and that step fails until it is changed afterwards, in a task of its own.
 
 **Untested on Windows.** Nobody has yet updated a project on a Windows machine.

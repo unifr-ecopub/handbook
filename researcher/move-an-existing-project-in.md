@@ -79,7 +79,7 @@ While an input waits for delivery, three rules apply:
 - **Terms of use.** The old folder has no `README.md` or terms in the data root, so Claude treats every input read from it as [restricted](../data/terms-of-use.md#sources-that-may-not-reach-an-outside-service) (counts only, never records) until you state its terms.
 - **When the data curator delivers the input.** Tell Claude. It replaces the `old_` line with a `raw_` or `pin_` line (or adds the raw pin and puts waiting steps back into the step list in order). It then runs everything, says which results changed and compares again.
 
-**What can go wrong.** Git ignores `old-data-folder.txt`, so on a machine without the old folder (such as a co-author's), no run starts until the data curator delivers those inputs. Do not ask for a replication package while `code/pins.do` still holds an `old_` line: `master.do` stops in a replication package that reads from the old folder, and the checklist requires removing every `old_` line before submission.
+**What can go wrong.** Git ignores `old-data-folder.txt`, so on a machine without the old folder (such as a co-author's), no run starts until the data curator delivers those inputs. No replication package is made while `code/pins.do` still holds an `old_` line: `master.do` stops in a replication package that reads from the old folder, and the checklist requires every `old_` line to be gone before submission.
 
 ## Old code in code/legacy/ and when originals leave
 

@@ -95,13 +95,13 @@ release.do: <dataset> v<N> is released and cannot be changed. Release the next n
 release.do: nothing is staged for <dataset>: <folder>/ holds no staged.txt. A full run of the build's master.do on the data curator's machine stages its files there. What to do: put right, or undo, what this sentence names; then run the build's master.do again; then commit and push whatever is not yet committed and pushed, exactly as it is then; then run release.do again. Nothing was released.
 ```
 
-**The data curator:** ask for the build, commit and push any uncommitted or unpushed changes exactly as they stand, and then ask for the release.
+**The data curator:** ask for the build, then for a commit and push of any uncommitted or unpushed changes exactly as they stand then, then for the release.
 
 ```text
 release.do: the map's row for <dataset>/<file> does not name its <fields> (blank, or unknown): a release needs the key and the terms of use. Nothing was released.
 ```
 
-**The data curator:** give Claude the missing fields. Because a dataset's rows in `datamap.csv` count as part of the code that makes it, ask for the build again, then commit and push, before the release.
+**The data curator:** give Claude the missing fields. Because a dataset's rows in `datamap.csv` count as part of the code that makes it, ask for the build again, then for a commit and push, before the release.
 
 ```text
 release.do: <key> does not identify the rows of <dataset>/<file>, or is missing in some. Nothing was released.

@@ -28,7 +28,7 @@ Copy the package <package> from my Stata.
 
 ## Packages that fetch other packages
 
-Some packages fetch others when they run. Claude checks each new package for this behaviour, tells you which package does it, and with your yes puts what it would fetch into `ado/` too. Where the package has an option that stops automatic fetching, Claude proposes adding that option to each call, with your yes. One such option changes a later random draw in the run, such as a bootstrap, and Claude says so first.
+Some packages fetch others when they run. Claude checks each new package for this behaviour, puts what it would fetch into `ado/` too, with your yes, and tells you which package does it. Where the package has an option that stops automatic fetching, Claude proposes adding that option to each call, with your yes. One such option changes a later random draw in the run, such as a bootstrap, and Claude says so first.
 
 **What can go wrong.** If a run leaves a new or changed file in `ado/`, a package fetched something while it ran. Do not commit that file unread: tell Claude.
 

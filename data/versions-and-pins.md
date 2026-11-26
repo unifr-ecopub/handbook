@@ -35,7 +35,7 @@ global pin_<dataset> "v<N>"
 global raw_<name> "<source>/<date>"
 ```
 
-The first names a dataset's version, the second a raw delivery. Write a hyphen in the dataset's name as `_` in the pin. A moved-in project may also hold a provisional line, `global old_<name> "<file or folder>"`, for an input still read from [its old folder](../researcher/move-an-existing-project-in.md#inputs-still-read-from-the-old-folder) until the data curator delivers it. Each name has one line: a second line for the same name stops the run.
+The first names a dataset's version, the second a raw delivery. A hyphen in the dataset's name is written `_` in the pin. A moved-in project may also hold a provisional line, `global old_<name> "<file or folder>"`, for an input still read from [its old folder](../researcher/move-an-existing-project-in.md#inputs-still-read-from-the-old-folder) until the data curator delivers it. Each name has one line: a second line for the same name stops the run.
 
 ## Which version a run read
 

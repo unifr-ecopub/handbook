@@ -19,7 +19,7 @@ It records a choice that you state unasked in the same way. A guess, a default, 
 
 **Claude will ask you.** Your name, once. It never takes a name from the machine or from git.
 
-Your colleagues see the row once you commit and push `decisions.md`.
+Your colleagues see the row once `decisions.md` is committed and pushed.
 
 ## Leave a choice open, or hand it to Claude
 
@@ -35,6 +35,6 @@ Say so. Claude adds a dated row under **Decided** with the same D-number, and th
 
 ## Record a licence yourself
 
-**Only you do.** Write any licence, or any choice that binds the authors, into `decisions.md` yourself. Claude leaves it under **Open**.
+**Only you do.** An author writes any licence, or any choice that binds the authors, into `decisions.md` by their own hand. Claude leaves it under **Open**.
 
 **Check.** `decisions.md` holds the row, and the step that applies it names the number on its `DECISIONS APPLIED` line.

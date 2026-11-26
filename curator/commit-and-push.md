@@ -25,7 +25,7 @@ Commit and push.
 - Someone pushed first: Claude pulls, says what came, and pushes again.
 - A conflict: Claude shows both versions of each file and changes nothing until you choose. Until the merge is finished, it runs no build and no release.
 - A pull that git refuses because of changes not yet committed: Claude stops, lists those files and discards nothing. Claude still makes the commit on this machine and does not push it.
-- A pull that brought commits while a candidate waits: Claude says whether they touch the code that makes that dataset. If they do, Claude says that you must run its build again before a release, and runs it when you ask.
+- A pull that brought commits while a candidate waits: Claude says whether they touch the code that makes that dataset. If they do, Claude says that its build must be run again before a release, and runs it when you ask.
 
 ## A commit you did not make
 
@@ -35,4 +35,4 @@ Your next pull can bring that commit. GitHub can also reject a push you make bef
 
 ## Run the tests before a push that changed code
 
-Whenever files to commit, unpushed commits, or changes from a pull or merge touch `code/`, `ado/` or `tests/`, Claude runs [the repo's tests](test-a-changed-chair-program.md) and gives the count. Claude runs them before committing local changes, and again before pushing after a pull or merge that brought changes there. If a test fails before the commit, Claude commits nothing; if one fails after, Claude pushes nothing.
+Whenever files to commit, unpushed commits, or changes from a pull or merge touch `code/`, `ado/` or `tests/`, Claude runs [the repo's tests](test-a-changed-chair-program.md) and gives the count. Claude runs them before committing local changes, and again before pushing after a pull or merge that brought such changes. If a test fails before the commit, Claude commits nothing; if one fails after, Claude pushes nothing.

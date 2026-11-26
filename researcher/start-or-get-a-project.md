@@ -18,7 +18,7 @@ Never make a project from a ZIP or `git archive`: a folder without `AGENTS.md` a
 
 ## If you created an empty repo on GitHub
 
-**Ask Claude.** In a project that you already have, if you created a new repo without **Use this template** (not yet tested):
+**Ask Claude.** In a project that you already have, if a new repo was created without **Use this template** (not yet tested):
 
 ```prompt
 My new repo is empty.

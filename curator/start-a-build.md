@@ -16,7 +16,7 @@ Start a build for <dataset> from <source>.
 
 - The dataset's name and each finished file's name. The dataset's name is lower case, with hyphens between words, and at most 28 characters, or 27 if it begins with a digit.
 - What one row is, its key, and which variables to keep.
-- The finished file's terms of use. When a build reads several inputs whose terms differ (at its start or when you add another input), the build author chooses the finished file's terms, including whether reading part of a restricted dataset passes its terms on. Claude asks you, proposes keeping every restriction from every input unless you name another, and records your answer under **Decided** in the build's `decisions.md` and in `datamap.csv`.
+- The finished file's terms of use. When a build reads several inputs whose terms differ (at its start or when another input is added), the build author chooses the finished file's terms, including whether reading part of a restricted dataset passes its terms on. Claude asks you, proposes keeping every restriction from every input unless you name another, and records your answer under **Decided** in the build's `decisions.md` and in `datamap.csv`.
 - The cases that code cannot decide, which go to [a review round](run-a-review-round.md).
 - Your name, for the build's `decisions.md`.
 
@@ -32,4 +32,4 @@ For a source whose terms [bar outside services](../data/terms-of-use.md#sources-
 
 On the data curator's machine, a run that ends `Run complete` and `Staged` leaves a candidate built from uncommitted code. On any other machine, the build stages nothing.
 
-Ask Claude to [commit and push](commit-and-push.md) the build's folder and `datamap.csv`. Once you push them exactly as they were when the build ran, you can [release that candidate](release-a-version.md) with no new build. If the code that makes the dataset changes after the run, the build runs again first: `release.do` refuses the candidate otherwise.
+Ask Claude to [commit and push](commit-and-push.md) the build's folder and `datamap.csv`. Once they are pushed exactly as they were when the build ran, that candidate can be [released](release-a-version.md) with no new build. If the code that makes the dataset changes after the run, the build runs again first: `release.do` refuses the candidate otherwise.

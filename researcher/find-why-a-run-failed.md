@@ -54,4 +54,4 @@ Any check before the step name stops before `master.do` opens a dated log in `lo
 
 **Check.** The step ends `Step complete`. A full run then ends `Run complete`, and Claude names each exhibit that changed.
 
-When a `Failed:` line gives a full sentence, [Messages of a project run](../reference/messages-project-run.md) says who acts. Never type a command that [Stata's own message](../reference/messages-project-run.md#during-the-steps) proposes.
+The sentence after `Failed:` often says what to do: see [Messages of a project run](../reference/messages-project-run.md). Never type a command that [Stata's own message](../reference/messages-project-run.md#during-the-steps) proposes.
