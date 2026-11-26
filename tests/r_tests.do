@@ -346,7 +346,7 @@ log using "`W'/h44.log", text name(h44)
 capture noisily rscript using "`C'/analysis/01_rtab.R"
 log close h44
 quietly cd "`here'"
-global t_want "pins.do sets pin_toy twice, on lines `lines'. A dataset or a raw delivery is pinned on one line"
+global t_want "pins.do sets pin_toy twice, on lines `lines'. A dataset, a raw delivery or an input of the old folder is pinned on one line"
 quietly do "`here'/logsays.do" "`W'/h44.log"
 capture confirm file "`tab'"
 do "`rec'" "`out'" H44 "a dataset pinned on two lines stops the R step run on its own with its sentence that names the lines" 0 `=1000 * (!`said' | "`lines'" == "" | !_rc)'
@@ -361,7 +361,7 @@ capture noisily rscript using "`C'/analysis/01_rtab.R"
 log close h58
 quietly cd "`here'"
 quietly do "`here'/setpin.do" "`C'/pins.do" raw_toy toy-raw/2026-01-01
-global t_want "pins.do sets raw_toy twice, on lines `lines'. A dataset or a raw delivery is pinned on one line"
+global t_want "pins.do sets raw_toy twice, on lines `lines'. A dataset, a raw delivery or an input of the old folder is pinned on one line"
 quietly do "`here'/logsays.do" "`W'/h58.log"
 capture confirm file "`tab'"
 do "`rec'" "`out'" H58 "a raw delivery pinned on two lines stops the R step run on its own with its sentence that names the lines" 0 `=1000 * (!`said' | "`lines'" == "" | !_rc)'
