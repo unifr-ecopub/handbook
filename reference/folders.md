@@ -18,6 +18,7 @@ The layout of a project, of `data-processing` and of a replication package. [The
 │   ├── dataprep/          steps that save working files
 │   ├── analysis/          steps that write exhibits
 │   ├── explore/           explore files
+│   ├── helpers/           what several steps share
 │   ├── legacy/            old code kept as a record after a move-in (never run)
 │   └── templates/
 ├── ado/                   Stata packages and the chair's programs

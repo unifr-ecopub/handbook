@@ -46,7 +46,14 @@ Claude clones the project and tells you where the clone is. You clone only [the 
 
 1. Open a new session on the new clone's top folder.
 2. Claude Code asks whether you trust this folder. Accept. Unless you accept, Claude Code ignores the repo's permission rules.
-3. Ask:
+3. On a computer that has not run a chair project before, say first:
+
+   ```prompt
+   This is my first time on this computer.
+   ```
+
+   Claude [checks the machine](../start/set-up-your-machine.md#let-claude-check-the-machine-and-run-everything) one item at a time, and asks you for the data root's path.
+4. Ask:
 
    ```prompt
    Run everything.

@@ -12,6 +12,7 @@ Each thing on the platform has one name.
 | Push | Send your commits to GitHub. |
 | `master.do` | The one file that runs a project or a build. |
 | Step | One `.do`, `.R` or `.py` file that `master.do` runs. |
+| Helper | A file of `code/helpers/` that holds what several steps share. A step pulls it in; it is never run on its own. |
 | Full run | A run of every step, from empty working files. |
 | Working files | What a step saves in `temp/` for a later step. |
 | Explore file | A file that looks at data and changes no result. |
