@@ -8,7 +8,7 @@ Claude reviews against every item of the project's `checklist.md`. A review read
 Review my code.
 ```
 
-For the paper, first ask "Run everything.", because only a full run in this session shows Claude that the exhibits are current. On Windows, with R steps, [you start that run yourself](work-with-r-steps.md#run-the-project-on-windows). Then:
+For the paper, first ask "Run everything.", because only a full run in this session shows Claude that the exhibits are current. On Windows, with R or Python steps, [you start that run yourself](work-with-r-steps.md#run-the-project-on-windows). Then:
 
 ```prompt
 Review my paper.
@@ -22,13 +22,13 @@ Claude opens each exhibit and checks every number typed in the text: its value, 
 
 ## Read the report
 
-Findings come first, each with the file and line, the checklist item, and what to change. Then every item of `checklist.md` is marked **holds**, **finding**, or **not judged** with the reason.
+Findings come first, each with the file and line, the checklist item, and what to change. Claude then marks every item of `checklist.md` as **holds**, **finding**, or **not judged** with the reason. If the results page marks the exhibits as provisional (inputs still read from an old folder), a paper review leads with that. A code review leaves `code/legacy/` out and says so.
 
 **Only you do.** Say which findings Claude should fix.
 
 ## Before submission: what people do
 
-Some checklist items need a person. No program enforces them, and Claude's review marks as **not judged** what the files cannot show.
+Some checklist items need a person. No program enforces them, and Claude's review marks as **not judged** what the files cannot show:
 
 - A colleague other than the author reruns the project from a fresh clone and matches the main results.
 - Someone checks each statement about a cited paper against that paper.

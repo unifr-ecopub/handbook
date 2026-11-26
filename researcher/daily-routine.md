@@ -22,21 +22,23 @@ flowchart LR
 
 If you do not know how a run ended, ask "Did my run finish?"
 
-"Commit." alone commits and does not push; "Push." alone pushes what is committed. Either way Claude pulls first, and before a commit it lists the files and commits them in the same go.
+"Commit." alone commits and does not push; "Push." alone pushes your local commits. Either way Claude pulls first, and before a commit it lists the files and commits them at once.
 
-**On Windows, with R steps,** Claude cannot start a run: [you start it yourself](work-with-r-steps.md#run-the-project-on-windows).
+After a change to `paper/draft/` or `paper/results/`, Claude updates `paper/draft/main.pdf` in place with `latexmk` and reports whether it compiled or which missing exhibits stopped it. If `latexmk` is absent, Claude says so.
+
+On Windows, with R or Python steps, Claude cannot start a run: [you start it yourself](work-with-r-steps.md#run-the-project-on-windows).
 
 **Untested on Windows.** Until Claude's git works there, [GitHub Desktop's buttons](fix-a-rejected-push-or-a-conflict.md#if-claude-cannot-use-git-on-your-machine) stand in.
 
 ## When Claude proposes a full run first
 
-Claude proposes a full run, and you decide, in three cases.
+Claude proposes a full run, and you decide, in three cases:
 
 - Before one step, if an earlier step or [a version](../data/versions-and-pins.md) changed since your last full run, or no full run finished on this machine.
 - After "Pull." alone, if it brought code, versions or results.
 - Before a commit, if results changed and no full run made them.
 
-One case has no question. If the pull on the way to a commit or a push that you asked for brings code, versions or results, Claude runs everything first. It names each file the run rewrote and why it changed, and commits those files too, in the same go.
+One case needs no question: when the pull before a commit or push you asked for brings code, versions or results, Claude runs everything first. It names each file the run rewrote and why it changed, and commits those files in the same commit.
 
 ## What a single step does not tell you
 

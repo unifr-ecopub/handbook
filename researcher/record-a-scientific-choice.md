@@ -13,7 +13,9 @@ stateDiagram-v2
 
 ## Answer in plain words
 
-Claude asks for each choice that a task needs, and proposes options. Answer in the conversation. Claude writes a row under **Decided** with your words quoted, your name and the date, and tells you its number, such as `D3`. It records a choice that you state unasked in the same way. A guess, a default, silence or "whatever is usual" is not a choice: Claude asks again.
+Claude asks for each choice that a task needs, and proposes options. Answer in the conversation. Claude writes a row under **Decided** with your words quoted, your name and the date, and tells you its number, such as `D3`.
+
+It records a choice that you state unasked in the same way. A guess, a default, silence or "whatever is usual" is not a choice: Claude asks again.
 
 **Claude will ask you.** Your name, once. It never takes a name from the machine or from git.
 
@@ -33,6 +35,6 @@ Say so. Claude adds a dated row under **Decided** with the same D-number, and th
 
 ## Record a licence yourself
 
-**Only you do.** An author writes a licence, or any choice that binds the authors, into `decisions.md` by their own hand. Claude leaves it under **Open**.
+**Only you do.** An author writes any licence, or any choice that binds the authors, into `decisions.md` by their own hand. Claude leaves it under **Open**.
 
 **Check.** `decisions.md` holds the row, and the step that applies it names the number on its `DECISIONS APPLIED` line.

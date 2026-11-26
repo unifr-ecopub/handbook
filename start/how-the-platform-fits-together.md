@@ -25,9 +25,9 @@ flowchart LR
   RUN --> WF
 ```
 
-Code lives on GitHub, one repo per project. Three shared repos serve everyone: `project-template` starts every project, `data-processing` makes the shared datasets, and `handbook` holds these pages. A later change to the template reaches a project only when you ask Claude to [update it from the template](../researcher/update-from-the-template.md).
+The platform keeps code on GitHub, one repo per project. Three shared repos serve everyone: `project-template` starts every project, `data-processing` makes the shared datasets, and `handbook` holds these pages. A later change to the template reaches a project only when you ask Claude to [update it from the template](../researcher/update-from-the-template.md).
 
-Data lives on Dropbox, in one folder called [the data root](../data/data-root.md). No data file enters a repo.
+The platform keeps data on Dropbox, in one folder called [the data root](../data/data-root.md). No data file enters a repo.
 
 Your machine holds your clones, your copies of the repos. Claude Code and Stata run there.
 
@@ -47,7 +47,7 @@ A provider's files arrive as a delivery and stay as received. A build cleans the
 
 ## Why it is built this way
 
-- **Code and data are kept apart.** Code is small and changes daily. Data is large and must not change by accident. Git suits only the first.
-- **Every run starts from `master.do`.** One way in means one set of checks, whether the steps are in Stata or in R.
+- **Keep code and data apart.** Code is small and changes daily. Data is large and must not change by accident. Git suits only the first.
+- **Every run starts from `master.do`.** One way in means one set of checks, whether the steps are in Stata, R, Python or a mix.
 - **Claude does the steps and you decide.** Each routine is written once, as an instruction that Claude follows on every machine. [Working with Claude](../claude/working-with-claude.md) says how you keep control.
-- **Branches, servers and database software are left out.** Each would need someone to look after it. The price is a few failures that no check catches, named under **What can go wrong.**
+- **The platform leaves out branches, servers and database software.** Each would need someone to look after it. The price is a few failures that no check catches, named under **What can go wrong.**

@@ -29,6 +29,7 @@ The platform keeps code on GitHub and data on Dropbox, and Claude does the techn
 - [Move to a new version of a dataset](researcher/move-to-a-new-version.md)
 - [Use a table you made by hand in a project](researcher/use-a-table-made-by-hand.md)
 - [Work on a project with R steps](researcher/work-with-r-steps.md)
+- [Work on a project with Python steps](researcher/work-with-python-steps.md)
 - [Add a Stata package to a project](researcher/add-a-stata-package.md)
 - [Have your code and your paper reviewed](researcher/review-code-and-paper.md)
 - [Start a new project, or get one onto your machine](researcher/start-or-get-a-project.md)

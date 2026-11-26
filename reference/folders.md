@@ -9,7 +9,7 @@ The layout of a project, of `data-processing` and of a replication package. [The
 ├── README.md
 ├── AGENTS.md              the rules for Claude
 ├── CLAUDE.md              loads AGENTS.md and names the skills
-├── .claude/               the skills, the Stata and R conventions, the settings
+├── .claude/               the skills, the Stata, R and Python conventions, the settings
 ├── checklist.md           the items of a review
 ├── decisions.md           the scientific choices
 ├── code/
@@ -18,17 +18,29 @@ The layout of a project, of `data-processing` and of a replication package. [The
 │   ├── dataprep/          steps that save working files
 │   ├── analysis/          steps that write exhibits
 │   ├── explore/           explore files
+│   ├── legacy/            old code kept as a record after a move-in (never run)
 │   └── templates/
 ├── ado/                   Stata packages and the chair's programs
+├── docs/                  notes and sources (published work as a link only)
 ├── paper/
 │   ├── draft/             the manuscript
+│   ├── presentation/      slides
 │   └── results/           exhibits and the results page
 ├── replication/           the README of a future package
 ├── temp/                  working files
 └── logs/                  a dated log per run
 ```
 
-Git holds everything but `temp/` and `logs/`. Only code writes `paper/results/` and `temp/`, and a full run empties `temp/` first.
+A project with R steps also holds `renv.lock` (and its `renv/` files) at the top; one with Python steps holds `.python-version`, `pyproject.toml` and `uv.lock`. Git ignores:
+
+- `temp/` and `logs/`
+- `renv/library/`
+- `.venv/` and Python cache files
+- `old-data-folder.txt` (this machine's path of an old project's folder)
+- compiled PDFs in `paper/draft/` and `paper/presentation/`
+- data files
+
+Only code writes `paper/results/` and `temp/`, and a full run empties `temp/` first.
 
 ## data-processing
 

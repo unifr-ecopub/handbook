@@ -15,16 +15,16 @@ How members receive the data root and the Claude account is not yet settled.
 
 ## Install the programs and sign in
 
-1. Stata 18 or later.
-2. GitHub Desktop. Sign in with your GitHub account.
-3. Git for Windows, with its installer's own choices. Claude needs it for git.
-4. Claude Code, as the desktop app or for the command line. Sign in with the Claude account.
+1. Install Stata 18 or later.
+2. Install GitHub Desktop, and sign in with your GitHub account.
+3. Install Git for Windows, with its installer's own choices. Claude needs it for git.
+4. Install Claude Code, as the desktop app or for the command line. Sign in with the Claude account.
 
-The data root needs Dropbox's own program. Only [a project with R steps](../researcher/work-with-r-steps.md) needs R and RStudio.
+The data root needs Dropbox's own program. Only [a project with R steps](../researcher/work-with-r-steps.md) needs R and RStudio, and only [a project with Python steps](../researcher/work-with-python-steps.md) needs `uv` (`uv` fetches Python itself).
 
 ## Clone your first repo
 
-A clone is your own copy of a repo, on your machine.
+A clone is your own copy of a repo, on your machine. To clone your first repo:
 
 1. In GitHub Desktop, choose **File › Clone Repository** and pick the repo.
 2. Set **Local Path** to a folder that does not sync, such as `C:/Users/<you>/GitHub/<project>`.
@@ -50,9 +50,9 @@ Step 3 follows Claude Code's documentation, and no trial here has confirmed it. 
 This is my first time on this computer.
 ```
 
-Claude checks git, Stata, the data root and, in a project with R steps, R, one at a time. It stops at the first that is not right and says who puts it right. Where `stata-se` is not found, it looks in Stata's usual folder before it asks you.
+Claude checks each requirement one at a time: git, Stata, the data root and, where the project uses them, R, Python (`uv` and the project's packages) and the project's old folder. It stops at the first that is not right and says who puts it right. Where `stata-se` is not found, it looks in Stata's usual folder before it asks you.
 
-**Claude will ask you.** The full path of the data root, the first time on a machine. Claude writes it into the data-root file in your home folder.
+**Claude will ask you.** The full path of the data root, the first time on a machine. Claude writes it into the data-root file in your home folder. If the project still reads inputs from an old folder, Claude also asks for that folder's path on this machine and writes it into `old-data-folder.txt`. If this machine has no copy of the old folder, Claude stops (see [Inputs still read from the old folder](../researcher/move-an-existing-project-in.md#inputs-still-read-from-the-old-folder)).
 
 **Only you do.**
 
@@ -63,6 +63,6 @@ Claude then runs one example file to prove the machine, and then everything.
 
 **Check.** The example run ends `Step complete`, the full run ends `Run complete`, and no file in your clone changed. If exhibits changed, Claude names them before any commit.
 
-On Windows, [you start the run yourself](../researcher/work-with-r-steps.md#run-the-project-on-windows) if the repo has R steps. In `data-processing`, say that the machine is new and give Claude the path.
+On Windows, [you start the run yourself](../researcher/work-with-r-steps.md#run-the-project-on-windows) if the repo has R or Python steps. In `data-processing`, say that the machine is new and give Claude the path.
 
-Later, a run that stops before any step with a sentence about the machine, such as [the data root was not found](../reference/messages-project-run.md#before-anything-runs-the-machine-checks), goes the same way: tell Claude what it says.
+Later, if a run stops before any step with a message about the machine, such as [the data root was not found](../reference/messages-project-run.md#before-anything-runs-the-machine-checks), tell Claude what it says.

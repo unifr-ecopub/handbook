@@ -13,11 +13,11 @@ One line per question, with a link to the page that covers it.
 - **What do I do each day?** [Pull, work on a step, run everything, commit and push](researcher/daily-routine.md).
 - **How do I know that a run finished?** [Its last line](reference/messages-project-run.md#how-a-run-ends) is `Run complete`.
 - **Does "Commit." also push?** No. [Ask "Push."](researcher/daily-routine.md), or "Commit and push." at once.
-- **Why can Claude not start my run?** On Windows, a project with R steps [runs in Stata's window](researcher/work-with-r-steps.md#run-the-project-on-windows).
+- **Why can Claude not start my run?** On Windows, a project with R or Python steps [runs in Stata's window](researcher/work-with-r-steps.md#run-the-project-on-windows).
 
 ## When something breaks
 
-- **A run failed. What now?** Ask Claude for [the cause](researcher/find-why-a-run-failed.md).
+- **A run failed. What now?** Ask Claude [why the run failed](researcher/find-why-a-run-failed.md).
 - **My push was rejected, or there is a conflict.** [Someone pushed first](researcher/fix-a-rejected-push-or-a-conflict.md).
 - **My tables are gone after a failed run.** [A full run makes them again](researcher/find-why-a-run-failed.md#check-the-fix).
 - **Stata says a command is unrecognized.** The project lacks [a Stata package](researcher/add-a-stata-package.md).
@@ -26,7 +26,7 @@ One line per question, with a link to the page that covers it.
 
 - **What is this dataset?** Its row in [the data map](data/data-map.md) says, and so does [its page in `docs/`](data/data-map.md#the-map-as-pages).
 - **Which version does my project read?** [The one on its line](data/versions-and-pins.md#which-version-a-run-read) in `code/pins.do`.
-- **How do I get the new version?** Ask Claude to [move](researcher/move-to-a-new-version.md).
+- **How do I get the new version?** Ask Claude to [move to the new version](researcher/move-to-a-new-version.md).
 
 ## Claude
 
@@ -40,4 +40,4 @@ One line per question, with a link to the page that covers it.
 
 - **Who commits in `data-processing`?** Claude, [when you ask](curator/commit-and-push.md), and never on its own.
 - **How do I undo a release?** You cannot. You [mark the version as wrong](curator/mark-a-wrong-version.md) in its build's `README.md`.
-- **How do I welcome a new researcher?** In [three steps](curator/manage-repos-and-people.md#welcome-a-new-researcher).
+- **How do I welcome a new researcher?** In [three onboarding steps](curator/manage-repos-and-people.md#welcome-a-new-researcher).

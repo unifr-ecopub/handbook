@@ -10,7 +10,7 @@ The data curator tells the chair after each release. The build's `README.md` in 
 Use the new version of <dataset>.
 ```
 
-Claude changes the dataset's line in `code/pins.do`, and no other, runs everything, and says which results changed. On Windows, with R steps, [you start that run yourself](work-with-r-steps.md#run-the-project-on-windows).
+Claude changes the dataset's line in `code/pins.do`, and no other, runs everything, and says which results changed. On Windows, with R or Python steps, [you start that run yourself](work-with-r-steps.md#run-the-project-on-windows).
 
 **Check.** Claude quotes this line from the log:
 
@@ -18,4 +18,4 @@ Claude changes the dataset's line in `code/pins.do`, and no other, runs everythi
 chair_use: <dataset>/<file> v<N>
 ```
 
-If the version does not load, [Loading a dataset](../reference/messages-project-run.md#loading-a-dataset) quotes each message. A version marked as wrong still loads, with no warning: its line in the build's `README.md` says why and which version to use instead, and the data curator tells the chair.
+If the version does not load, [Loading a dataset](../reference/messages-project-run.md#loading-a-dataset) quotes each message. A version marked as wrong still loads, with no warning. Its line in the build's `README.md` says why and which version to use instead, and the data curator tells the chair.
