@@ -52,7 +52,7 @@ This is my first time on this computer.
 
 Claude checks git, Stata, the data root and, where the project uses them, R, Python (`uv` and the project's packages) and the project's old folder, one at a time. It stops at the first that is not right and says who puts it right. Where `stata-se` is not found, it looks in Stata's usual folder before it asks you.
 
-**Claude will ask you.** The full path of the data root, the first time on a machine. Claude writes it into the data-root file in your home folder. If the project still reads inputs from an old folder, Claude also asks for that folder's path on this machine and writes it into `old-data-folder.txt`.
+**Claude will ask you.** The full path of the data root, the first time on a machine. Claude writes it into the data-root file in your home folder. If the project still reads inputs from an old folder, Claude also asks for that folder's path on this machine and writes it into `old-data-folder.txt`; if this machine has no copy of the old folder, Claude stops (see [Inputs still read from the old folder](../researcher/move-an-existing-project-in.md#inputs-still-read-from-the-old-folder)).
 
 **Only you do.**
 

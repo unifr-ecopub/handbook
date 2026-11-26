@@ -59,4 +59,4 @@ After you send the package, delete the working folder, `<project>-work/`: it may
 - Claude stops if the package needs two versions of one dataset and may not ship both.
 - A table made by hand is shipped as it is today, which may differ from what the release read.
 
-**Untested on Windows.** For a project with R steps, Claude asks you to start the test run there: double-click `code/master.do` of the test copy, click **Do**, and tell Claude when it has ended.
+**Untested on Windows.** For a project with R or Python steps, Claude asks you to start the test run there: double-click `code/master.do` of the test copy, click **Do**, and tell Claude when it has ended.

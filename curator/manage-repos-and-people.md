@@ -1,6 +1,6 @@
 # Manage repos and people
 
-Adding or removing members needs an owner of the chair's organisation; creating a project repo from the template does too when the organisation's settings do not let members create repos themselves (where members can, a researcher can [ask Claude to start a new project](../researcher/start-or-get-a-project.md#start-a-new-project)). Claude has no part in the tasks on this page. The button names follow GitHub's documentation, and no trial here has confirmed them.
+Adding or removing members needs an owner of the chair's organisation; creating a project repo from the template does too when the organisation's settings do not let members create repos themselves (where members can, a researcher can [ask Claude to start a new project](../researcher/start-or-get-a-project.md#start-a-new-project), and giving the team of all members the role **Write** — steps 5 and 6 below — stays yours). Claude has no part in the tasks on this page. The button names follow GitHub's documentation, and no trial here has confirmed them.
 
 ## Create a project repo from the template
 

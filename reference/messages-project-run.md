@@ -60,6 +60,12 @@ Failed: pins.do sets <pin> twice, on lines <line> and <line>. A dataset, a raw d
 **Claude:** asks which line is right, deletes the other and runs again.
 
 ```text
+pins.do, line <n>, is not a pin that can be read: <line> . Write it as  global pin_<dataset> "v<N>" ,  global raw_<name> "<source>/<date>"  or  global old_<name> "<file or folder in the old folder>" , with the double quotes.
+```
+
+Printed by R and Python steps when a line of `code/pins.do` is malformed. **Claude:** fixes the line in `code/pins.do` and runs again.
+
+```text
 Failed: pins.do pins raw/<delivery>, which is not in the data root, <folder>. Check the line in pins.do; if it is right, let Dropbox finish syncing (r(601))
 ```
 
@@ -67,6 +73,7 @@ Failed: pins.do pins raw/<delivery>, which is not in the data root, <folder>. Ch
 
 ```text
 Failed: pins.do reads from the project's old folder (<pins>), and the old folder was not found: the file <file> is missing or empty. Write one line into that file, the full path of this project's old folder on this machine, as in C:/Users/<you>/Dropbox/<old project>; on a machine without the old folder, a co-author's, this project does not run until the curator has delivered the inputs to the data root (r(601))
+Failed: pins.do reads from the project's old folder (<pins>), and the old folder was not found: the file <file> names <folder>, which is not a folder on this machine. Write one line into that file, the full path of this project's old folder on this machine, as in C:/Users/<you>/Dropbox/<old project>; on a machine without the old folder, a co-author's, this project does not run until the curator has delivered the inputs to the data root (r(601))
 ```
 
 **You:** tell Claude "The old folder was not found." and give it the path on this machine, so Claude writes `old-data-folder.txt`. On a machine without the old folder, the project waits until the data curator delivers those inputs.
@@ -81,7 +88,7 @@ Failed: pins.do pins old_<name> "<path>", which is not in the old folder, <folde
 Failed: pins.do still reads from the project's old folder (<pins>), which a replication package does not hold: a package is made once the curator has delivered each of these inputs to the data root and its line in pins.do is a raw_ or pin_ line (r(601))
 ```
 
-A replication package cannot run while any `old_` line remains in `code/pins.do`.
+**You:** ask the data curator to deliver each input to the data root, have Claude replace its `old_` line with a `raw_` or `pin_` line and rerun everything, and only then ask the data curator to assemble the package.
 
 ```text
 Provisional: this project reads <n> inputs from its old folder, <folder>: its results stay provisional until each is a delivery in the data root.
@@ -185,6 +192,12 @@ This project has Python steps and no .python-version that names Python's version
 ```
 
 **You:** tell Claude. If you deleted or changed `.python-version` by accident, discard the change in GitHub Desktop; otherwise Claude copies it again.
+
+```text
+The chair's projects need Python 3.11 or later, and .python-version names <version>: write a later version into it, as code/templates/py-project/.python-version has it.
+```
+
+**Claude:** asks which Python version the project is to use, updates `.python-version` and `pyproject.toml`, locks, syncs and checks the fresh copy.
 
 ```text
 Python does not run in Stata's batch mode on Windows: open Stata, cd into this project's code folder and type  do master.do  there.

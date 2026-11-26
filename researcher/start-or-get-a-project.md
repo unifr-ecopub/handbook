@@ -8,21 +8,23 @@
 Start a new project <project>.
 ```
 
-Claude creates a private repo from `project-template` with `gh` and clones it into your projects folder; without `gh` or a sign-in, you make it on github.com with **Use this template** on `project-template`, and Claude clones it once it is there.
+Claude creates a private repo from `project-template` with `gh` and clones it into your projects folder; without `gh` or a sign-in, you make it on github.com with **Use this template** on `project-template`, and Claude clones it once it is there (not yet tested).
 
-**Only you do.** If your account cannot create repositories in the organisation, give the data curator the project's bare name and nothing more. The names `data`, `data-processing`, `handbook` and `project-template` are taken. The data curator [makes the repo from the template](../curator/manage-repos-and-people.md#create-a-project-repo-from-the-template).
+**Only you do.** Once Claude has made a repo for you, ask the data curator to give the team of all members the role **Write** on it. If your account cannot create repositories in the organisation, give the data curator the project's bare name and nothing more. The names `data`, `data-processing`, `handbook` and `project-template` are taken. The data curator [makes the repo from the template](../curator/manage-repos-and-people.md#create-a-project-repo-from-the-template).
 
 Never make a project from a ZIP or `git archive`: a folder without `AGENTS.md` and `.claude/` is not a working project.
 
 ## If you created an empty repo on GitHub
 
-**Ask Claude.** In a project that you already have, if a new repo was created without **Use this template**:
+**Ask Claude.** In a project that you already have, if a new repo was created without **Use this template** (not yet tested):
 
 ```prompt
 My new repo is empty.
 ```
 
-**Claude will ask you.** For your yes before it puts the template's files into the repo (over any `README.md` or `.gitignore` that GitHub wrote). If the repo already holds an old project's files, Claude puts no template file among them: with your yes it renames the folder, starts a new project beside it, and you [move the old project in](move-an-existing-project-in.md).
+**Claude will ask you.** For your yes before it puts the template's files into the repo (over any `README.md` or `.gitignore` that GitHub wrote). If the repo already holds an old project's files, Claude puts no template file among them: with your yes it renames the folder on this machine, starts a new project beside it, and you [move the old project in](move-an-existing-project-in.md).
+
+**Only you do.** If the repo held an old project, it still holds the name on GitHub: rename it there (**Settings**, **Repository name**), or choose another name for the new project.
 
 ## Get a project of the chair onto your machine
 
