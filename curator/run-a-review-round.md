@@ -1,6 +1,6 @@
 # Run a review round
 
-Some cases cannot be decided by code, such as an uncertain match. An assistant decides them in an Excel sheet, and the build's next run reads the decisions.
+Code cannot decide some cases, such as an uncertain match. An assistant decides them in an Excel sheet, and the build's next run reads the decisions.
 
 ```mermaid
 flowchart LR
@@ -26,7 +26,7 @@ Tell the assistant, whose page is [Fill in a review sheet](../assistant/fill-in-
 The assistant has filled the sheet for <dataset>. Apply it.
 ```
 
-Claude runs the whole build. Only a run that ends `Run complete` and `Staged` replaces the candidate, and a run stages on the data curator's machine alone. The build saves the decisions it used as the file `decisions`, which is released with the version.
+Claude runs the whole build. Only a run that ends `Run complete` and `Staged` replaces the candidate, and a run stages on the data curator's machine alone. The build saves the decisions it used as the file `decisions`, and the release includes it with the version.
 
 **Check.** Claude reports these two lines:
 

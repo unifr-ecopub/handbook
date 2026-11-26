@@ -1,6 +1,8 @@
 # Manage repos and people
 
-Adding or removing members needs an owner of the chair's organisation; creating a project repo from the template does too when the organisation's settings do not let members create repos themselves (where members can, a researcher can [ask Claude to start a new project](../researcher/start-or-get-a-project.md#start-a-new-project), and giving the team of all members the role **Write** — steps 5 and 6 below — stays yours). Claude has no part in the tasks on this page. The button names follow GitHub's documentation, and no trial here has confirmed them.
+You need an owner of the chair's organisation to add or remove members. You also need one to create a project repo from the template when the organisation's settings do not let members create repos themselves. Where members can create repos, a researcher can [ask Claude to start a new project](../researcher/start-or-get-a-project.md#start-a-new-project), and giving the team of all members the role **Write** (steps 5 and 6 below) stays yours.
+
+Claude has no part in the tasks on this page. The button names follow GitHub's documentation, and no trial here has confirmed them.
 
 ## Create a project repo from the template
 
@@ -11,7 +13,7 @@ Adding or removing members needs an owner of the chair's organisation; creating 
 5. In the new repo, open **Settings**, then **Collaborators & teams**, and click **Add teams**.
 6. Pick the team of all members, and give it the role **Write**.
 
-The new repo gets the template's files as they are, and nothing is edited before its first run. A later change to the template does not reach it, so each project keeps the `ado/` and the rules its results were made with.
+The new repo copies the template's files as they are; do not edit them before its first run. Later changes to the template do not reach it, so each project keeps the `ado/` files and rules that made its results.
 
 ## Welcome a new researcher
 

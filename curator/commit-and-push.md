@@ -16,7 +16,7 @@ Commit and push.
 
 **Claude will ask you.** For your yes, if the list of changed files holds one that Claude did not name to you. A file you say to leave out stays out.
 
-**Only you do.** If a window opens to sign in to GitHub, sign in with your GitHub account. If the pull or the push fails for want of a sign-in, press **Pull** or **Push** in GitHub Desktop, which shows the commit.
+**Only you do.** If a window opens to sign in to GitHub, sign in with your GitHub account. If the pull or the push fails because you are not signed in, press **Pull** or **Push** in GitHub Desktop, which shows the commit.
 
 **Check.** Claude says what its pull brought and that the commit is pushed. On github.com, `data-processing` shows your commit.
 
@@ -24,8 +24,8 @@ Commit and push.
 
 - Someone pushed first: Claude pulls, says what came, and pushes again.
 - A conflict: Claude shows both versions of each file and changes nothing until you choose. Until the merge is finished, it runs no build and no release.
-- A pull that git refuses because of changes not yet committed: Claude stops, lists those files and discards nothing. The commit is made, stays on this machine and is not pushed.
-- A pull that brought commits while a candidate waits: Claude says whether they touch the code that makes that dataset. If they do, Claude says that its build must be run again before a release, and runs it when you ask.
+- A pull that git refuses because of changes not yet committed: Claude stops, lists those files and discards nothing. Claude still makes the commit on this machine and does not push it.
+- A pull that brought commits while a candidate waits: Claude says whether they touch the code that makes that dataset. If they do, Claude says that you must run its build again before a release, and runs it when you ask.
 
 ## A commit you did not make
 
@@ -35,4 +35,4 @@ Your next pull can bring that commit. GitHub can also reject a push you make bef
 
 ## Run the tests before a push that changed code
 
-If the files to commit, the commits not yet pushed, or what a pull or a merge brought touch `code/`, `ado/` or `tests/`, Claude runs [the repo's tests](test-a-changed-chair-program.md) and gives the count: before the commit, where the change was made here, and again before the push, after a pull or a merge that brought such changes. If one fails before the commit, nothing is committed; if one fails after, nothing is pushed.
+Whenever files to commit, unpushed commits, or changes from a pull or merge touch `code/`, `ado/` or `tests/`, Claude runs [the repo's tests](test-a-changed-chair-program.md) and gives the count. Claude runs them before committing local changes, and again before pushing after a pull or merge that brought changes there. If a test fails before the commit, Claude commits nothing; if one fails after, Claude pushes nothing.

@@ -1,6 +1,6 @@
 # Test and copy a changed chair program
 
-The chair's five Stata programs live in `ado/c/` of `data-processing`. `project-template` holds a copy of three, `chair_use`, `chair_rstep` and `chair_results`; `chair_commit.ado` and `chair_fingerprint.ado` are in `data-processing` alone. After a change, both repos must pass their tests, and each copy must stay identical to its source.
+`data-processing` stores the chair's five Stata programs in `ado/c/`. `project-template` holds a copy of three, `chair_use`, `chair_rstep` and `chair_results`; `chair_commit.ado` and `chair_fingerprint.ado` are in `data-processing` alone. After a change, both repos must pass their tests, and each copy must stay identical to its source.
 
 ```mermaid
 flowchart LR
@@ -24,7 +24,7 @@ Run the tests.
 data tests: <n> passed, <n> failed (results.txt)
 ```
 
-Claude never edits a file under `tests/` on its own or on a general yes to fix a failure: it changes one only when you ask for that change in so many words (aside from copying a changed template from `code/templates/` into `tests/fixtures/builds/`).
+Claude never edits a file under `tests/` on its own or on a general yes to fix a failure. It changes one only when you explicitly ask for that change (aside from copying a changed template from `code/templates/` into `tests/fixtures/builds/`).
 
 ## Copy the program into project-template
 
