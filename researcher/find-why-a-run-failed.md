@@ -33,7 +33,7 @@ Claude proposes the smallest change at the cause, and waits for your word.
 
 ## Check the fix
 
-A failed run has deleted exhibits. Do not commit that state: the next full run makes them again.
+A full run that fails during a step has cleared `temp/` and `paper/results/`: do not commit that state; the next full run makes the exhibits again. A run that stops on a check before the steps (Stata's version, the guard, `ado/`, the data root, `pins.do`, old-folder checks, software checks, or the step or explore name) clears nothing in `temp/` or `paper/results/`. Where a stop happens before `master.do` opens a dated log in `logs/` (any check before the step name), Claude reads the `Failed:` line in Stata's batch log in `code/` (`master.log`, or the step's `.log`), or asks what Stata displayed in its window.
 
 **Check.** The step ends `Step complete`. A full run then ends `Run complete`, and Claude names each exhibit that changed.
 

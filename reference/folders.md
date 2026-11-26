@@ -35,6 +35,7 @@ Git holds everything but `temp/` and `logs/`. Only code writes `paper/results/` 
 ```plaintext
 data-processing/
 ├── datamap.csv            the data map
+├── docs/                  pages of the data map, generated on GitHub from datamap.csv
 ├── builds/<dataset>/      one build
 │   ├── README.md          what it reads, and one line per version
 │   ├── decisions.md       the build author's choices

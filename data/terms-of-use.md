@@ -9,7 +9,7 @@ Each source is open to the whole team, and to Claude, unless its terms say other
 
 `terms` reads `open`, `chair only`, or a restriction in the words that the provider used. Nothing is added to those words, because the entry binds everyone who reads it.
 
-A processed file and a review sheet have their source's terms. A replication package ships only what the authors allow.
+A processed file and a review sheet take their source's terms unless the build author says otherwise; where a build reads several inputs whose terms differ, the finished file has the terms its build author chose (recorded in the build's `decisions.md` and in `datamap.csv`). A replication package ships only what the authors allow.
 
 ## Sources that may not reach an outside service
 

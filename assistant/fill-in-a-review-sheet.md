@@ -17,8 +17,8 @@ A sheet follows the [terms of use](../data/terms-of-use.md) of its source.
 
 ## What stops the next build
 
-The build reads each `.xlsx` file in the folder, and stops in three cases. The data curator then asks you to correct the sheet.
+The build reads each `.xlsx` file in the folder, and stops in three cases. The data curator then asks you to correct the sheet; for the first two stops, the message names the sheets and the Excel rows.
 
 - A decision is something other than `1`, `0` or blank.
-- Two sheets decide one case differently. A conflicted copy that Dropbox made of a sheet counts as a second sheet.
+- Two rows decide one case differently, whether in two sheets (including a conflicted copy that Dropbox made) or in one sheet that lists a case twice.
 - A sheet lacks a column.
