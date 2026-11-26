@@ -47,7 +47,7 @@ sequenceDiagram
 
 Claude can be wrong. Four things stand between a mistake and a paper.
 
-1. **Records.** Each task ends with the files changed. Each run leaves a dated log, each choice a row in `decisions.md`, and each commit a line in GitHub's history.
+1. **Records.** Each task ends with the files changed. Each run leaves a dated log (unless a check stops it before a log is opened), each choice a row in `decisions.md`, and each commit a line in GitHub's history.
 2. **Full runs.** A result comes only from code that `master.do` ran, and a full run makes every table and figure afresh.
 3. **Reviews.** On request, Claude checks the code, and each number typed in the paper, against a written checklist.
 4. **People.** Before submission, a colleague reruns the project from a fresh copy, and a person reads the paper in full. No program enforces this rule.

@@ -24,6 +24,8 @@ Run the tests.
 data tests: <n> passed, <n> failed (results.txt)
 ```
 
+Claude never edits a file under `tests/` on its own or on a general yes to fix a failure: it changes one only when you ask for that change in so many words (aside from copying a changed template from `code/templates/` into `tests/fixtures/builds/`).
+
 ## Copy the program into project-template
 
 Claude tells you that `project-template/ado/c/`, in the clone beside this one, needs the same file. It copies only when you ask, for example:

@@ -35,6 +35,4 @@ Review sheets: <n> read. Cases: <n>. Decided: <n> (<n> yes, <n> no). Not decided
 Decisions that match no current case, not used: <n>.
 ```
 
-The build stops on a sheet with a wrong entry, and on two sheets that decide one case differently. Claude says which sheets. See [A review round](../reference/messages-build-and-release.md#a-review-round). The assistant corrects them in Excel; then ask for the build again.
-
-**Only you do.** For a source whose terms [bar outside services](../data/terms-of-use.md#sources-that-may-not-reach-an-outside-service), or say not to open its files, read in the build's log which sheets they are.
+The build stops on a sheet with a wrong entry, and on rows that decide one case differently (across sheets, or twice in one sheet). Claude says which sheets and rows. See [A review round](../reference/messages-build-and-release.md#a-review-round). The assistant corrects them in Excel; then ask for the build again.

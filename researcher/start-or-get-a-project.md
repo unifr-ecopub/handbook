@@ -2,7 +2,17 @@
 
 ## Start a new project
 
-**Only you do.** Give the data curator the project's bare name and nothing more. The names `data`, `data-processing`, `handbook` and `project-template` are taken. The data curator [makes the repo from the template](../curator/manage-repos-and-people.md#create-a-project-repo-from-the-template).
+**Ask Claude.** In a project that you already have, if your GitHub account can create repositories in the chair's organisation:
+
+```prompt
+Start a new project <project>.
+```
+
+Claude creates a private repo from `project-template` with `gh` and clones it into your projects folder; without `gh` or a sign-in, you make it on github.com with **Use this template** on `project-template`, and Claude clones it once it is there (not yet tested).
+
+**Only you do.** If your account cannot create repositories in the organisation, give the data curator the project's bare name and nothing more. The names `data`, `data-processing`, `handbook` and `project-template` are taken. The data curator [makes the repo from the template](../curator/manage-repos-and-people.md#create-a-project-repo-from-the-template).
+
+Never make a project from a ZIP or `git archive`: a folder without `AGENTS.md` and `.claude/` is not a working project.
 
 ## Get a project of the chair onto your machine
 
