@@ -6,7 +6,7 @@ On this platform, Claude does the technical steps and people decide.
 
 Claude is an AI model made by Anthropic. You work with it in Claude Code, a program on your own machine. You open a session on one project's folder and write as you would to a colleague, as in "This number looks wrong."
 
-Each project holds written instructions for Claude, so a request such as "Run everything." means the same on every machine.
+Each project holds written instructions for Claude: the rules in `AGENTS.md`, which `CLAUDE.md` loads, and the procedures of rarer tasks in `.claude/`. So a request such as "Run everything." means the same on every machine.
 
 The handbook's website also offers its pages for Claude: `llms-full.txt`, beside the start page, holds every page in one file, and `llms.txt` lists them. A project's own instructions still come first wherever the handbook differs.
 
@@ -38,9 +38,10 @@ sequenceDiagram
 ## What Claude never does
 
 - It never commits or pushes on its own, and never releases a dataset without asking.
-- It never decides a scientific choice unless you say "You decide.", and it then marks the choice as provisional.
+- It never decides a scientific choice unless you hand it over, as in "You decide.", and it then marks the choice as provisional. The choices of an old project that you move in stay as the old code had them, also marked provisional, until you confirm them.
 - It never edits delivered data, released data, or a table that a person made.
 - It never invents a finding. A result comes from code that `master.do` ran.
+- It never runs an installer on your machine. Whatever needs an installer, administrator rights or a sign-in, you do.
 
 ## How you keep control
 

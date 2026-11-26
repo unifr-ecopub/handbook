@@ -14,18 +14,19 @@
 7. **Never type a path into code.** A typed path works on one machine only.
 8. **Never edit `code/pins.do` during a run.** With R steps, the run then mixes two versions, with no error.
 9. **Never edit `code/_config.R`.** It must stay the same in every project.
+10. **Never install a Stata package from Stata's window.** A run reads community packages only from the project's `ado/`: [ask Claude](../researcher/add-a-stata-package.md).
 
 ## Results
 
-10. **Never edit an exhibit by hand.** The paper must show what the code made.
-11. **Never export an exhibit with `replace`.** One result then replaces another unseen.
+11. **Never edit an exhibit by hand.** The paper must show what the code made.
+12. **Never export an exhibit with `replace`.** One result then replaces another unseen.
 
 ## Git
 
-12. **Never make a branch.** Each repo has one line of history, `main`.
-13. **Never commit data, `temp/` or `logs/`.** The ignore rules keep them out.
+13. **Never make a branch.** Each repo has one line of history, `main`.
+14. **Never commit data, `temp/` or `logs/`.** The ignore rules keep them out.
 
 ## Shared data
 
-14. **Never change a file in `raw/` or `processed/`.** A correction is a cleaning step, or the next version.
-15. **Never rename or remove a column of a review sheet.** The build stops on a sheet that lacks one.
+15. **Never change a file in `raw/` or `processed/`.** A correction is a cleaning step, or the next version.
+16. **Never rename or remove a column of a review sheet.** The build stops on a sheet that lacks one.

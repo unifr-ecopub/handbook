@@ -42,22 +42,27 @@ A path that holds `Dropbox` or `OneDrive` syncs. Nobody has checked whether a un
 
 Step 3 follows Claude Code's documentation, and no trial here has confirmed it. If **Auto** is missing, tell the data curator.
 
-## Give Claude the data root and run everything
+## Let Claude check the machine and run everything
 
-**Ask Claude.** Say that the machine is new, then ask for a full run:
-
-```prompt
-This is a new computer.
-```
+**Ask Claude.** In your first repo:
 
 ```prompt
-Run everything.
+This is my first time on this computer.
 ```
 
-The first run stops because [the data root was not found](../reference/messages-project-run.md#before-anything-runs-the-machine-checks), and Claude asks you for its full path.
+Claude checks git, Stata, the data root and, in a project with R steps, R, one at a time. It stops at the first that is not right and says who puts it right. Where `stata-se` is not found, it looks in Stata's usual folder before it asks you.
 
-**Only you do.** In Explorer, open `chair-research-data`, copy the path from the address bar, and give it to Claude. Claude writes the data-root file and runs again.
+**Claude will ask you.** The full path of the data root, the first time on a machine. Claude writes it into the data-root file in your home folder.
 
-**Check.** The run ends `Run complete`, and no file in your clone changed.
+**Only you do.**
+
+- In Explorer, open `chair-research-data`, copy the path from the address bar, and give it to Claude.
+- Install what Claude names, keeping the choices its installer proposes, and say when it is done. Claude runs no installer, even if you ask: whatever needs an installer, administrator rights or a sign-in is yours.
+
+Claude then runs one example file to prove the machine, and then everything.
+
+**Check.** The example run ends `Step complete`, the full run ends `Run complete`, and no file in your clone changed. If exhibits changed, Claude names them before any commit.
 
 On Windows, [you start the run yourself](../researcher/work-with-r-steps.md#run-the-project-on-windows) if the repo has R steps. In `data-processing`, say that the machine is new and give Claude the path.
+
+Later, a run that stops before any step with a sentence about the machine, such as [the data root was not found](../reference/messages-project-run.md#before-anything-runs-the-machine-checks), goes the same way: tell Claude what it says.

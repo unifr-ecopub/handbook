@@ -28,9 +28,11 @@ Findings come first, each with the file and line, the checklist item, and what t
 
 ## Before submission: what people do
 
-Four checklist items need a person. No program enforces them, and Claude's review marks them **not judged**.
+Some checklist items need a person. No program enforces them, and Claude's review marks as **not judged** what the files cannot show.
 
 - A colleague other than the author reruns the project from a fresh clone and matches the main results.
+- Someone checks each statement about a cited paper against that paper.
+- Someone reads the target journal's policy on AI tools, and the paper makes the statement it requires.
 - A person reads the PDF in full, and the checklist names who and when.
 - An author records the licences in `decisions.md`, by their own hand.
-- The data curator [assembles the replication package](../curator/assemble-a-replication-package.md) and tests it.
+- The data curator [assembles the replication package](../curator/assemble-a-replication-package.md) and tests it. Ask the data curator when the paper is ready to submit: Claude in your project assembles no package.

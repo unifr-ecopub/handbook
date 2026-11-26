@@ -12,6 +12,7 @@ One line per question, with a link to the page that covers it.
 
 - **What do I do each day?** [Pull, work on a step, run everything, commit and push](researcher/daily-routine.md).
 - **How do I know that a run finished?** [Its last line](reference/messages-project-run.md#how-a-run-ends) is `Run complete`.
+- **Does "Commit." also push?** No. [Ask "Push."](researcher/daily-routine.md), or "Commit and push." at once.
 - **Why can Claude not start my run?** On Windows, a project with R steps [runs in Stata's window](researcher/work-with-r-steps.md#run-the-project-on-windows).
 
 ## When something breaks
@@ -19,6 +20,7 @@ One line per question, with a link to the page that covers it.
 - **A run failed. What now?** Ask Claude for [the cause](researcher/find-why-a-run-failed.md).
 - **My push was rejected, or there is a conflict.** [Someone pushed first](researcher/fix-a-rejected-push-or-a-conflict.md).
 - **My tables are gone after a failed run.** [A full run makes them again](researcher/find-why-a-run-failed.md#check-the-fix).
+- **Stata says a command is unrecognized.** The project lacks [a Stata package](researcher/add-a-stata-package.md).
 
 ## The data
 
@@ -31,6 +33,7 @@ One line per question, with a link to the page that covers it.
 - **Does Claude commit on its own?** No, [only when you ask](claude/working-with-claude.md#what-claude-never-does).
 - **Who decides a scientific choice?** [You do](researcher/record-a-scientific-choice.md).
 - **Does my data go to Anthropic?** [What Claude reads](data/terms-of-use.md#sources-that-may-not-reach-an-outside-service) does.
+- **How does my project get the template's new rules?** Ask Claude to [update it from the template](researcher/update-from-the-template.md).
 - **Can Claude be wrong?** Yes. See [How you keep control](claude/working-with-claude.md#how-you-keep-control).
 
 ## For the data curator

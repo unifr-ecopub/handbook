@@ -25,7 +25,7 @@ flowchart LR
   RUN --> WF
 ```
 
-Code lives on GitHub, one repo per project. Three shared repos serve everyone: `project-template` starts every project, `data-processing` makes the shared datasets, and `handbook` holds these pages.
+Code lives on GitHub, one repo per project. Three shared repos serve everyone: `project-template` starts every project, `data-processing` makes the shared datasets, and `handbook` holds these pages. A later change to the template reaches a project only when you ask Claude to [update it from the template](../researcher/update-from-the-template.md).
 
 Data lives on Dropbox, in one folder called [the data root](../data/data-root.md). No data file enters a repo.
 

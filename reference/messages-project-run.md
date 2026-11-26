@@ -91,7 +91,15 @@ This step needs this project's settings, which master.do sets: from this project
 
 A step was started on its own. **You:** ask Claude to run it.
 
-A step can also stop with Stata's own message `grmap not yet activated`, and the advice to type `grmap, activate`. Never type it: in Stata's window it writes to a folder that no run reads. **You:** tell Claude, which activates the command inside the project.
+A step can stop with Stata's own message that a command is unknown:
+
+```text
+command <name> is unrecognized
+```
+
+**You:** tell Claude, which names the package and asks whether to [put it into `ado/`](../researcher/add-a-stata-package.md).
+
+A step can also stop with Stata's own message `grmap not yet activated`, and the advice to type `grmap, activate`. Never type it: in Stata's window it writes to a folder that no run reads. **You:** tell Claude, which activates the command inside the project, with your yes.
 
 ## R steps
 
@@ -101,6 +109,12 @@ This clone's R packages are not installed yet: once, in R, in the project folder
 ```
 
 **Claude:** looks for the right R, and restores the packages. You type nothing in R. **You:** install R only if the machine lacks that version.
+
+```text
+This project has R steps and no renv.lock: copy what is in code/templates/r-project/ into the project folder; then, once, in R, in the project folder, type  renv::restore()  and run again.
+```
+
+**You:** tell Claude what the run says, and it [sets the project up for R](../researcher/work-with-r-steps.md#add-the-first-r-step). You type nothing in R.
 
 ```text
 renv.lock names no repository called RENV, from which renv installs itself, so a fresh clone on another machine cannot install renv or restore the packages, though this machine runs: put the RENV entry back among the Repositories of renv.lock as code/templates/r-project/renv.lock has it, and run again.

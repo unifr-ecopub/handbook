@@ -16,7 +16,7 @@
 **Ask Claude.** In the project:
 
 ```prompt
-Add an R step that makes a map.
+I want to write my first R step.
 ```
 
 **Claude will ask you.** Before the first R step, two things. Does the machine have the R version that `code/templates/r-project/renv.lock` names, and is the network on? With your yes, Claude sets the project up for R. From then on, the project's own `renv.lock` names the version.
@@ -43,9 +43,26 @@ For a single step, Claude tells you what to type in Stata's window. Claude still
 
 - **R was not found, or is another version.** Claude looks on the machine for the right R. If it finds one, it asks whether it may write one line that names it into your Stata `profile.do`. On Windows, you then close Stata and start the run in a new Stata window. If the machine has no such R, only you install it.
 - **The packages are missing,** as in a fresh clone. Claude restores them. The message says to type a command in R: leave that to Claude.
+- **The project has no `renv.lock`, or it names no repository called RENV.** Claude sets up or repairs the project's R files.
 
 **Untested on Windows.** The place of `profile.do` there, `C:/Users/<you>/profile.do`, follows Stata's documentation.
 
+## Add an R package, or take the packages of another date
+
+**Ask Claude.** In the project:
+
+```prompt
+Install the R package <name>.
+```
+
+```prompt
+Use the packages of <date>.
+```
+
+Claude installs through `renv` and writes the change into `renv.lock`; no step installs a package. For another date, it changes only the address of the dated package snapshot, so an old project can keep its package versions. A package of an older date may not build on today's R: Claude names it and asks.
+
 ## After a change to the packages
 
-After any change to `renv.lock`, Claude restores the packages once in a fresh copy of the project under `temp/`, and checks R there. On Windows, it asks you to run that check in Stata's window.
+After any change to `renv.lock`, Claude restores the packages once in a fresh copy of the project under `temp/`, and checks R there. On Windows, it asks you to run that check in Stata's window. Only then does Claude say that the change works.
+
+**Check.** Claude says what the check showed. The changed `renv.lock` is committed with the step that needs it.

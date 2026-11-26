@@ -7,7 +7,9 @@ The layout of a project, of `data-processing` and of a replication package. [The
 ```plaintext
 <project>/
 ├── README.md
-├── CLAUDE.md, .claude/    Claude's instructions and settings
+├── AGENTS.md              the rules for Claude
+├── CLAUDE.md              loads AGENTS.md and names the skills
+├── .claude/               the skills, the Stata and R conventions, the settings
 ├── checklist.md           the items of a review
 ├── decisions.md           the scientific choices
 ├── code/
@@ -62,4 +64,4 @@ The repo holds no data.
 
 In a package, the data root is the folder `data/`. A replicator sets no path.
 
-A package holds no `CLAUDE.md`, no `AGENTS.md` and no `.claude/`: Claude [leaves them out](../curator/assemble-a-replication-package.md#read-the-report).
+A package holds no `CLAUDE.md`, no `AGENTS.md` and no `.claude/`: Claude [leaves them out](../curator/assemble-a-replication-package.md#read-the-report). A project's `.gitattributes` also leaves them out of any archive of its repo, such as GitHub's **Download ZIP**; a clone keeps them.

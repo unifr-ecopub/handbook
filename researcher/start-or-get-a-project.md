@@ -14,7 +14,7 @@ Get me the project <project>.
 
 Claude clones the project and tells you where the clone is. You clone only [the first repo on a machine](../start/set-up-your-machine.md#clone-your-first-repo) yourself.
 
-**Claude will ask you.** Once, the folder where you keep your projects. It refuses a folder inside Dropbox, OneDrive or another project.
+**Claude will ask you.** Once, the folder where you keep your projects. It refuses a folder inside Dropbox, OneDrive or another project. If a folder of that name is already there, it says so and clones nothing.
 
 **Untested on Windows.** Claude clones with Git for Windows. If git is missing, Claude says so, and you install it.
 
