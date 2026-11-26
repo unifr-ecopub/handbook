@@ -27,7 +27,7 @@ With your yes, Claude copies `.python-version`, `pyproject.toml` and `uv.lock` f
 
 **Only you do.** If `uv` is missing, run the install command Claude gives you in your own terminal, or ask IT to install it. If Claude still cannot find `uv` afterwards, close Claude Code and open it again.
 
-**Check.** The step ends `Step complete`. Commit `.python-version`, `pyproject.toml` and `uv.lock` with the step (git ignores `.venv/`).
+**Check.** The step ends `Step complete`. Ask Claude to commit `.python-version`, `pyproject.toml` and `uv.lock` with the step (git ignores `.venv/`).
 
 ## Run the project on Windows
 
@@ -83,6 +83,6 @@ After any change to `pyproject.toml` or `uv.lock`, Claude checks that the lock r
 
 Claude copies the committed files into a fresh folder under `temp/`, along with `old-data-folder.txt` if `code/pins.do` still holds an `old_` line. In that copy, Claude runs `uv sync --frozen` and `master.do`'s Python check. In a project that also has R steps, Claude restores R in the same fresh copy so one copy checks both. On Windows, Claude makes the copy and runs the sync. You then run that check in Stata's window and tell Claude how it ended.
 
-**Check.** Claude reports the packages and their versions from `uv.lock`, the date, and what the fresh-copy check showed. Commit `pyproject.toml`, `uv.lock` and `.python-version` with the step that needs them.
+**Check.** Claude reports the packages and their versions from `uv.lock`, the date, and what the fresh-copy check showed. Ask Claude to commit `pyproject.toml`, `uv.lock` and `.python-version` with the step that needs them.
 
 **Untested on Windows.** Nobody has yet tested the fresh-copy check in Stata's window on Windows.

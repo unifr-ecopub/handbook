@@ -14,15 +14,19 @@ The run failed: why?
 This number looks wrong.
 ```
 
-Claude reads the run's log, makes the fault appear again through `master.do`, and looks at the data with explore files, counts first. Before its first explore file, and before it reads more of a log than its command, the line that says how it ended and Stata's error, it reads the `README.md` and terms of each source that the step reads. It reports the cause: the file, the line, and what happens there. On Windows, with R or Python steps, [you start each run yourself](work-with-r-steps.md#run-the-project-on-windows).
+Claude reads the run's log, makes the fault appear again through `master.do`, and looks at the data with explore files, counts first. Before running its first explore file, or reading past a log's command, outcome line and Stata error, Claude checks the `README.md` and terms of each source the step uses. It reports the cause: the file, the line, and what happens there. On Windows, with R or Python steps, [you start each run yourself](work-with-r-steps.md#run-the-project-on-windows).
 
 **Claude will ask you.** The value you expected, if neither the log nor git shows it.
 
-**What can go wrong.** An explore file can print rows of the data into the session. A source is restricted if its terms bar outside services, or its `README.md` says not to open its files; "chair only" alone is not. An input read from an old folder through an `old_` pin has neither, so it is restricted until you state its terms. For [a restricted source](../data/terms-of-use.md#sources-that-may-not-reach-an-outside-service), Claude's instructions allow only counts, and of a log only the line that says how it ended, Stata's error and counts. Where the cause needs the records, Claude says so and stops. These are instructions, not a lock.
+**What can go wrong.** An explore file can print rows of the data into the session. Claude's instructions restrict what it may show, and these are instructions, not a lock:
+
+- A source is restricted if its terms bar outside services, or its `README.md` says not to open its files ("chair only" alone is not). An input read from an old folder through an `old_` pin has neither, so it is restricted until you state its terms.
+- For [a restricted source](../data/terms-of-use.md#sources-that-may-not-reach-an-outside-service), Claude's instructions allow only counts, and of a log only the outcome line, Stata's error and counts.
+- Where the cause needs the records, Claude says so and stops.
 
 ## Decide what Claude proposes
 
-Claude proposes the smallest change at the cause, and waits for your word.
+Claude proposes the smallest change at the cause, and waits for your word:
 
 - **A fault in the code.** Say yes, and Claude changes it.
 - **A scientific choice,** such as which rows to keep. Claude lists the options and adds an Open question to [`decisions.md`](record-a-scientific-choice.md).
@@ -33,8 +37,21 @@ Claude proposes the smallest change at the cause, and waits for your word.
 
 ## Check the fix
 
-A full run that fails during a step has cleared `temp/` and `paper/results/`: do not commit that state; the next full run makes the exhibits again. A run that stops on a check before the steps (Stata's version, the guard, `ado/`, the data root, `pins.do`, old-folder checks, software checks, or the step or explore name) clears nothing in `temp/` or `paper/results/`. Where a stop happens before `master.do` opens a dated log in `logs/` (any check before the step name), Claude reads the `Failed:` line in Stata's batch log in `code/` (`master.log`, or the step's `.log`), or asks what Stata displayed in its window.
+A full run that fails during a step has cleared `temp/` and `paper/results/`. Do not commit that state: the next full run makes the exhibits again.
+
+A run clears nothing in `temp/` or `paper/results/` when it stops on a check before the steps:
+
+- Stata's version
+- the guard
+- `ado/`
+- the data root
+- `pins.do`
+- old-folder checks
+- software checks
+- the step or explore name
+
+Any check before the step name stops before `master.do` opens a dated log in `logs/`. In that case, Claude reads the `Failed:` line in Stata's batch log in `code/` (`master.log`, or the step's `.log`), or asks what Stata displayed in its window.
 
 **Check.** The step ends `Step complete`. A full run then ends `Run complete`, and Claude names each exhibit that changed.
 
-The sentence after `Failed:` often says what to do: see [Messages of a project run](../reference/messages-project-run.md). Never type a command that [Stata's own message](../reference/messages-project-run.md#during-the-steps) proposes.
+When a `Failed:` line gives a full sentence, [Messages of a project run](../reference/messages-project-run.md) says who acts. Never type a command that [Stata's own message](../reference/messages-project-run.md#during-the-steps) proposes.

@@ -18,4 +18,4 @@ Claude changes the dataset's line in `code/pins.do`, and no other, runs everythi
 chair_use: <dataset>/<file> v<N>
 ```
 
-If the version does not load, [Loading a dataset](../reference/messages-project-run.md#loading-a-dataset) quotes each message. A version marked as wrong still loads, with no warning: its line in the build's `README.md` says why and which version to use instead, and the data curator tells the chair.
+If the version does not load, [Loading a dataset](../reference/messages-project-run.md#loading-a-dataset) quotes each message. A version marked as wrong still loads, with no warning. Its line in the build's `README.md` says why and which version to use instead, and the data curator tells the chair.

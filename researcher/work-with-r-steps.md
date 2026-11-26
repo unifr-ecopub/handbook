@@ -2,7 +2,7 @@
 
 `master.do` runs R steps as it runs Stata steps.
 
-**Untested on Windows.** So far, no R step was run on a Windows machine.
+**Untested on Windows.** Nobody has yet run an R step on a Windows machine.
 
 | Task | Who |
 |---|---|
@@ -19,7 +19,7 @@
 I want to write my first R step.
 ```
 
-**Claude will ask you.** Before the first R step, two things. Does the machine have the R version that `code/templates/r-project/renv.lock` names, and is the network on? With your yes, Claude sets the project up for R. From then on, the project's own `renv.lock` names the version.
+**Claude will ask you.** Before the first R step, Claude asks two things: whether the machine has the R version that `code/templates/r-project/renv.lock` names, and whether the network is on. With your yes, Claude sets the project up for R. From then on, the project's own `renv.lock` names the version.
 
 ## Run the project on Windows
 
@@ -39,11 +39,11 @@ For a single step, Claude tells you what to type in Stata's window. Claude still
 
 ## When master.do says R is not ready
 
-[R steps](../reference/messages-project-run.md#r-steps) quotes each message.
+[R steps](../reference/messages-project-run.md#r-steps) quotes each message. Each case has its own fix:
 
 - **R was not found, or is another version.** Claude looks on the machine for the right R. If it finds one, it asks whether it may write one line that names it into your Stata `profile.do`. On Windows, you then close Stata and start the run in a new Stata window. If the machine has no such R, only you install it.
 - **The packages are missing,** as in a fresh clone. Claude restores them. The message says to type a command in R: leave that to Claude.
-- **The project has no `renv.lock`, or it names no repository called RENV.** Claude sets up or repairs the project's R files.
+- **The project has no `renv.lock`, or it names no repository called `RENV`.** Claude sets up or repairs the project's R files.
 
 **Untested on Windows.** The place of `profile.do` there, `C:/Users/<you>/profile.do`, follows Stata's documentation.
 
@@ -63,6 +63,6 @@ Claude installs through `renv` and writes the change into `renv.lock`; no step i
 
 ## After a change to the packages
 
-After any change to `renv.lock`, Claude restores the packages once in a fresh copy of the project under `temp/`, and checks R there (and in [a project with Python steps](work-with-python-steps.md#after-a-change-to-the-packages) too, restores Python in the same copy). On Windows, it asks you to run that check in Stata's window. Only then does Claude say that the change works.
+After any change to `renv.lock`, Claude restores the packages once in a fresh copy of the project under `temp/` and checks R there. If the project also has [Python steps](work-with-python-steps.md#after-a-change-to-the-packages), Claude restores Python in the same copy. On Windows, it asks you to run that check in Stata's window. Only then does Claude say that the change works.
 
-**Check.** Claude says what the check showed. The changed `renv.lock` is committed with the step that needs it.
+**Check.** Claude says what the check showed. Ask Claude to commit the changed `renv.lock` with the step that needs it.
