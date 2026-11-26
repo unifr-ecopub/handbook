@@ -20,7 +20,7 @@ How members receive the data root and the Claude account is not yet settled.
 3. Git for Windows, with its installer's own choices. Claude needs it for git.
 4. Claude Code, as the desktop app or for the command line. Sign in with the Claude account.
 
-The data root needs Dropbox's own program. Only [a project with R steps](../researcher/work-with-r-steps.md) needs R and RStudio, and only a project with Python steps needs `uv` (`uv` fetches Python itself).
+The data root needs Dropbox's own program. Only [a project with R steps](../researcher/work-with-r-steps.md) needs R and RStudio, and only [a project with Python steps](../researcher/work-with-python-steps.md) needs `uv` (`uv` fetches Python itself).
 
 ## Clone your first repo
 

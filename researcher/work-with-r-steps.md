@@ -63,6 +63,6 @@ Claude installs through `renv` and writes the change into `renv.lock`; no step i
 
 ## After a change to the packages
 
-After any change to `renv.lock`, Claude restores the packages once in a fresh copy of the project under `temp/`, and checks R there (and in a project with Python steps too, restores Python in the same copy). On Windows, it asks you to run that check in Stata's window. Only then does Claude say that the change works.
+After any change to `renv.lock`, Claude restores the packages once in a fresh copy of the project under `temp/`, and checks R there (and in [a project with Python steps](work-with-python-steps.md#after-a-change-to-the-packages) too, restores Python in the same copy). On Windows, it asks you to run that check in Stata's window. Only then does Claude say that the change works.
 
 **Check.** Claude says what the check showed. The changed `renv.lock` is committed with the step that needs it.

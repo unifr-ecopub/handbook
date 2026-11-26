@@ -113,6 +113,7 @@ jobs:
           researcher/move-to-a-new-version.md
           researcher/use-a-table-made-by-hand.md
           researcher/work-with-r-steps.md
+          researcher/work-with-python-steps.md
           researcher/add-a-stata-package.md
           researcher/review-code-and-paper.md
           researcher/start-or-get-a-project.md

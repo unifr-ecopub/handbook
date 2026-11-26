@@ -185,7 +185,7 @@ This project needs Python <version> (.python-version); this is Python <version>:
 This project has Python steps and no uv.lock: copy what is in code/templates/py-project/ into the project folder; then, once, in the project folder, type  uv sync --frozen  and run again.
 ```
 
-**You:** tell Claude what the run says, and it sets the project up for Python.
+**You:** tell Claude what the run says, and it [sets the project up for Python](../researcher/work-with-python-steps.md#add-the-first-python-step).
 
 ```text
 This project has Python steps and no .python-version that names Python's version, as in 3.14: in GitHub Desktop, discard the change that removed it, or copy it again from code/templates/py-project/
@@ -203,7 +203,7 @@ The chair's projects need Python 3.11 or later, and .python-version names <versi
 Python does not run in Stata's batch mode on Windows: open Stata, cd into this project's code folder and type  do master.do  there.
 ```
 
-**You:** start the run in Stata's window, as for [a project with R steps](../researcher/work-with-r-steps.md#run-the-project-on-windows).
+**You:** [start the run in Stata's window](../researcher/work-with-python-steps.md#run-the-project-on-windows).
 
 ```text
 This is not the project's own Python (it is <path>), so the packages uv.lock names are not the ones it would use: run the step through master.do, or choose <path> as the interpreter in your editor.
