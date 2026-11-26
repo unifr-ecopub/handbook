@@ -24,7 +24,9 @@ If you do not know how a run ended, ask "Did my run finish?"
 
 "Commit." alone commits and does not push; "Push." alone pushes what is committed. Either way Claude pulls first, and before a commit it lists the files and commits them in the same go.
 
-**On Windows, with R steps,** Claude cannot start a run: [you start it yourself](work-with-r-steps.md#run-the-project-on-windows).
+After a change to `paper/draft/` or `paper/results/`, Claude updates `paper/draft/main.pdf` in place with `latexmk` and reports whether it compiled or which missing exhibits stopped it. If `latexmk` is absent, Claude says so.
+
+**On Windows, with R or Python steps,** Claude cannot start a run: [you start it yourself](work-with-r-steps.md#run-the-project-on-windows).
 
 **Untested on Windows.** Until Claude's git works there, [GitHub Desktop's buttons](fix-a-rejected-push-or-a-conflict.md#if-claude-cannot-use-git-on-your-machine) stand in.
 

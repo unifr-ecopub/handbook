@@ -33,11 +33,11 @@ Claude fetches the template from the chair's own organisation on GitHub. If noth
 - each edit it proposes to `code/master.do`, outside your project's block, and to the files a project fills in: `README.md`, `decisions.md`, `checklist.md`, `replication/README.md` and `.gitignore`;
 - a pull first.
 
-The template's own files come together: they are `.claude/`, `AGENTS.md`, `CLAUDE.md`, `.gitattributes`, `ado/`, `code/_config.R`, `code/templates/`, the two example files in `code/explore/` and `temp/README.md`. Say yes, and Claude takes them all; say no, and it takes none. You may decline any proposed edit of a file that the project fills in. Claude never changes your steps, your other explore files, `code/pins.do`, `paper/`, a Stata package you added to `ado/`, your project's block in `master.do`, or the text and rows that your project wrote. A scientific choice it asks you, and never proposes.
+The template's own files come together: they are `.claude/`, `AGENTS.md`, `CLAUDE.md`, `.gitattributes`, `ado/`, `code/_config.R`, `code/_config.py`, `code/templates/`, the three example files in `code/explore/` and `temp/README.md`. Say yes, and Claude takes them all; say no, and it takes none. You may decline any proposed edit of a file that the project fills in. Claude never changes your steps, your other explore files, `code/pins.do`, `code/legacy/`, `docs/`, `paper/`, the R and Python files in the project's top (such as `renv.lock` and `uv.lock`), a Stata package you added to `ado/`, your project's block in `master.do`, or the text and rows that your project wrote. A scientific choice it asks you, and never proposes.
 
 ## Check the result
 
-Claude pulls, takes the files, makes the edits you agreed to, and runs everything. On Windows, with R steps, [you start that run yourself](work-with-r-steps.md#run-the-project-on-windows).
+Claude pulls, takes the files, makes the edits you agreed to, and runs everything. On Windows, with R or Python steps, [you start that run yourself](work-with-r-steps.md#run-the-project-on-windows).
 
 **Check.** The run ends `Run complete`, and Claude names each exhibit that changed, is new or is gone, with the change of the template that may explain it. Nothing is committed until you ask "Commit and push.".
 

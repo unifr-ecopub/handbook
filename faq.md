@@ -13,7 +13,7 @@ One line per question, with a link to the page that covers it.
 - **What do I do each day?** [Pull, work on a step, run everything, commit and push](researcher/daily-routine.md).
 - **How do I know that a run finished?** [Its last line](reference/messages-project-run.md#how-a-run-ends) is `Run complete`.
 - **Does "Commit." also push?** No. [Ask "Push."](researcher/daily-routine.md), or "Commit and push." at once.
-- **Why can Claude not start my run?** On Windows, a project with R steps [runs in Stata's window](researcher/work-with-r-steps.md#run-the-project-on-windows).
+- **Why can Claude not start my run?** On Windows, a project with R or Python steps [runs in Stata's window](researcher/work-with-r-steps.md#run-the-project-on-windows).
 
 ## When something breaks
 

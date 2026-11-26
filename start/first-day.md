@@ -38,7 +38,7 @@ Step complete: <step>
 
 ## 4. Run everything and read how it ended
 
-A full run runs every step from empty working files. Results count only after one. A project with R steps [runs differently on Windows](../researcher/work-with-r-steps.md#run-the-project-on-windows).
+A full run runs every step from empty working files. Results count only after one. A project with R or Python steps [runs differently on Windows](../researcher/work-with-r-steps.md#run-the-project-on-windows).
 
 ```prompt
 Run everything.

@@ -12,8 +12,8 @@
 
 6. **Never run a file through Stata's menu.** **File › Open** runs it in Stata's current folder, which may be another project's. With two copies of one project on your machine, close Stata first, then double-click the `master.do` you mean.
 7. **Never type a path into code.** A typed path works on one machine only.
-8. **Never edit `code/pins.do` during a run.** With R steps, the run then mixes two versions, with no error.
-9. **Never edit `code/_config.R`.** It must stay the same in every project.
+8. **Never edit `code/pins.do` during a run.** With R or Python steps, the run then mixes two versions, with no error.
+9. **Never edit `code/_config.R` or `code/_config.py`.** They must stay the same in every project.
 10. **Never install a Stata package from Stata's window.** A run reads community packages only from the project's `ado/`: [ask Claude](../researcher/add-a-stata-package.md).
 
 ## Results

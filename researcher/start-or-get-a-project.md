@@ -8,11 +8,21 @@
 Start a new project <project>.
 ```
 
-Claude creates a private repo from `project-template` with `gh` and clones it into your projects folder; without `gh` or a sign-in, you make it on github.com with **Use this template** on `project-template`, and Claude clones it once it is there (not yet tested).
+Claude creates a private repo from `project-template` with `gh` and clones it into your projects folder; without `gh` or a sign-in, you make it on github.com with **Use this template** on `project-template`, and Claude clones it once it is there.
 
 **Only you do.** If your account cannot create repositories in the organisation, give the data curator the project's bare name and nothing more. The names `data`, `data-processing`, `handbook` and `project-template` are taken. The data curator [makes the repo from the template](../curator/manage-repos-and-people.md#create-a-project-repo-from-the-template).
 
 Never make a project from a ZIP or `git archive`: a folder without `AGENTS.md` and `.claude/` is not a working project.
+
+## If you created an empty repo on GitHub
+
+**Ask Claude.** In a project that you already have, if a new repo was created without **Use this template**:
+
+```prompt
+My new repo is empty.
+```
+
+**Claude will ask you.** For your yes before it puts the template's files into the repo (over any `README.md` or `.gitignore` that GitHub wrote). If the repo already holds an old project's files, Claude puts no template file among them: with your yes it renames the folder, starts a new project beside it, and you [move the old project in](move-an-existing-project-in.md).
 
 ## Get a project of the chair onto your machine
 
@@ -38,6 +48,6 @@ Claude clones the project and tells you where the clone is. You clone only [the 
    Run everything.
    ```
 
-   On Windows, with R steps, [you start the run yourself](work-with-r-steps.md#run-the-project-on-windows).
+   On Windows, with R or Python steps, [you start the run yourself](work-with-r-steps.md#run-the-project-on-windows).
 
 **Check.** The run ends `Run complete`, and no file in your clone changed. If exhibits changed, your run differs from the committed results, and Claude names them before any commit.

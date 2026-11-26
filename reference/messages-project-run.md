@@ -2,7 +2,7 @@
 
 The messages that a project run prints, and who acts after each. `<…>` marks a part that varies. Claude reads the log for you: ask "Did my run finish?"
 
-On a new machine, you first meet [the data root was not found](#before-anything-runs-the-machine-checks). Where a line says to ask Claude for a run, [you start it yourself](../researcher/work-with-r-steps.md#run-the-project-on-windows) on Windows with R steps.
+On a new machine, you first meet [the data root was not found](#before-anything-runs-the-machine-checks). Where a line says to ask Claude for a run, [you start it yourself](../researcher/work-with-r-steps.md#run-the-project-on-windows) on Windows with R or Python steps.
 
 ## How a run ends
 
@@ -45,7 +45,19 @@ Failed: R is not ready for this project, for the reason just above. If no R was 
 
 **Claude:** finds R and restores the packages. See [When master.do says R is not ready](../researcher/work-with-r-steps.md#when-masterdo-says-r-is-not-ready).
 
+```text
+Failed: Python is not ready for this project, for the reason just above. With none, Python did not start: once, in the project folder, type  uv sync --frozen  and run again (r(601))
+```
+
+**Claude:** checks `uv` and restores Python and the packages. **You:** install `uv` only if the machine lacks it. See [Python steps](#python-steps).
+
 ## The pins
+
+```text
+Failed: pins.do sets <pin> twice, on lines <line> and <line>. A dataset, a raw delivery or an input of the old folder is pinned on one line: delete the line that is wrong, and run again (r(198))
+```
+
+**Claude:** asks which line is right, deletes the other and runs again.
 
 ```text
 Failed: pins.do pins raw/<delivery>, which is not in the data root, <folder>. Check the line in pins.do; if it is right, let Dropbox finish syncing (r(601))
@@ -53,9 +65,33 @@ Failed: pins.do pins raw/<delivery>, which is not in the data root, <folder>. Ch
 
 **You:** check the delivery's name with the data curator, or wait for Dropbox.
 
+```text
+Failed: pins.do reads from the project's old folder (<pins>), and the old folder was not found: the file <file> is missing or empty. Write one line into that file, the full path of this project's old folder on this machine, as in C:/Users/<you>/Dropbox/<old project>; on a machine without the old folder, a co-author's, this project does not run until the curator has delivered the inputs to the data root (r(601))
+```
+
+**You:** tell Claude "The old folder was not found." and give it the path on this machine, so Claude writes `old-data-folder.txt`. On a machine without the old folder, the project waits until the data curator delivers those inputs.
+
+```text
+Failed: pins.do pins old_<name> "<path>", which is not in the old folder, <folder>. Check the line in pins.do and the line of old-data-folder.txt; if both are right and the old folder is on Dropbox, let Dropbox finish syncing (r(601))
+```
+
+**You:** check with Claude that `old-data-folder.txt` and `code/pins.do` name the right path, or wait for Dropbox.
+
+```text
+Failed: pins.do still reads from the project's old folder (<pins>), which a replication package does not hold: a package is made once the curator has delivered each of these inputs to the data root and its line in pins.do is a raw_ or pin_ line (r(601))
+```
+
+A replication package cannot run while any `old_` line remains in `code/pins.do`.
+
+```text
+Provisional: this project reads <n> inputs from its old folder, <folder>: its results stay provisional until each is a delivery in the data root.
+```
+
+For one input, the line reads `1 input`. Every result stays provisional until the data curator has delivered each input to the data root and its `old_` line becomes a `raw_` or `pin_` line.
+
 ## Loading a dataset
 
-`chair_use` prints these, with slightly other words in an R step.
+`chair_use` prints these, with slightly other words in an R or Python step.
 
 ```text
 chair_use: <dataset>/<file> v<N>
@@ -127,3 +163,44 @@ This R runs on its own, outside master.do: exhibits are overwritten. Results for
 ```
 
 You ran a step in RStudio. Report no result from it.
+
+## Python steps
+
+```text
+This clone's Python packages are not installed yet: once, in the project folder, type  uv sync --frozen  and run again.
+Python packages that uv.lock names are not installed in this clone at the version it names (<packages>): once, in the project folder, type  uv sync --frozen  and run again.
+This project needs Python <version> (.python-version); this is Python <version>: once, in the project folder, type  uv sync --frozen  and run again.
+```
+
+**Claude:** runs `uv sync --frozen`, which fetches Python and the packages into `.venv/`. **You:** install `uv` only if the machine lacks it.
+
+```text
+This project has Python steps and no uv.lock: copy what is in code/templates/py-project/ into the project folder; then, once, in the project folder, type  uv sync --frozen  and run again.
+```
+
+**You:** tell Claude what the run says, and it sets the project up for Python.
+
+```text
+This project has Python steps and no .python-version that names Python's version, as in 3.14: in GitHub Desktop, discard the change that removed it, or copy it again from code/templates/py-project/
+```
+
+**You:** tell Claude. If you deleted or changed `.python-version` by accident, discard the change in GitHub Desktop; otherwise Claude copies it again.
+
+```text
+Python does not run in Stata's batch mode on Windows: open Stata, cd into this project's code folder and type  do master.do  there.
+```
+
+**You:** start the run in Stata's window, as for [a project with R steps](../researcher/work-with-r-steps.md#run-the-project-on-windows).
+
+```text
+This is not the project's own Python (it is <path>), so the packages uv.lock names are not the ones it would use: run the step through master.do, or choose <path> as the interpreter in your editor.
+This Python runs on its own, outside master.do: exhibits are overwritten. Results for the paper come from a full run of master.do.
+```
+
+You ran a step outside `master.do`. Choose the project's `.venv` interpreter in your editor to try a step, and report no result from it.
+
+```text
+<step> did not finish; Python's own message is in the stderr part of its output above, on its last line. With none, Python was stopped, ran out of memory, or the script called sys.exit() or quit().
+```
+
+**You:** ask Claude ["The run failed: why?"](../researcher/find-why-a-run-failed.md). If Python's message says `No module named '<name>'`, ask Claude to install that Python package.

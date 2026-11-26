@@ -11,7 +11,7 @@ Each thing on the platform has one name.
 | Commit | Record the changed files, with a summary. |
 | Push | Send your commits to GitHub. |
 | `master.do` | The one file that runs a project or a build. |
-| Step | One `.do` or `.R` file that `master.do` runs. |
+| Step | One `.do`, `.R` or `.py` file that `master.do` runs. |
 | Full run | A run of every step, from empty working files. |
 | Working files | What a step saves in `temp/` for a later step. |
 | Explore file | A file that looks at data and changes no result. |
@@ -22,7 +22,7 @@ Each thing on the platform has one name.
 | Build | The code that makes a dataset, a cleaned and shared set of files. |
 | Candidate | A build's finished files, before a release. |
 | Version | A released copy of a dataset, `v<N>`. It never changes. |
-| Pin | A line of `code/pins.do` that names the version or delivery to read. |
+| Pin | A line of `code/pins.do` that names the version, delivery or, provisionally, old-folder input to read. |
 | Data map | `datamap.csv`, which describes each source and each file. |
 | Table made by hand | A table that a person made and code cannot rebuild. |
 | Review sheet | The Excel file in which an assistant decides cases. |

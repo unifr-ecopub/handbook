@@ -48,6 +48,6 @@ A provider's files arrive as a delivery and stay as received. A build cleans the
 ## Why it is built this way
 
 - **Code and data are kept apart.** Code is small and changes daily. Data is large and must not change by accident. Git suits only the first.
-- **Every run starts from `master.do`.** One way in means one set of checks, whether the steps are in Stata or in R.
+- **Every run starts from `master.do`.** One way in means one set of checks, whether the steps are in Stata, R, Python or a mix.
 - **Claude does the steps and you decide.** Each routine is written once, as an instruction that Claude follows on every machine. [Working with Claude](../claude/working-with-claude.md) says how you keep control.
 - **Branches, servers and database software are left out.** Each would need someone to look after it. The price is a few failures that no check catches, named under **What can go wrong.**

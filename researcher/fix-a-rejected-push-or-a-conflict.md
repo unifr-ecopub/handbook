@@ -28,7 +28,7 @@ For each file, Claude shows both versions in plain words.
 
 Claude then finishes the merge. If code, versions or results were in conflict, it runs everything and names what the run rewrote. It commits the merge and says so. It pushes only if you asked for a push, as in "Commit and push." when the conflict came; otherwise ask "Push." Nobody merges an exhibit by hand: the full run makes it afresh.
 
-**Check.** Any full run ended `Run complete`, and Claude says that it committed the merge, and that it is pushed if you asked for a push. On Windows, with R steps, [you start each run yourself](work-with-r-steps.md#run-the-project-on-windows).
+**Check.** Any full run ended `Run complete`, and Claude says that it committed the merge, and that it is pushed if you asked for a push. On Windows, with R or Python steps, [you start each run yourself](work-with-r-steps.md#run-the-project-on-windows).
 
 ## If Claude cannot use git on your machine
 
