@@ -28,11 +28,11 @@ Claude copies every file untouched into `raw/<source>/<date>/`, and checks that 
 
 `<source>` is lower case, with hyphens between words, and at most 28 characters, or 27 if it begins with a digit. Claude renames a folder that breaks this only on your yes, and never a delivered file.
 
-**What can go wrong.** Once the terms allow it, Claude reads the header and first rows of each text file, and those rows reach Anthropic's servers. `unknown` and `chair only` allow it. Only terms that [bar outside services](../data/terms-of-use.md#sources-that-may-not-reach-an-outside-service), or that say not to open the files, keep the files closed: say them in your request, or when Claude asks.
+**What can go wrong.** Once the terms allow it, Claude reads the header and first rows of each text file, and those rows reach Anthropic's servers. `open` and `chair only` allow it. Terms that [bar outside services](../data/terms-of-use.md#sources-that-may-not-reach-an-outside-service), or that say not to open the files, keep the files closed, and so do terms that nobody has stated yet: say them in your request, or when Claude asks.
 
 ## The terms beside the files
 
-If the terms are anything but `open` or `unknown`, Claude writes them as `raw/<source>/README.md` in the data root, in your words or the provider's, and shows you its text. If a `README.md` is there already, Claude shows it and changes it only as you say.
+Claude writes the terms as `raw/<source>/README.md` in the data root, `open` included, in your words or the provider's, and shows you its text. Where nobody knows them, the `README.md` says that they are not yet stated. If a `README.md` is there already, Claude shows it and changes it only as you say.
 
 ## Check the row, then commit and push
 

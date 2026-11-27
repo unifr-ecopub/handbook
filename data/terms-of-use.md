@@ -5,7 +5,7 @@ Each source is open to the whole team, and to Claude, unless its terms say other
 ## Where terms are written
 
 - In the column `terms` of [the data map](data-map.md), for each raw source and each processed file.
-- In a `README.md` in the source's folder, `raw/<source>/`, if the terms are anything but `open` or `unknown`.
+- In a `README.md` in the source's folder, `raw/<source>/`: it gives the terms, `open` included, or says that they are not yet stated.
 
 `terms` reads `open`, `chair only`, or a restriction in the words that the provider used. Do not add to those words, because the entry binds everyone who reads it.
 
@@ -24,8 +24,8 @@ Claude's instructions cover such a source, and one whose terms say not to open i
 - the command that stopped
 - the build's own sentences
 
-You read the rest of the log yourself. Two logs hold only names, types and counts, and Claude may read them whole: that of an explore file it wrote with `describe` and `count` alone, and `release.log`. For a new source, Claude asks for the terms before it opens a file. `unknown` and `chair only` do not bar anything.
+You read the rest of the log yourself. Two logs hold only names, types and counts, and Claude may read them whole: that of an explore file it wrote with `describe` and `count` alone, and `release.log`. For a new source, Claude asks for the terms before it opens a file. `chair only` does not bar anything. A raw source whose terms nobody has stated stays closed in the same way until the data curator states them.
 
-In a project, the same test holds: terms that bar outside services, or a `README.md` that says not to open the files. Before running an explore file on a source, or reading past a log's command and outcome lines, Claude reads the source's `README.md` and terms. On a restricted source, Claude shows only counts, the outcome line and Stata's error, and stops where a task (including [a diagnosis](../researcher/find-why-a-run-failed.md)) needs the records. An input read from a project's old folder has no `README.md` or terms in the data root, so Claude treats it as restricted until you state its terms.
+In a project, the same test holds: terms that bar outside services, or a `README.md` that says not to open the files or that the terms are not yet stated. Before running an explore file on a source, or reading past a log's command and outcome lines, Claude reads the source's `README.md` and terms. On a restricted source, Claude shows only counts, the outcome line and Stata's error, and stops where a task (including [a diagnosis](../researcher/find-why-a-run-failed.md)) needs the records. An input read from a project's old folder has no `README.md` or terms in the data root, so Claude treats it as restricted until you state its terms.
 
 **What can go wrong.** These are instructions, not locks. Decide first whether the provider's terms let Claude work on the source.
