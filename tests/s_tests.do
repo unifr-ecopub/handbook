@@ -785,11 +785,11 @@ mata: s = cat(st_local("pg")); st_local("tmp", strofreal(sum(s :== "| [01\_more]
 do "`rec'" "`out'" H72 "a temporary file is named by the stamp chair_use put on its data or else by name()" 1 `tmp'
 mata: s = cat(st_local("pg")); st_local("loop", strofreal(sum(s :== "| [01\_more](analysis/01_more.do) ×3 · 1:1 on ctn<br>master: in memory<br>using: toy/toy° | 78 | 0 | 0 |") == 1))
 do "`rec'" "`out'" H73 "three chair_merge in a loop are one row with the counts summed" 1 `loop'
-mata: s = cat(st_local("pg")); st_local("app", strofreal(sum(s :== "| [01\_more](analysis/01_more.do)<br>master: bygrp\_\*<br>using: bygrp\_\* | 8 | 9 |") == 1 & sum(s :== "| Append | Master rows | Using rows |") == 1))
+mata: s = cat(st_local("pg")); st_local("app", strofreal(sum(s :== "| [01\_more](analysis/01_more.do)<br>master: bygrp\_\*<br>using: bygrp\_\*, bygrp\_\* | 8 | 9 + 9 |") == 1 & sum(s :== "| Append | Master rows | Using rows |") == 1))
 do "`rec'" "`out'" H74 "a chair_append is a row of the page with the rows of each side" 1 `app'
 mata: s = cat(st_local("pg")); st_local("vals", strofreal(sum(s :== "| bygrp\_\* ×3 | [01\_more](analysis/01_more.do) | ctn | 26 |") == 1 & !any(strpos(s, "bygrp\_0") :| strpos(s, "bygrp_0"))))
 do "`rec'" "`out'" H75 "working files named from a value in a loop are one row with a count and summed rows and no value on the page" 1 `vals'
-mata: s = cat(st_local("pg")); st_local("whole", strofreal(sum(s :== "| joined | [01\_more](analysis/01_more.do) | ctn | 17 |") == 1))
+mata: s = cat(st_local("pg")); st_local("whole", strofreal(sum(s :== "| joined | [01\_more](analysis/01_more.do) | ctn | 26 |") == 1))
 do "`rec'" "`out'" H76 "a step with clear all does not stop the page from recording what follows" 1 `whole'
 mata: s = cat(st_local("F") + "/paper/results/README.md"); a = selectindex(strpos(s, "02_order_a.txt](numbers") :> 0); b = selectindex(strpos(s, "02_order_b.txt](numbers") :> 0); st_local("sorted", strofreal(rows(a) == 1 & rows(b) == 1 ? a[1] < b[1] : 0))
 do "`rec'" "`out'" H77 "the results page lists a step's exhibits sorted by name whatever order they were written in" 1 `sorted'

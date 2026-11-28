@@ -9,7 +9,8 @@
 * map (two squares drawn with grmap, Stata's own map command, which must be activated first),
 * flowbuild (two working files with chair_save, and two chair_merge against one file, each with
 * six rows unmatched and its own note), flowmore (temporary files merged: one chair_use made, one
-* built and named, three in a loop; three files named from a value; clear all; a chair_append),
+* built and named, three in a loop; three files named from a value; clear all; a chair_append of
+* two files),
 * order (two numbers written b first, then a), dupkey (chair_save on a key that repeats), nokey
 * (chair_save on a key with a missing value), badmerge (chair_merge with an outcome expect() lacks)
 args P s kind
@@ -48,7 +49,7 @@ if "`kind'" == "flowmore" {
     file write `fh' "preserve" _n "clear" _n "set obs 26" _n "generate ctn = _n" _n "generate flag = 1" _n "tempfile built" _n "save @Qbuilt@E" _n "restore" _n "chair_merge 1:1 ctn using @Qbuilt@E, expect(match) nogenerate name(built)" _n
     file write `fh' "forvalues k = 1/3 {" _n "    preserve" _n "    chair_use toy/toy, clear" _n "    rename value v@Qk@E" _n "    tempfile p@Qk@E" _n "    save @Qp@Qk@E@E" _n "    restore" _n "    chair_merge 1:1 ctn using @Qp@Qk@E@E, expect(match) nogenerate" _n "}" _n
     file write `fh' "generate grp = mod(ctn, 3)" _n "forvalues g = 0/2 {" _n "    preserve" _n "    keep if grp == @Qg@E" _n `"    chair_save "@{p_temp}/bygrp_@Qg@E.dta", key(ctn)"' _n "    restore" _n "}" _n
-    file write `fh' "clear all" _n `"use "@{p_temp}/bygrp_0.dta", clear"' _n `"chair_append using "@{p_temp}/bygrp_1.dta""' _n `"chair_save "@{p_temp}/joined.dta", key(ctn)"' _n
+    file write `fh' "clear all" _n `"use "@{p_temp}/bygrp_0.dta", clear"' _n `"chair_append using "@{p_temp}/bygrp_1.dta" "@{p_temp}/bygrp_2.dta""' _n `"chair_save "@{p_temp}/joined.dta", key(ctn)"' _n
 }
 if "`kind'" == "order" {
     file write `fh' "tempname t" _n
