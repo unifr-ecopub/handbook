@@ -19,12 +19,13 @@ are the clones in the folder beside this repo.
   act before any session can be opened, and after **Check.** where it acts on what the check
   shows. **Untested on Windows.** opens a paragraph of its own. A guide never
   repeats a procedure, never gives a by-hand version and never calls Claude optional; only a
-  replication package runs without Claude. The opening paragraph of each guide says, in the same
-  words: "Claude commits and pushes when you ask, and never on its own; it asks before
-  `release.do`. Scientific choices are yours, and Claude writes them into `decisions.md`." (the
-  data curator's guide: "yours, or the build author's", "the build's `decisions.md`"), and the
-  data curator's guide adds, once, that this holds in `data-processing` too. A task that a repo's rule or skill still leaves to the person
-  says so under **Only you do.**, and no more.
+  replication package runs without Claude. The entry page of the researcher
+  (`researcher/daily-routine.md`) and of the data curator (`curator/commit-and-push.md`) says once,
+  in its opening paragraph: "Claude commits and pushes when you ask, and never on its own; it asks
+  before `release.do`. Scientific choices are yours, and Claude writes them into `decisions.md`."
+  (the data curator's: "yours, or the build author's", "the build's `decisions.md`", and that this
+  holds in `data-processing` too). No other page repeats it. A task that a repo's rule or skill
+  still leaves to the person says so under **Only you do.**, and no more.
 - **The guides follow, and never own,** the skills, `CLAUDE.md` files, settings and messages of
   `data-processing` and `project-template`. Every sentence must be true of them as they stand: a
   request is one a skill's description or a `CLAUDE.md` answers, and a message is quoted only as

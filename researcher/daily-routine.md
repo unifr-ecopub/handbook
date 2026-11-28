@@ -1,6 +1,6 @@
 # Follow the daily routine
 
-Open [one session](../start/set-up-your-machine.md#open-your-first-session-and-answer-the-trust-question) on the project each working day. [Words](../reference/words.md) defines pull, step, full run, exhibit, commit and push.
+Open [one session](../start/set-up-your-machine.md#open-your-first-session-and-answer-the-trust-question) on the project each working day. [Words](../reference/words.md) defines pull, step, full run, exhibit, commit and push. Claude commits and pushes when you ask, and never on its own; it asks before `release.do`. Scientific choices are yours, and Claude writes them into `decisions.md`.
 
 ```mermaid
 flowchart LR

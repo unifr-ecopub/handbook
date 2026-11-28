@@ -10,7 +10,7 @@ flowchart LR
   D --> E["Push each repo"]
 ```
 
-## Run the tests of data-processing
+## Run the tests of `data-processing`
 
 **Ask Claude.** In `data-processing`:
 
@@ -26,7 +26,7 @@ data tests: <n> passed, <n> failed (results.txt)
 
 Claude never edits a file under `tests/` on its own or on a general yes to fix a failure. It changes one only when you explicitly ask for that change (aside from copying a changed template from `code/templates/` into `tests/fixtures/builds/`).
 
-## Copy the program into project-template
+## Copy the program into `project-template`
 
 Claude tells you that `project-template/ado/c/`, in the clone beside this one, needs the same file. It copies only when you ask, for example:
 

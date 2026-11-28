@@ -45,7 +45,7 @@ The template's own files come together:
 
 Say yes, and Claude takes them all; say no, and it takes none. You may decline any proposed edit of a file that the project fills in. Claude never changes:
 
-- your steps and your other explore files
+- your steps, your helpers and your other explore files
 - `code/pins.do`
 - `code/legacy/`, `docs/` and `paper/`
 - the R and Python files in the project's top (such as `renv.lock` and `uv.lock`)

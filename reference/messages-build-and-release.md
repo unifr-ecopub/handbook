@@ -109,4 +109,6 @@ release.do: <key> does not identify the rows of <dataset>/<file>, or is missing 
 
 The fault is in the build. **The build author:** correct the step with Claude.
 
+## The tests
+
 The tests end with a line of counts, quoted in [Test and copy a changed chair program](../curator/test-a-changed-chair-program.md).

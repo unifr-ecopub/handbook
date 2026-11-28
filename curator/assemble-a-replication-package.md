@@ -40,6 +40,8 @@ Claude looks for the project's clone beside your clone of `data-processing`, and
 - each provisional decision of a build confirmed after the version's release (the dataset, its D-number and the date), because the package copies that build's `decisions.md` from the version's commit and does not show that confirmation;
 - a draft of the paper's statement on AI use. Claude also saves this draft in the working folder, and in no file of the package. The authors decide its words and where it goes.
 
+## What the package removes and keeps
+
 A package holds no `CLAUDE.md`, no `AGENTS.md` and no `.claude/`. In the package's copies, Claude also drops:
 
 - the passages that name Claude at the top of `checklist.md` and `decisions.md`

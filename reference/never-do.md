@@ -5,7 +5,7 @@ Rules that prevent broken runs, lost work and untracked changes across projects 
 ## Where files go
 
 1. **Never clone into Dropbox, OneDrive or any folder that syncs.** A sync changes files while Stata and git use them.
-2. **Never name a folder `data` inside a project.** `master.do` takes it for the data root.
+2. **Never name a top folder `data` inside a project.** `master.do` takes it for the data root.
 3. **Never copy data into a project.** Data stays out of git.
 4. **Never save a file by hand into `temp/`.** A full run deletes everything there.
 5. **Never put a table made by hand into `raw/` or into a repo.** It belongs in `intermediate/`.

@@ -37,7 +37,7 @@ For a single step, Claude tells you what to type in Stata's window. Claude still
 
 **Only you do.** Open `project.Rproj` in RStudio and run the step line by line. Take results from a full run only.
 
-## When master.do says R is not ready
+## When `master.do` says R is not ready
 
 [R steps](../reference/messages-project-run.md#r-steps) quotes each message. Each case has its own fix:
 

@@ -4,7 +4,7 @@ In every repo, `data-processing` too, Claude commits and pushes when you ask "Co
 
 **Untested on Windows.** Until Claude's git works there, [GitHub Desktop's buttons](../researcher/fix-a-rejected-push-or-a-conflict.md#if-claude-cannot-use-git-on-your-machine) stand in: Claude names the files and the summary to type.
 
-## Commit and push data-processing
+## Commit and push `data-processing`
 
 Claude ends each task that changed a file with the files and a summary of one line.
 
