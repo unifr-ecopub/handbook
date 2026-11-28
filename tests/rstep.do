@@ -7,7 +7,8 @@
 * kill (tab, then R stops with an error, quits with status 0 or is killed), twice (tab, then a
 * second write to the same table through new_file()), explore, digit (loads 1toy/toy), qa (writes
 * a list of unmatched rows under logs/qa/), flow (chair_save, two chair_merge against one file and
-* a chair_append; the merge keeps a tibble and the master's row order), rdup (chair_save on a key that
+* a chair_append; the merge keeps a tibble, the master's row order and a column of its own named
+* .chair_l, the name an earlier version used inside), rdup (chair_save on a key that
 * repeats), rbad (chair_merge with an outcome expect lacks)
 args P s kind
 local stem = substr("`s'", strrpos("`s'", "/") + 1, .)
@@ -27,10 +28,10 @@ if "`kind'" == "explore" mata: b = b \ `"d <- chair_use("toy/toy")"' \ `"cat(spr
 if "`kind'" == "qa" mata: b = b \ `"writeLines("ctn", file.path(P@logs, "qa", "`stem'_unmatched.csv"))"' \ `"cat("`stem'.R: wrote its unmatched rows\n")"'
 if "`kind'" == "flow" {
     mata: b = b \ `"d <- chair_use("toy/toy")"' \ `"w <- read.csv(file.path(P@raw_toy, "weights.csv"))"' \ `"chair_save(w[w@ctn <= 20, ], file.path(P@temp, "rhalf.dta"), key = "ctn")"'
-    mata: b = b \ `"d <- d[order(-d@ctn), ]"' \ `"m <- chair_merge(d, file.path(P@temp, "rhalf.dta"), type = "1:1", on = "ctn", expect = c("both", "left_only"), note = "R list.")"'
-    mata: b = b \ `"stopifnot(inherits(m, "tbl_df"), nrow(m) == 26, identical(as.numeric(m@ctn), as.numeric(d@ctn)))"'
+    mata: b = b \ `"d <- d[order(-d@ctn), ]"' \ `"d@.chair_l <- d@ctn + 60L"' \ `"m <- chair_merge(d, file.path(P@temp, "rhalf.dta"), type = "1:1", on = "ctn", expect = c("both", "left_only"), note = "R list.")"'
+    mata: b = b \ `"stopifnot(inherits(m, "tbl_df"), nrow(m) == 26, identical(as.numeric(m@ctn), as.numeric(d@ctn)), identical(m@.chair_l, d@.chair_l))"'
     mata: b = b \ `"m2 <- chair_merge(m, file.path(P@temp, "rhalf.dta"), type = "1:1", on = "ctn", expect = c("both", "left_only"), keep = "both")"'
-    mata: b = b \ `"a <- chair_append(file.path(P@temp, "rhalf.dta"), file.path(P@temp, "rhalf.dta"))"' \ `"stopifnot(nrow(a) == 40, nrow(m2) == 20)"' \ `"chair_save(m, file.path(P@temp, "rmerged.dta"), key = "ctn")"'
+    mata: b = b \ `"a <- chair_append(file.path(P@temp, "rhalf.dta"), file.path(P@temp, "rhalf.dta"))"' \ `"stopifnot(nrow(a) == 40, nrow(m2) == 20)"' \ `"chair_save(m, file.path(P@temp, "rmerged.rds"), key = "ctn")"'
 }
 if "`kind'" == "rdup" mata: b = b \ `"chair_save(data.frame(ctn = c(1, 1)), file.path(P@temp, "explore", "dup.dta"), key = "ctn")"'
 if "`kind'" == "rbad" mata: b = b \ `"m <- chair_merge(chair_use("toy/toy"), file.path(P@temp, "rhalf.dta"), type = "1:1", on = "ctn", expect = "both")"'

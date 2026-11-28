@@ -168,6 +168,12 @@ Data flow page not written: code/README.md is hand-written.
 
 A step run alone, or a full run that stopped, marks [the data flow page](words.md) not current; the next full run writes it again. After the last line, **You:** ask Claude to move your text to `docs/`.
 
+```text
+Failed: the data flow page <folder>/code/README.md cannot be written: close it where it is open, and run again (r(<code>))
+```
+
+**You:** close the page where it is open, then ask for the run again.
+
 ## R steps
 
 ```text

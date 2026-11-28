@@ -60,7 +60,7 @@ Claude asks you about any scientific choice and never proposes one.
 
 Claude pulls, takes the files, makes the edits you agreed to, and runs everything. On Windows, with R or Python steps, [you start that run yourself](work-with-r-steps.md#run-the-project-on-windows).
 
-**Check.** The run ends `Run complete`, and Claude names each exhibit that changed, is new or is gone, with the change of the template that may explain it, and each working file that the data flow page marks not recorded: its step saves or merges without `chair_save` or `chair_merge`, and changing that is a task of its own. Claude commits nothing until you ask "Commit and push."
+**Check.** The run ends `Run complete`, and Claude names each exhibit that changed, is new or is gone, with the change of the template that may explain it, and each working file that the data flow page marks not recorded: no `chair_save` of the run wrote it. A merge without `chair_merge` leaves no row at all; a code review finds it. Changing either is a task of its own. Claude commits nothing until you ask "Commit and push."
 
 **What can go wrong.** One of your steps may still use a template file that the update removes. Claude names each affected step before you answer, and that step fails until it is changed afterwards, in a task of its own.
 

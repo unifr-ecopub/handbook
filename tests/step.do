@@ -9,8 +9,11 @@
 * map (two squares drawn with grmap, Stata's own map command, which must be activated first),
 * flowbuild (two working files with chair_save, and two chair_merge against one file, each with
 * six rows unmatched and its own note), flowmore (temporary files merged: one chair_use made, one
-* built and named, three in a loop; three files named from a value; clear all; a chair_append of
-* two files),
+* built and named, three in a loop; three files named from a value in a loop, one alone, one with
+* the value inside its name; clear all; a chair_append of two files), counts (a file saved twice,
+* another once, a third with save; a merge with update; a save after other data were loaded; a raw
+* delivery read in a helper; the project's setting p_step), edge (chair_merge and chair_append of a
+* temporary file with no rows; chair_save of a name that holds a dollar sign),
 * order (two numbers written b first, then a), dupkey (chair_save on a key that repeats), nokey
 * (chair_save on a key with a missing value), badmerge (chair_merge with an outcome expect() lacks)
 args P s kind
@@ -49,7 +52,18 @@ if "`kind'" == "flowmore" {
     file write `fh' "preserve" _n "clear" _n "set obs 26" _n "generate ctn = _n" _n "generate flag = 1" _n "tempfile built" _n "save @Qbuilt@E" _n "restore" _n "chair_merge 1:1 ctn using @Qbuilt@E, expect(match) nogenerate name(built)" _n
     file write `fh' "forvalues k = 1/3 {" _n "    preserve" _n "    chair_use toy/toy, clear" _n "    rename value v@Qk@E" _n "    tempfile p@Qk@E" _n "    save @Qp@Qk@E@E" _n "    restore" _n "    chair_merge 1:1 ctn using @Qp@Qk@E@E, expect(match) nogenerate" _n "}" _n
     file write `fh' "generate grp = mod(ctn, 3)" _n "forvalues g = 0/2 {" _n "    preserve" _n "    keep if grp == @Qg@E" _n `"    chair_save "@{p_temp}/bygrp_@Qg@E.dta", key(ctn)"' _n "    restore" _n "}" _n
-    file write `fh' "clear all" _n `"use "@{p_temp}/bygrp_0.dta", clear"' _n `"chair_append using "@{p_temp}/bygrp_1.dta" "@{p_temp}/bygrp_2.dta""' _n `"chair_save "@{p_temp}/joined.dta", key(ctn)"' _n
+    file write `fh' "local v = ctn[1]" _n `"chair_save "@{p_temp}/one_@Qv@E.dta", key(ctn)"' _n `"chair_save "@{p_temp}/mid_@Qv@E_x.dta", key(ctn)"' _n
+    file write `fh' "clear all" _n `"use "@{p_temp}/bygrp_0.dta", clear"' _n "local a 1" _n "local b 2" _n `"chair_append using "@{p_temp}/bygrp_@Qa@E.dta" "@{p_temp}/bygrp_@Qb@E.dta""' _n `"chair_save "@{p_temp}/joined.dta", key(ctn)"' _n
+}
+if "`kind'" == "counts" {
+    file write `fh' `"assert "@{p_step}" == "my setting""' _n `"include "@{p_helpers}/readw.do""' _n `"use "@{p_temp}/toy.dta", clear"' _n `"chair_save "@{p_temp}/batch_1.dta", key(ctn)"' _n "keep if ctn == 1" _n `"chair_save "@{p_temp}/batch_1.dta", key(ctn)"' _n `"chair_save "@{p_temp}/batch_2.dta", key(ctn)"' _n `"save "@{p_temp}/batch_3.dta""' _n
+    file write `fh' "clear" _n "set obs 2" _n "generate ctn = _n" _n "generate value = cond(_n == 1, 0, .)" _n `"chair_save "@{p_temp}/uleft.dta", key(ctn)"' _n "replace value = 11 * _n" _n `"chair_save "@{p_temp}/uright.dta", key(ctn)"' _n
+    file write `fh' `"use "@{p_temp}/uleft.dta", clear"' _n `"chair_merge 1:1 ctn using "@{p_temp}/uright.dta", update expect(match match_update match_conflict) nogenerate"' _n `"use "@{p_temp}/toy.dta", clear"' _n `"chair_save "@{p_temp}/fromtoy.dta", key(ctn)"' _n
+}
+if "`kind'" == "edge" {
+    file write `fh' "clear" _n "set obs 1" _n "generate ctn = 1" _n "tempfile empty" _n "preserve" _n "drop in 1" _n "save @Qempty@E, emptyok" _n "restore" _n
+    file write `fh' "chair_merge 1:1 ctn using @Qempty@E, expect(master) nogenerate name(empty)" _n "chair_append using @Qempty@E, name(empty)" _n
+    file write `fh' `"local w = "@{p_temp}/explore/wrapped" + char(36) + "data.dta""' _n `"chair_save "@Qmacval(w)@E", key(ctn)"' _n `"confirm file "@Qmacval(w)@E""' _n `"erase "@Qmacval(w)@E""' _n `"save "@{p_temp}/explore/edge_ok.dta", replace"' _n
 }
 if "`kind'" == "order" {
     file write `fh' "tempname t" _n

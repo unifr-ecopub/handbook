@@ -610,7 +610,7 @@ quietly cd "`C'"
 capture noisily do master.do
 local rc = _rc
 quietly cd "`here'"
-mata: s = cat(st_local("C") + "/README.md"); st_local("ok", strofreal(sum(s :== "| rhalf | [02\_rflow](analysis/02_rflow.R) | ctn | 20 |") == 1 & sum(s :== "| rmerged | [02\_rflow](analysis/02_rflow.R) | ctn | 26 |") == 1 & sum(s :== "| [02\_rflow](analysis/02_rflow.R) · 1:1 on ctn<br>master: toy/toy<br>using: rhalf | 20 | 6 | 0 |") == 1 & sum(s :== "| [02\_rflow](analysis/02_rflow.R) · 1:1 on ctn<br>master: in memory<br>using: rhalf | 20 | 6 | 0 |") == 1 & sum(s :== "| [02\_rflow](analysis/02_rflow.R)<br>master: rhalf<br>using: rhalf | 20 | 20 |") == 1))
+mata: s = cat(st_local("C") + "/README.md"); st_local("ok", strofreal(sum(s :== "| rhalf | [02\_rflow](analysis/02_rflow.R) | ctn | 20 |") == 1 & sum(s :== "| rmerged.rds | [02\_rflow](analysis/02_rflow.R) | ctn | 26 |") == 1 & sum(s :== "| [02\_rflow](analysis/02_rflow.R) · 1:1 on ctn<br>master: toy/toy<br>using: rhalf | 20 | 6 | 0 |") == 1 & sum(s :== "| [02\_rflow](analysis/02_rflow.R) · 1:1 on ctn<br>master: in memory<br>using: rhalf | 20 | 6 | 0 |") == 1 & sum(s :== "| [02\_rflow](analysis/02_rflow.R)<br>master: rhalf<br>using: rhalf | 20 | 20 |") == 1))
 do "`rec'" "`out'" H83 "an R step's chair_save and chair_merge and chair_append are rows of the data flow page in master and using words" 0 `=`rc' + 1000 * !`ok''
 mata: q = st_local("P") + "/logs/qa/02_rflow_merge"; st_local("ok", strofreal(fileexists(q + "1.csv") & fileexists(q + "2.csv") ? sum(strpos(cat(q + "1.csv"), "master only") :> 0 :& strpos(cat(q + "1.csv"), "R list.") :> 0) == 6 : 0))
 do "`rec'" "`out'" H84 "an R chair_merge keeps a tibble and the master's row order and each of two merges keeps its list with its note" 1 `=`ok' & !`rc''
@@ -632,6 +632,6 @@ foreach f in 03_rdup 04_rbad {
     quietly do "`here'/logsays.do" "`W'/h85.log"
     local said2 = `said2' & `s1' & `said'
 }
-mata: st_local("nofile", strofreal(!fileexists(st_local("P") + "/temp/explore/dup.dta")))
-do "`rec'" "`out'" H85 "in R chair_save refuses a key that repeats and chair_merge an outcome expect does not allow" 1 `=`said2' & `nofile''
+mata: st_local("nofile", strofreal(!fileexists(st_local("P") + "/temp/explore/dup.dta") & fileexists(st_local("P") + "/temp/explore/04_rbad_merge1.csv")))
+do "`rec'" "`out'" H85 "in R chair_save refuses a key that repeats and chair_merge lists the unmatched rows and then refuses an outcome expect does not allow" 1 `=`said2' & `nofile''
 global t_want ""

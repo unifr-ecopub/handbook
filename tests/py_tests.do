@@ -49,20 +49,30 @@ if "`m'" == "0" {
 mata: q = char(34); b = "import pandas as pd" \ ("d = chair_use(" + q + "toy/toy" + q + ")") \ ("w = pd.read_csv(P.raw_toy / " + q + "weights.csv" + q + ")")
 mata: b = b \ ("chair_save(w[w[" + q + "ctn" + q + "] <= 20], P.temp / " + q + "phalf.dta" + q + ", key=[" + q + "ctn" + q + "])")
 mata: b = b \ ("d = d.sort_values(" + q + "ctn" + q + ", ascending=False).reset_index(drop=True)")
-mata: b = b \ ("m = chair_merge(d, P.temp / " + q + "phalf.dta" + q + ", type=" + q + "1:1" + q + ", on=[" + q + "ctn" + q + "], expect=[" + q + "both" + q + ", " + q + "left_only" + q + "], note=" + q + "Python list." + q + ")")
+mata: b = b \ ("m = chair_merge(d, P.temp / " + q + "phalf.dta" + q + ", type=" + q + "1:1" + q + ", on=[" + q + "ctn" + q + "], expect=[" + q + "both" + q + ", " + q + "left_only" + q + "], keep=[" + q + "both" + q + ", " + q + "left_only" + q + "], note=" + q + "Python list." + q + ")")
 mata: b = b \ ("assert list(m[" + q + "ctn" + q + "]) == list(d[" + q + "ctn" + q + "])")
 mata: b = b \ ("m3 = chair_merge(w[w[" + q + "ctn" + q + "] <= 20], d, type=" + q + "1:1" + q + ", on=[" + q + "ctn" + q + "], expect=[" + q + "both" + q + ", " + q + "right_only" + q + "], keep=" + q + "both" + q + ")")
 mata: b = b \ ("assert str(m3[" + q + "weight" + q + "].dtype) == " + q + "int64" + q + ", m3[" + q + "weight" + q + "].dtype")
 mata: b = b \ ("a = chair_append(P.temp / " + q + "phalf.dta" + q + ", P.temp / " + q + "phalf.dta" + q + ")") \ "assert len(a) == 40"
 mata: b = b \ ("chair_save(m, P.temp / " + q + "pmerged.dta" + q + ", key=[" + q + "ctn" + q + "])")
+* A whole number near 2^53 and a column named _chair_l keep their values; a categorical key of the
+* using side keeps its values; a file name with a tab does not break the run's records; a reader
+* of chunks is read.
+mata: b = b \ ("big = pd.DataFrame({" + q + "ctn" + q + ": [1], " + q + "account" + q + ": [9007199254740993], " + q + "_chair_l" + q + ": [61]})")
+mata: b = b \ ("mb = chair_merge(big, pd.DataFrame({" + q + "ctn" + q + ": [1, 2]}), type=" + q + "1:1" + q + ", on=" + q + "ctn" + q + ", expect=[" + q + "both" + q + ", " + q + "right_only" + q + "], keep=" + q + "both" + q + ")")
+mata: b = b \ ("assert int(mb.at[0, " + q + "account" + q + "]) == 9007199254740993 and int(mb.at[0, " + q + "_chair_l" + q + "]) == 61, mb")
+mata: b = b \ ("mc = chair_merge(pd.DataFrame({" + q + "k" + q + ": pd.Categorical([" + q + "a" + q + "])}), pd.DataFrame({" + q + "k" + q + ": pd.Categorical([" + q + "b" + q + "])}), type=" + q + "1:1" + q + ", on=" + q + "k" + q + ", expect=[" + q + "left_only" + q + ", " + q + "right_only" + q + "])")
+mata: b = b \ ("assert sorted(str(v) for v in mc[" + q + "k" + q + "]) == [" + q + "a" + q + ", " + q + "b" + q + "], mc")
+mata: b = b \ ("chair_save(mb, P.temp / " + q + "tab" + char(92) + "tfile.pkl" + q + ", key=" + q + "ctn" + q + ")")
+mata: b = b \ ("with chair_use(" + q + "toy/toy" + q + ", chunksize=2) as chunks:") \ ("    assert len(next(iter(chunks))) == 2")
 mata: s = t[1..m[1] - 1] \ b; f = st_local("C") + "/analysis/01_pyflow.py"; if (fileexists(f)) unlink(f); fh = fopen(f, "w"); for (k = 1; k <= rows(s); k++) fput(fh, s[k]); fclose(fh)
 mata: s = t[1..m[1] - 1] \ ("import pandas as pd") \ ("chair_save(pd.DataFrame({" + q + "ctn" + q + ": [1, 1]}), P.temp / " + q + "explore" + q + " / " + q + "dup.dta" + q + ", key=[" + q + "ctn" + q + "])"); f = st_local("C") + "/explore/01_pydup.py"; if (fileexists(f)) unlink(f); fh = fopen(f, "w"); for (k = 1; k <= rows(s); k++) fput(fh, s[k]); fclose(fh)
 mata: s = t[1..m[1] - 1] \ ("chair_merge(chair_use(" + q + "toy/toy" + q + "), P.temp / " + q + "phalf.dta" + q + ", type=" + q + "1:1" + q + ", on=[" + q + "ctn" + q + "], expect=[" + q + "both" + q + "])"); f = st_local("C") + "/explore/02_pybad.py"; if (fileexists(f)) unlink(f); fh = fopen(f, "w"); for (k = 1; k <= rows(s); k++) fput(fh, s[k]); fclose(fh)
 mata: s = cat(st_local("C") + "/master.do"); s = subinstr(s, `"local steps """', "local steps analysis/01_pyflow.py"); unlink(st_local("C") + "/master.do"); fh = fopen(st_local("C") + "/master.do", "w"); for (k = 1; k <= rows(s); k++) fput(fh, s[k]); fclose(fh)
 
 * ---- A Python step on the data flow page ---------------------------------------------------------
-* chair_merge keeps the master's row order, and a whole-number column stays one where the rows kept
-* lack no value; the page shows the saves, the merges and the append in master and using words.
+* A left join keeps the master's row order, as pandas' does; the page shows the saves, the merges
+* and the append in master and using words.
 sleep 1100
 quietly cd "`C'"
 capture noisily do master.do
@@ -70,7 +80,8 @@ local rc = _rc
 quietly cd "`here'"
 mata: s = cat(st_local("C") + "/README.md"); st_local("ok", strofreal(sum(s :== "| phalf | [01\_pyflow](analysis/01_pyflow.py) | ctn | 20 |") == 1 & sum(s :== "| pmerged | [01\_pyflow](analysis/01_pyflow.py) | ctn | 26 |") == 1 & sum(s :== "| [01\_pyflow](analysis/01_pyflow.py) · 1:1 on ctn<br>master: toy/toy<br>using: phalf | 20 | 6 | 0 |") == 1 & sum(s :== "| [01\_pyflow](analysis/01_pyflow.py)<br>master: phalf<br>using: phalf | 20 | 20 |") == 1))
 mata: q = st_local("P") + "/logs/qa/01_pyflow_merge1.csv"; st_local("ok", strofreal(strtoreal(st_local("ok")) & (fileexists(q) ? sum(strpos(cat(q), "master only") :> 0 :& strpos(cat(q), "Python list.") :> 0) == 6 : 0)))
-do "`rec'" "`out'" H86 "a Python step's chair_save and chair_merge and chair_append are rows of the data flow page and chair_merge keeps row order and whole numbers" 0 `=`rc' + 1000 * !`ok''
+mata: s = cat(st_local("C") + "/README.md"); st_local("ok", strofreal(strtoreal(st_local("ok")) & sum(s :== "| 1 file, name built at run time | [01\_pyflow](analysis/01_pyflow.py) | ctn | 1 |") == 1))
+do "`rec'" "`out'" H86 "a Python step's chair_save and chair_merge and chair_append are rows of the data flow page and chair_merge keeps values and types and column names and a tab in a file name and a reader of chunks pass" 0 `=`rc' + 1000 * !`ok''
 * chair_save refuses a key that repeats, and chair_merge an outcome expect does not allow.
 local said2 1
 foreach f in 01_pydup 02_pybad {
@@ -88,6 +99,6 @@ foreach f in 01_pydup 02_pybad {
     quietly do "`here'/logsays.do" "`W'/h87.log"
     local said2 = `said2' & `s1' & `said'
 }
-mata: st_local("nofile", strofreal(!fileexists(st_local("P") + "/temp/explore/dup.dta")))
-do "`rec'" "`out'" H87 "in Python chair_save refuses a key that repeats and chair_merge an outcome expect does not allow" 1 `=`said2' & `nofile''
+mata: st_local("nofile", strofreal(!fileexists(st_local("P") + "/temp/explore/dup.dta") & fileexists(st_local("P") + "/temp/explore/02_pybad_merge1.csv")))
+do "`rec'" "`out'" H87 "in Python chair_save refuses a key that repeats and chair_merge lists the unmatched rows and then refuses an outcome expect does not allow" 1 `=`said2' & `nofile''
 global t_want ""

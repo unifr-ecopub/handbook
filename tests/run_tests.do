@@ -50,7 +50,7 @@ local pers "`c(sysdir_personal)'"
 quietly cd "`here'"
 capture noisily do "`here'/s_tests.do" "`here'"
 local rc = _rc
-forvalues i = 1/82 {
+forvalues i = 1/92 {
     capture log close `=cond(`i' < 10, "h0", "h")'`i'
 }
 capture log close master
