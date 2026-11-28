@@ -18,7 +18,8 @@
 * begins the same), overwrite (a file chair_save wrote, replaced with save), sidekey (a merge on a
 * key named _side), folders (a working file and a raw file in a folder named from a value; a file
 * saved for samesize), samesize (that file replaced with save, at the same size, and a path looked
-* up with chair_use but not loaded),
+* up with chair_use but not loaded), samestep (a file chair_save wrote, replaced with save at the
+* same size in the same step),
 * order (two numbers written b first, then a), dupkey (chair_save on a key that repeats), nokey
 * (chair_save on a key with a missing value), badmerge (chair_merge with an outcome expect() lacks)
 args P s kind
@@ -81,6 +82,7 @@ if "`kind'" == "folders" {
     file write `fh' `"chair_merge 1:1 ctn using "@{p_raw}/@{raw_toy}/@Qid@E/w.dta", expect(match) nogenerate"' _n `"chair_save "@{p_temp}/samesize.dta", key(ctn)"' _n
 }
 if "`kind'" == "samesize" file write `fh' `"chair_use toy/toy, pathonly"' _n `"use "@{p_temp}/samesize.dta", clear"' _n "replace value = value + 1" _n `"save "@{p_temp}/samesize.dta", replace"' _n
+if "`kind'" == "samestep" file write `fh' `"use "@{p_temp}/toy.dta", clear"' _n `"chair_save "@{p_temp}/samestep.dta", key(ctn)"' _n "replace value = value + 1" _n `"save "@{p_temp}/samestep.dta", replace"' _n
 if "`kind'" == "order" {
     file write `fh' "tempname t" _n
     foreach x in b a {

@@ -751,7 +751,7 @@ quietly do "`here'/copytree.do" "`R'" "`F'/data"
 quietly do "`here'/setpin.do" "`FC'/pins.do" pin_toy v1
 quietly do "`here'/setpin.do" "`FC'/pins.do" raw_toy toy-raw/2026-01-01
 * The project's block also holds a setting of its own named p_step, which a run must leave alone.
-mata: s = cat(st_local("FC") + "/master.do"); s = subinstr(s, `"local steps """', "global p_step " + char(34) + "my setting" + char(34) + char(10) + "local steps dataprep/01_build.do dataprep/02_counts.do dataprep/03_names.do dataprep/04_overwrite.do dataprep/05_side.do dataprep/06_folders.do dataprep/07_samesize.do analysis/01_more.do analysis/02_order.do"); unlink(st_local("FC") + "/master.do"); fh = fopen(st_local("FC") + "/master.do", "w"); for (k = 1; k <= rows(s); k++) fput(fh, s[k]); fclose(fh)
+mata: s = cat(st_local("FC") + "/master.do"); s = subinstr(s, `"local steps """', "global p_step " + char(34) + "my setting" + char(34) + char(10) + "local steps dataprep/01_build.do dataprep/02_counts.do dataprep/03_names.do dataprep/04_overwrite.do dataprep/05_side.do dataprep/06_folders.do dataprep/07_samesize.do dataprep/08_samestep.do analysis/01_more.do analysis/02_order.do"); unlink(st_local("FC") + "/master.do"); fh = fopen(st_local("FC") + "/master.do", "w"); for (k = 1; k <= rows(s); k++) fput(fh, s[k]); fclose(fh)
 mata: fh = fopen(st_local("FC") + "/helpers/readw.do", "w"); fput(fh, "import delimited using " + char(34) + char(36) + "{p_raw}/" + char(36) + "{raw_toy}/weights.csv" + char(34) + ", clear"); fclose(fh)
 quietly do "`here'/step.do" "`F'" dataprep/01_build.do flowbuild
 quietly do "`here'/step.do" "`F'" dataprep/02_counts.do counts
@@ -760,6 +760,7 @@ quietly do "`here'/step.do" "`F'" dataprep/04_overwrite.do overwrite
 quietly do "`here'/step.do" "`F'" dataprep/05_side.do sidekey
 quietly do "`here'/step.do" "`F'" dataprep/06_folders.do folders
 quietly do "`here'/step.do" "`F'" dataprep/07_samesize.do samesize
+quietly do "`here'/step.do" "`F'" dataprep/08_samestep.do samestep
 * A raw file in a folder of the delivery named from a value, 1.
 capture mkdir "`F'/data/raw/toy-raw/2026-01-01/1"
 clear
@@ -926,8 +927,12 @@ do "`rec'" "`out'" H105 "chair_use with pathonly is not recorded as a read" 1 `o
 * contents with those hashed after the step that saved it.
 mata: s = cat(st_local("pg")); st_local("ok", strofreal(sum(s :== "| samesize | – | not recorded | – |") == 1))
 do "`rec'" "`out'" H106 "a working file replaced at the same size by a later step is marked not recorded" 1 `ok'
+* In a Stata step chair_save hashes the file at once: save over it at the same size in the same
+* step, and it is not recorded either.
+mata: s = cat(st_local("pg")); st_local("ok", strofreal(sum(s :== "| samestep | – | not recorded | – |") == 1))
+do "`rec'" "`out'" H107 "a working file replaced at the same size later in the same Stata step is marked not recorded" 1 `ok'
 * A full run that stops at a step marks it too; that step's chair_save refused a key that repeats.
-mata: s = cat(st_local("FC") + "/master.do"); s = subinstr(s, "local steps dataprep/01_build.do dataprep/02_counts.do dataprep/03_names.do dataprep/04_overwrite.do dataprep/05_side.do dataprep/06_folders.do dataprep/07_samesize.do analysis/01_more.do analysis/02_order.do", "local steps dataprep/01_build.do dataprep/02_counts.do dataprep/03_names.do dataprep/04_overwrite.do dataprep/05_side.do dataprep/06_folders.do dataprep/07_samesize.do analysis/01_more.do analysis/02_order.do analysis/03_dup.do"); unlink(st_local("FC") + "/master.do"); fh = fopen(st_local("FC") + "/master.do", "w"); for (k = 1; k <= rows(s); k++) fput(fh, s[k]); fclose(fh)
+mata: s = cat(st_local("FC") + "/master.do"); s = subinstr(s, "local steps dataprep/01_build.do dataprep/02_counts.do dataprep/03_names.do dataprep/04_overwrite.do dataprep/05_side.do dataprep/06_folders.do dataprep/07_samesize.do dataprep/08_samestep.do analysis/01_more.do analysis/02_order.do", "local steps dataprep/01_build.do dataprep/02_counts.do dataprep/03_names.do dataprep/04_overwrite.do dataprep/05_side.do dataprep/06_folders.do dataprep/07_samesize.do dataprep/08_samestep.do analysis/01_more.do analysis/02_order.do analysis/03_dup.do"); unlink(st_local("FC") + "/master.do"); fh = fopen(st_local("FC") + "/master.do", "w"); for (k = 1; k <= rows(s); k++) fput(fh, s[k]); fclose(fh)
 quietly do "`here'/step.do" "`F'" analysis/03_dup.do dupkey
 sleep 1100
 quietly cd "`FC'"
