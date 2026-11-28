@@ -18,7 +18,7 @@ local R "`W'/data"
 local out "`here'/results.txt"
 local rec "`here'/record.do"
 local tmpl = substr("`here'", 1, strrpos(substr("`here'", 1, strrpos("`here'", "/") - 1), "/")) + "project-template"
-local rcases H30 H31 H32 H33 H34 H35 H36 H37 H38 H39 H41 H42 H43 H44 H45 H46 H47 H48 H49 H50 H51 H57 H58 H59 H64 H65 H66 H67 H68 H83 H84 H85
+local rcases H30 H31 H32 H33 H34 H35 H36 H37 H38 H39 H41 H42 H43 H44 H45 H46 H47 H48 H49 H50 H51 H57 H58 H59 H64 H65 H66 H67 H68 H83 H84 H85 H98 H99
 local P "`W'/r toy"
 local C "`P'/code"
 quietly do "`here'/copytree.do" "`tmpl'" "`P'"
@@ -634,4 +634,26 @@ foreach f in 03_rdup 04_rbad {
 }
 mata: st_local("nofile", strofreal(!fileexists(st_local("P") + "/temp/explore/dup.dta") & fileexists(st_local("P") + "/temp/explore/04_rbad_merge1.csv")))
 do "`rec'" "`out'" H85 "in R chair_save refuses a key that repeats and chair_merge lists the unmatched rows and then refuses an outcome expect does not allow" 1 `=`said2' & `nofile''
+* A using-only key of another type than the master's joins in the type both share: factor levels
+* b against a, and 1.5 against a whole number.
+quietly do "`here'/rstep.do" "`P'" explore/05_rkeys.R rkeys
+sleep 1100
+quietly cd "`C'"
+log using "`W'/h98.log", text name(h98) replace
+capture noisily do master.do explore/05_rkeys.R
+local rc = _rc
+log close h98
+quietly cd "`here'"
+global t_want "rkeys: done"
+quietly do "`here'/logsays.do" "`W'/h98.log"
+do "`rec'" "`out'" H98 "an R chair_merge keeps a using-only key of another type than the master's in the type both share" 0 `=`rc' + 1000 * !`said''
+* A key named side, the name of the list's own column, stays in the list.
+quietly do "`here'/rstep.do" "`P'" explore/06_rside.R rside
+sleep 1100
+quietly cd "`C'"
+capture noisily do master.do explore/06_rside.R
+local rc = _rc
+quietly cd "`here'"
+mata: q = st_local("P") + "/temp/explore/06_rside_merge1.csv"; st_local("ok", strofreal(fileexists(q) ? rows(cat(q)) == 3 & cat(q)[1] == char(34) + "side" + char(34) + "," + char(34) + "_side" + char(34) + "," + char(34) + "note" + char(34) & substr(cat(q)[2], 1, 2) == "1," : 0))
+do "`rec'" "`out'" H99 "an R chair_merge on a key named side keeps the key in its list" 0 `=`rc' + 1000 * !`ok''
 global t_want ""

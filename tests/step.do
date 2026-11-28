@@ -13,7 +13,10 @@
 * the value inside its name; clear all; a chair_append of two files), counts (a file saved twice,
 * another once, a third with save; a merge with update; a save after other data were loaded; a raw
 * delivery read in a helper; the project's setting p_step), edge (chair_merge and chair_append of a
-* temporary file with no rows; chair_save of a name that holds a dollar sign),
+* temporary file with no rows; chair_save of a name that holds a dollar sign), names (a raw
+* delivery named only in an if 0 block; a file named from a value beside one whose written name
+* begins the same), overwrite (a file chair_save wrote, replaced with save), sidekey (a merge on a
+* key named _side),
 * order (two numbers written b first, then a), dupkey (chair_save on a key that repeats), nokey
 * (chair_save on a key with a missing value), badmerge (chair_merge with an outcome expect() lacks)
 args P s kind
@@ -65,6 +68,12 @@ if "`kind'" == "edge" {
     file write `fh' "chair_merge 1:1 ctn using @Qempty@E, expect(master) nogenerate name(empty)" _n "chair_append using @Qempty@E, name(empty)" _n
     file write `fh' `"local w = "@{p_temp}/explore/wrapped" + char(36) + "data.dta""' _n `"chair_save "@Qmacval(w)@E", key(ctn)"' _n `"confirm file "@Qmacval(w)@E""' _n `"erase "@Qmacval(w)@E""' _n `"save "@{p_temp}/explore/edge_ok.dta", replace"' _n
 }
+if "`kind'" == "names" {
+    file write `fh' "if 0 {" _n `"    import delimited using "@{p_raw}/@{raw_toy}/weights.csv", clear"' _n "}" _n "chair_use toy/toy, clear" _n "quietly summarize ctn" _n "local selected = r(max)" _n
+    file write `fh' `"chair_save "@{p_temp}/review_record_@Qselected@E.dta", key(ctn)"' _n `"chair_save "@{p_temp}/review_record_26-other.dta", key(ctn)"' _n
+}
+if "`kind'" == "overwrite" file write `fh' "clear" _n "set obs 1" _n "generate ctn = _n" _n `"chair_save "@{p_temp}/example.dta", key(ctn)"' _n "expand 2" _n `"save "@{p_temp}/example.dta", replace"' _n
+if "`kind'" == "sidekey" file write `fh' "clear" _n "set obs 1" _n "generate _side = 2" _n `"chair_save "@{p_temp}/right.dta", key(_side)"' _n "replace _side = 1" _n `"chair_merge 1:1 _side using "@{p_temp}/right.dta", expect(master using)"' _n
 if "`kind'" == "order" {
     file write `fh' "tempname t" _n
     foreach x in b a {

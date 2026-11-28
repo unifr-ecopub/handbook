@@ -12,7 +12,7 @@ local R "`W'/data"
 local out "`here'/results.txt"
 local rec "`here'/record.do"
 local tmpl = substr("`here'", 1, strrpos(substr("`here'", 1, strrpos("`here'", "/") - 1), "/")) + "project-template"
-local pycases H86 H87
+local pycases H86 H87 H100 H101
 local P "`W'/py"
 local C "`P'/code"
 quietly do "`here'/copytree.do" "`tmpl'" "`P'"
@@ -61,13 +61,19 @@ mata: b = b \ ("chair_save(m, P.temp / " + q + "pmerged.dta" + q + ", key=[" + q
 mata: b = b \ ("big = pd.DataFrame({" + q + "ctn" + q + ": [1], " + q + "account" + q + ": [9007199254740993], " + q + "_chair_l" + q + ": [61]})")
 mata: b = b \ ("mb = chair_merge(big, pd.DataFrame({" + q + "ctn" + q + ": [1, 2]}), type=" + q + "1:1" + q + ", on=" + q + "ctn" + q + ", expect=[" + q + "both" + q + ", " + q + "right_only" + q + "], keep=" + q + "both" + q + ")")
 mata: b = b \ ("assert int(mb.at[0, " + q + "account" + q + "]) == 9007199254740993 and int(mb.at[0, " + q + "_chair_l" + q + "]) == 61, mb")
+* Kept unmatched using rows leave the column missing there: it becomes Int64 and keeps the value.
+mata: b = b \ ("mo = chair_merge(big, pd.DataFrame({" + q + "ctn" + q + ": [1, 2]}), type=" + q + "1:1" + q + ", on=" + q + "ctn" + q + ", expect=[" + q + "both" + q + ", " + q + "right_only" + q + "])")
+mata: b = b \ ("assert str(mo[" + q + "account" + q + "].dtype) == " + q + "Int64" + q + " and int(mo.loc[mo[" + q + "ctn" + q + "] == 1, " + q + "account" + q + "].iloc[0]) == 9007199254740993, mo")
 mata: b = b \ ("mc = chair_merge(pd.DataFrame({" + q + "k" + q + ": pd.Categorical([" + q + "a" + q + "])}), pd.DataFrame({" + q + "k" + q + ": pd.Categorical([" + q + "b" + q + "])}), type=" + q + "1:1" + q + ", on=" + q + "k" + q + ", expect=[" + q + "left_only" + q + ", " + q + "right_only" + q + "])")
 mata: b = b \ ("assert sorted(str(v) for v in mc[" + q + "k" + q + "]) == [" + q + "a" + q + ", " + q + "b" + q + "], mc")
 mata: b = b \ ("chair_save(mb, P.temp / " + q + "tab" + char(92) + "tfile.pkl" + q + ", key=" + q + "ctn" + q + ")")
 mata: b = b \ ("with chair_use(" + q + "toy/toy" + q + ", chunksize=2) as chunks:") \ ("    assert len(next(iter(chunks))) == 2")
+* An append of a file whose name holds a tab: the page is still written.
+mata: b = b \ ("pd.DataFrame({" + q + "ctn" + q + ": [1]}).to_pickle(P.temp / " + q + "with" + char(92) + "ttab.pkl" + q + ")") \ ("chair_append(P.temp / " + q + "with" + char(92) + "ttab.pkl" + q + ", P.temp / " + q + "with" + char(92) + "ttab.pkl" + q + ")")
 mata: s = t[1..m[1] - 1] \ b; f = st_local("C") + "/analysis/01_pyflow.py"; if (fileexists(f)) unlink(f); fh = fopen(f, "w"); for (k = 1; k <= rows(s); k++) fput(fh, s[k]); fclose(fh)
 mata: s = t[1..m[1] - 1] \ ("import pandas as pd") \ ("chair_save(pd.DataFrame({" + q + "ctn" + q + ": [1, 1]}), P.temp / " + q + "explore" + q + " / " + q + "dup.dta" + q + ", key=[" + q + "ctn" + q + "])"); f = st_local("C") + "/explore/01_pydup.py"; if (fileexists(f)) unlink(f); fh = fopen(f, "w"); for (k = 1; k <= rows(s); k++) fput(fh, s[k]); fclose(fh)
 mata: s = t[1..m[1] - 1] \ ("chair_merge(chair_use(" + q + "toy/toy" + q + "), P.temp / " + q + "phalf.dta" + q + ", type=" + q + "1:1" + q + ", on=[" + q + "ctn" + q + "], expect=[" + q + "both" + q + "])"); f = st_local("C") + "/explore/02_pybad.py"; if (fileexists(f)) unlink(f); fh = fopen(f, "w"); for (k = 1; k <= rows(s); k++) fput(fh, s[k]); fclose(fh)
+mata: s = t[1..m[1] - 1] \ "import pandas as pd" \ ("chair_merge(pd.DataFrame({" + q + "side" + q + ": [1]}), pd.DataFrame({" + q + "side" + q + ": [2]}), type=" + q + "1:1" + q + ", on=" + q + "side" + q + ", expect=[" + q + "left_only" + q + ", " + q + "right_only" + q + "])"); f = st_local("C") + "/explore/03_pyside.py"; if (fileexists(f)) unlink(f); fh = fopen(f, "w"); for (k = 1; k <= rows(s); k++) fput(fh, s[k]); fclose(fh)
 mata: s = cat(st_local("C") + "/master.do"); s = subinstr(s, `"local steps """', "local steps analysis/01_pyflow.py"); unlink(st_local("C") + "/master.do"); fh = fopen(st_local("C") + "/master.do", "w"); for (k = 1; k <= rows(s); k++) fput(fh, s[k]); fclose(fh)
 
 * ---- A Python step on the data flow page ---------------------------------------------------------
@@ -101,4 +107,16 @@ foreach f in 01_pydup 02_pybad {
 }
 mata: st_local("nofile", strofreal(!fileexists(st_local("P") + "/temp/explore/dup.dta") & fileexists(st_local("P") + "/temp/explore/02_pybad_merge1.csv")))
 do "`rec'" "`out'" H87 "in Python chair_save refuses a key that repeats and chair_merge lists the unmatched rows and then refuses an outcome expect does not allow" 1 `=`said2' & `nofile''
+global t_want ""
+* A key named side, the name of the list's own column, stays in the list.
+sleep 1100
+quietly cd "`C'"
+capture noisily do master.do explore/03_pyside.py
+local rc = _rc
+quietly cd "`here'"
+mata: q = st_local("P") + "/temp/explore/03_pyside_merge1.csv"; st_local("ok", strofreal(fileexists(q) ? rows(cat(q)) == 3 & cat(q)[1] == "side,_side,note" & substr(cat(q)[2], 1, 2) == "1," : 0))
+do "`rec'" "`out'" H100 "a Python chair_merge on a key named side keeps the key in its list" 0 `=`rc' + 1000 * !`ok''
+* The full run above appended a file whose name holds a tab, and still wrote its page.
+mata: s = cat(st_local("C") + "/README.md"); st_local("ok", strofreal(sum(s :== "| [01\_pyflow](analysis/01_pyflow.py)<br>master: a file built at run time<br>using: a file built at run time | 1 | 1 |") == 1))
+do "`rec'" "`out'" H101 "a Python chair_append of a file whose name holds a tab leaves the page whole" 1 `ok'
 global t_want ""

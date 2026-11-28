@@ -751,10 +751,13 @@ quietly do "`here'/copytree.do" "`R'" "`F'/data"
 quietly do "`here'/setpin.do" "`FC'/pins.do" pin_toy v1
 quietly do "`here'/setpin.do" "`FC'/pins.do" raw_toy toy-raw/2026-01-01
 * The project's block also holds a setting of its own named p_step, which a run must leave alone.
-mata: s = cat(st_local("FC") + "/master.do"); s = subinstr(s, `"local steps """', "global p_step " + char(34) + "my setting" + char(34) + char(10) + "local steps dataprep/01_build.do dataprep/02_counts.do analysis/01_more.do analysis/02_order.do"); unlink(st_local("FC") + "/master.do"); fh = fopen(st_local("FC") + "/master.do", "w"); for (k = 1; k <= rows(s); k++) fput(fh, s[k]); fclose(fh)
+mata: s = cat(st_local("FC") + "/master.do"); s = subinstr(s, `"local steps """', "global p_step " + char(34) + "my setting" + char(34) + char(10) + "local steps dataprep/01_build.do dataprep/02_counts.do dataprep/03_names.do dataprep/04_overwrite.do dataprep/05_side.do analysis/01_more.do analysis/02_order.do"); unlink(st_local("FC") + "/master.do"); fh = fopen(st_local("FC") + "/master.do", "w"); for (k = 1; k <= rows(s); k++) fput(fh, s[k]); fclose(fh)
 mata: fh = fopen(st_local("FC") + "/helpers/readw.do", "w"); fput(fh, "import delimited using " + char(34) + char(36) + "{p_raw}/" + char(36) + "{raw_toy}/weights.csv" + char(34) + ", clear"); fclose(fh)
 quietly do "`here'/step.do" "`F'" dataprep/01_build.do flowbuild
 quietly do "`here'/step.do" "`F'" dataprep/02_counts.do counts
+quietly do "`here'/step.do" "`F'" dataprep/03_names.do names
+quietly do "`here'/step.do" "`F'" dataprep/04_overwrite.do overwrite
+quietly do "`here'/step.do" "`F'" dataprep/05_side.do sidekey
 quietly do "`here'/step.do" "`F'" analysis/01_more.do flowmore
 quietly do "`here'/step.do" "`F'" analysis/02_order.do order
 local pg "`FC'/README.md"
@@ -810,7 +813,7 @@ mata: s = cat(st_local("pg")); st_local("lin", strofreal(anyof(s, "    w_temp_to
 do "`rec'" "`out'" H89 "a solid arrow of the picture comes only from the lineage of the data saved" 1 `lin'
 * A raw delivery read in a helper the step pulls in is named; the project's own setting p_step
 * reached the step unchanged, or it would have stopped.
-mata: s = cat(st_local("pg")); st_local("hlp", strofreal(sum(s :== "| toy-raw | raw\* | 2026-01-01 | [01\_build](dataprep/01_build.do), [02\_counts](dataprep/02_counts.do) |") == 1))
+mata: s = cat(st_local("pg")); st_local("hlp", strofreal(sum(s :== "| toy-raw | raw\* | 2026-01-01 | [01\_build](dataprep/01_build.do), [02\_counts](dataprep/02_counts.do), [03\_names](dataprep/03_names.do) |") == 1))
 do "`rec'" "`out'" H90 "a raw delivery read in a helper is named for the step and a project setting named p_step is left alone" 1 `hlp'
 * chair_merge and chair_append of a temporary file with no rows run as merge and append do, and
 * chair_save keeps a dollar sign in a name as save does.
@@ -847,6 +850,20 @@ else {
     file write `fh' "TEST SKIP H92: a file is made read-only with chmod, which Windows lacks" _n
     file close `fh'
 }
+* A file named from a value is not shown because the code writes out a longer name that begins
+* the same: only a name written out whole counts.
+mata: s = cat(st_local("pg")); st_local("ok", strofreal(sum(s :== "| review\_record\_26-other | [03\_names](dataprep/03_names.do) | ctn | 26 |") == 1 & sum(s :== "| 1 file, name built at run time | [03\_names](dataprep/03_names.do) | ctn | 26 |") == 1 & !any(strpos(s, "review\_record\_26 ") :| strpos(s, "review_record_26" + char(34)))))
+do "`rec'" "`out'" H93 "a file named from a value stays off the page when the code writes out a longer name that begins the same" 1 `ok'
+* A file chair_save wrote and save then replaced is not recorded: the page checks its size.
+mata: s = cat(st_local("pg")); st_local("ok", strofreal(sum(s :== "| example | – | not recorded | – |") == 1 & !any(strpos(s, "| example | [04"))))
+do "`rec'" "`out'" H94 "a working file that save replaced after chair_save wrote it is marked not recorded" 1 `ok'
+* A merge on a key named _side, the name the list used for its own column, runs and lists both rows.
+mata: q = st_local("F") + "/logs/qa/05_side_merge1.csv"; st_local("ok", strofreal(fileexists(q) ? rows(cat(q)) == 3 & cat(q)[1] == "_side,__side,_note" : 0))
+do "`rec'" "`out'" H95 "chair_merge on a key named _side runs and its list keeps the key" 1 `ok'
+* What a step's code names but the run did not record says no more than that: the column is Step,
+* and the footnote says the name comes from the code (here a raw delivery inside if 0).
+mata: s = cat(st_local("pg")); st_local("ok", strofreal(sum(s :== "| Source | Kind | Version | Step |") == 1 & sum(strpos(s, "\* named in the code, not recorded by the run") :> 0) == 1 & !any(strpos(s, "Read by"))))
+do "`rec'" "`out'" H97 "the sources table heads its steps Step and its footnote says a name found in the code is not a recorded read" 1 `ok'
 * One step run alone marks the page, which shows the last full run.
 sleep 1100
 quietly cd "`FC'"
@@ -855,8 +872,35 @@ local rc = _rc
 quietly cd "`here'"
 mata: s = cat(st_local("pg")); st_local("mark", strofreal(sum(s :== "**Not current:** " + char(96) + "analysis/02_order.do" + char(96) + " ran alone since.") == 1))
 do "`rec'" "`out'" H78 "a run of one step marks the data flow page not current" 0 `=`rc' + 1000 * !`mark''
+* A single step that cannot mark the page stops before it runs, with Failed, and the page stays.
+if c(os) != "Windows" {
+    capture erase "`W'/h96page.md"
+    copy "`pg'" "`W'/h96page.md"
+    shell chmod a-w "`pg'"
+    sleep 1100
+    quietly cd "`FC'"
+    log using "`W'/h96.log", text name(h96)
+    capture noisily do master.do analysis/01_more.do
+    local rc = _rc
+    log close h96
+    quietly cd "`here'"
+    shell chmod u+w "`pg'"
+    global t_want "Failed: the data flow page `FC'/README.md cannot be written: close it where it is open, and run again (r(`rc'))"
+    global t_without ""
+    quietly do "`here'/logsays.do" "`W'/h96.log"
+    local ok = `said' & `rc' != 0 & fileread("`W'/h96page.md") == fileread("`pg'")
+    global t_want "Step complete"
+    quietly do "`here'/logsays.do" "`W'/h96.log"
+    do "`rec'" "`out'" H96 "a single step that cannot mark the data flow page stops with Failed before it runs and leaves the page whole" 1 `=`ok' & !`said''
+}
+else {
+    tempname fh
+    file open `fh' using "`out'", write text append
+    file write `fh' "TEST SKIP H96: a file is made read-only with chmod, which Windows lacks" _n
+    file close `fh'
+}
 * A full run that stops at a step marks it too; that step's chair_save refused a key that repeats.
-mata: s = cat(st_local("FC") + "/master.do"); s = subinstr(s, "local steps dataprep/01_build.do dataprep/02_counts.do analysis/01_more.do analysis/02_order.do", "local steps dataprep/01_build.do dataprep/02_counts.do analysis/01_more.do analysis/02_order.do analysis/03_dup.do"); unlink(st_local("FC") + "/master.do"); fh = fopen(st_local("FC") + "/master.do", "w"); for (k = 1; k <= rows(s); k++) fput(fh, s[k]); fclose(fh)
+mata: s = cat(st_local("FC") + "/master.do"); s = subinstr(s, "local steps dataprep/01_build.do dataprep/02_counts.do dataprep/03_names.do dataprep/04_overwrite.do dataprep/05_side.do analysis/01_more.do analysis/02_order.do", "local steps dataprep/01_build.do dataprep/02_counts.do dataprep/03_names.do dataprep/04_overwrite.do dataprep/05_side.do analysis/01_more.do analysis/02_order.do analysis/03_dup.do"); unlink(st_local("FC") + "/master.do"); fh = fopen(st_local("FC") + "/master.do", "w"); for (k = 1; k <= rows(s); k++) fput(fh, s[k]); fclose(fh)
 quietly do "`here'/step.do" "`F'" analysis/03_dup.do dupkey
 sleep 1100
 quietly cd "`FC'"

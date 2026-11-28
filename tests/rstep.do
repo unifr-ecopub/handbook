@@ -9,7 +9,8 @@
 * a list of unmatched rows under logs/qa/), flow (chair_save, two chair_merge against one file and
 * a chair_append; the merge keeps a tibble, the master's row order and a column of its own named
 * .chair_l, the name an earlier version used inside), rdup (chair_save on a key that
-* repeats), rbad (chair_merge with an outcome expect lacks)
+* repeats), rbad (chair_merge with an outcome expect lacks), rkeys (using-only keys of another type
+* than the master's: factor levels, a fraction against whole numbers), rside (a key named side)
 args P s kind
 local stem = substr("`s'", strrpos("`s'", "/") + 1, .)
 local stem = substr("`stem'", 1, strlen("`stem'") - 2)
@@ -35,6 +36,11 @@ if "`kind'" == "flow" {
 }
 if "`kind'" == "rdup" mata: b = b \ `"chair_save(data.frame(ctn = c(1, 1)), file.path(P@temp, "explore", "dup.dta"), key = "ctn")"'
 if "`kind'" == "rbad" mata: b = b \ `"m <- chair_merge(chair_use("toy/toy"), file.path(P@temp, "rhalf.dta"), type = "1:1", on = "ctn", expect = "both")"'
+if "`kind'" == "rkeys" {
+    mata: b = b \ `"f <- chair_merge(data.frame(k = factor("a")), data.frame(k = factor("b")), type = "1:1", on = "k", expect = c("left_only", "right_only"))"' \ `"stopifnot(identical(sort(as.character(f@k)), c("a", "b")))"'
+    mata: b = b \ `"g <- chair_merge(data.frame(k = 1L), data.frame(k = 1.5), type = "1:1", on = "k", expect = c("left_only", "right_only"))"' \ `"stopifnot(isTRUE(all.equal(sort(g@k), c(1, 1.5))))"' \ `"cat("rkeys: done\n")"'
+}
+if "`kind'" == "rside" mata: b = b \ `"s <- chair_merge(data.frame(side = 1L), data.frame(side = 2L), type = "1:1", on = "side", expect = c("left_only", "right_only"))"'
 if "`kind'" == "digit" mata: b = b \ `"d <- chair_use("1toy/toy")"' \ `"cat(sprintf("digit: %d rows\n", nrow(d)))"'
 mata: t = cat(st_local("P") + "/code/templates/step.R"); m = selectindex(strpos(t, "stop(" + char(34) + "templates/step.R is a template") :== 1); st_local("m", strofreal(rows(m) == 1 ? m[1] : 0))
 if "`m'" == "0" {
