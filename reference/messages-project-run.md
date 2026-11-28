@@ -150,13 +150,13 @@ chair_merge: <n> rows are <result>, which expect(<results>) does not allow
 chair_merge: <n> rows are <result>, which expect does not allow
 ```
 
-The data are not as the step expects: a key repeats, or a merge matched otherwise. The last line is an R or Python step's. **You:** ask Claude why; what the step should do then is your choice.
+A key repeats, or a merge gave rows its `expect` does not allow. R and Python steps print the third line. **You:** ask Claude why; what the step does next is your choice.
 
 ```text
 chair_merge: <n> master only, <n> using only on <key>; listed in logs/qa/<step>_merge<n>.csv: <note>
 ```
 
-Not a stop: the step expected these rows, and lists them.
+The unmatched rows are listed. If `expect` allows them, the step goes on; if not, the step stops with the line above.
 
 ## After the steps
 
@@ -166,13 +166,13 @@ Data flow page marked not current.
 Data flow page not written: code/README.md is hand-written.
 ```
 
-A step run alone, or a full run that stopped, marks [the data flow page](words.md) not current; the next full run writes it again. After the last line, **You:** ask Claude to move your text to `docs/`.
+A step run alone, or a full run that stopped, marks [the data flow page](words.md) not current until the next full run. After the last line, **You:** ask Claude to move your text to `docs/`.
 
 ```text
 Failed: the data flow page <folder>/code/README.md cannot be written: close it where it is open, and run again (r(<code>))
 ```
 
-**You:** close the page where it is open, then ask for the run again.
+The run stops before it clears anything. **You:** close the page where it is open, and ask for the run again.
 
 ## R steps
 

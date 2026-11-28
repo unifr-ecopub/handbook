@@ -16,7 +16,9 @@
 * temporary file with no rows; chair_save of a name that holds a dollar sign), names (a raw
 * delivery named only in an if 0 block; a file named from a value beside one whose written name
 * begins the same), overwrite (a file chair_save wrote, replaced with save), sidekey (a merge on a
-* key named _side),
+* key named _side), folders (a working file and a raw file in a folder named from a value; a file
+* saved for samesize), samesize (that file replaced with save, at the same size, and a path looked
+* up with chair_use but not loaded),
 * order (two numbers written b first, then a), dupkey (chair_save on a key that repeats), nokey
 * (chair_save on a key with a missing value), badmerge (chair_merge with an outcome expect() lacks)
 args P s kind
@@ -74,6 +76,11 @@ if "`kind'" == "names" {
 }
 if "`kind'" == "overwrite" file write `fh' "clear" _n "set obs 1" _n "generate ctn = _n" _n `"chair_save "@{p_temp}/example.dta", key(ctn)"' _n "expand 2" _n `"save "@{p_temp}/example.dta", replace"' _n
 if "`kind'" == "sidekey" file write `fh' "clear" _n "set obs 1" _n "generate _side = 2" _n `"chair_save "@{p_temp}/right.dta", key(_side)"' _n "replace _side = 1" _n `"chair_merge 1:1 _side using "@{p_temp}/right.dta", expect(master using)"' _n
+if "`kind'" == "folders" {
+    file write `fh' "chair_use toy/toy, clear" _n "local id = ctn[1]" _n `"capture mkdir "@{p_temp}/@Qid@E""' _n `"chair_save "@{p_temp}/@Qid@E/lookup.dta", key(ctn)"' _n
+    file write `fh' `"chair_merge 1:1 ctn using "@{p_raw}/@{raw_toy}/@Qid@E/w.dta", expect(match) nogenerate"' _n `"chair_save "@{p_temp}/samesize.dta", key(ctn)"' _n
+}
+if "`kind'" == "samesize" file write `fh' `"chair_use toy/toy, pathonly"' _n `"use "@{p_temp}/samesize.dta", clear"' _n "replace value = value + 1" _n `"save "@{p_temp}/samesize.dta", replace"' _n
 if "`kind'" == "order" {
     file write `fh' "tempname t" _n
     foreach x in b a {

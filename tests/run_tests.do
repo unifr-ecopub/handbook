@@ -50,7 +50,7 @@ local pers "`c(sysdir_personal)'"
 quietly cd "`here'"
 capture noisily do "`here'/s_tests.do" "`here'"
 local rc = _rc
-forvalues i = 1/101 {
+forvalues i = 1/106 {
     capture log close `=cond(`i' < 10, "h0", "h")'`i'
 }
 capture log close master
@@ -62,7 +62,7 @@ if `rc' do "`rec'" "`out'" S "the Stata cases in s_tests.do ran to their end" 0 
 quietly cd "`here'"
 capture noisily do "`here'/r_tests.do" "`here'"
 local rc = _rc
-forvalues i = 30/101 {
+forvalues i = 30/106 {
     capture log close h`i'
 }
 capture log close h68b
@@ -76,6 +76,7 @@ quietly cd "`here'"
 capture noisily do "`here'/py_tests.do" "`here'"
 local rc = _rc
 capture log close h87
+capture log close h103
 capture log close master
 quietly cd "`here'"
 if `rc' do "`rec'" "`out'" P "the Python cases in py_tests.do ran to their end" 0 `rc'

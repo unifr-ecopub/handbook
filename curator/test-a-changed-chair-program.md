@@ -1,6 +1,6 @@
 # Test and copy a changed chair program
 
-`data-processing` stores the chair's five Stata programs in `ado/c/`. `project-template` holds a copy of three, `chair_use`, `chair_rstep` and `chair_results`; `chair_commit.ado` and `chair_fingerprint.ado` are in `data-processing` alone, and `chair_pystep`, `chair_save`, `chair_merge`, `chair_append` and `chair_flow` in `project-template` alone. After a change, both repos must pass their tests, and each copy must stay identical to its source.
+`data-processing` stores the chair's five Stata programs in `ado/c/`. `project-template` holds a copy of three, `chair_use`, `chair_rstep` and `chair_results`; `chair_commit.ado` and `chair_fingerprint.ado` are in `data-processing` alone, and `chair_pystep`, `chair_save`, `chair_merge`, `chair_append`, `chair_flow` and `chair_after` in `project-template` alone. After a change, both repos must pass their tests, and each copy must stay identical to its source.
 
 ```mermaid
 flowchart LR

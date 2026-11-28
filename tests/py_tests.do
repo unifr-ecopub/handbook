@@ -12,7 +12,7 @@ local R "`W'/data"
 local out "`here'/results.txt"
 local rec "`here'/record.do"
 local tmpl = substr("`here'", 1, strrpos(substr("`here'", 1, strrpos("`here'", "/") - 1), "/")) + "project-template"
-local pycases H86 H87 H100 H101
+local pycases H86 H87 H100 H101 H103
 local P "`W'/py"
 local C "`P'/code"
 quietly do "`here'/copytree.do" "`tmpl'" "`P'"
@@ -74,6 +74,7 @@ mata: s = t[1..m[1] - 1] \ b; f = st_local("C") + "/analysis/01_pyflow.py"; if (
 mata: s = t[1..m[1] - 1] \ ("import pandas as pd") \ ("chair_save(pd.DataFrame({" + q + "ctn" + q + ": [1, 1]}), P.temp / " + q + "explore" + q + " / " + q + "dup.dta" + q + ", key=[" + q + "ctn" + q + "])"); f = st_local("C") + "/explore/01_pydup.py"; if (fileexists(f)) unlink(f); fh = fopen(f, "w"); for (k = 1; k <= rows(s); k++) fput(fh, s[k]); fclose(fh)
 mata: s = t[1..m[1] - 1] \ ("chair_merge(chair_use(" + q + "toy/toy" + q + "), P.temp / " + q + "phalf.dta" + q + ", type=" + q + "1:1" + q + ", on=[" + q + "ctn" + q + "], expect=[" + q + "both" + q + "])"); f = st_local("C") + "/explore/02_pybad.py"; if (fileexists(f)) unlink(f); fh = fopen(f, "w"); for (k = 1; k <= rows(s); k++) fput(fh, s[k]); fclose(fh)
 mata: s = t[1..m[1] - 1] \ "import pandas as pd" \ ("chair_merge(pd.DataFrame({" + q + "side" + q + ": [1]}), pd.DataFrame({" + q + "side" + q + ": [2]}), type=" + q + "1:1" + q + ", on=" + q + "side" + q + ", expect=[" + q + "left_only" + q + ", " + q + "right_only" + q + "])"); f = st_local("C") + "/explore/03_pyside.py"; if (fileexists(f)) unlink(f); fh = fopen(f, "w"); for (k = 1; k <= rows(s); k++) fput(fh, s[k]); fclose(fh)
+mata: s = t[1..m[1] - 1] \ "import pandas as pd" \ ("ap = chair_append(pd.DataFrame({" + q + "ctn" + q + ": [1], " + q + "account" + q + ": [9007199254740993]}), pd.DataFrame({" + q + "ctn" + q + ": [2]}))") \ ("assert str(ap[" + q + "account" + q + "].dtype) == " + q + "Int64" + q + " and int(ap.at[0, " + q + "account" + q + "]) == 9007199254740993, ap") \ ("print(" + q + "append: whole numbers kept" + q + ")"); f = st_local("C") + "/explore/04_pyappend.py"; if (fileexists(f)) unlink(f); fh = fopen(f, "w"); for (k = 1; k <= rows(s); k++) fput(fh, s[k]); fclose(fh)
 mata: s = cat(st_local("C") + "/master.do"); s = subinstr(s, `"local steps """', "local steps analysis/01_pyflow.py"); unlink(st_local("C") + "/master.do"); fh = fopen(st_local("C") + "/master.do", "w"); for (k = 1; k <= rows(s); k++) fput(fh, s[k]); fclose(fh)
 
 * ---- A Python step on the data flow page ---------------------------------------------------------
@@ -119,4 +120,17 @@ do "`rec'" "`out'" H100 "a Python chair_merge on a key named side keeps the key 
 * The full run above appended a file whose name holds a tab, and still wrote its page.
 mata: s = cat(st_local("C") + "/README.md"); st_local("ok", strofreal(sum(s :== "| [01\_pyflow](analysis/01_pyflow.py)<br>master: a file built at run time<br>using: a file built at run time | 1 | 1 |") == 1))
 do "`rec'" "`out'" H101 "a Python chair_append of a file whose name holds a tab leaves the page whole" 1 `ok'
+global t_want ""
+* An append where one input lacks a whole-number column keeps its values: Int64, not a float.
+sleep 1100
+quietly cd "`C'"
+log using "`W'/h103.log", text name(h103) replace
+capture noisily do master.do explore/04_pyappend.py
+local rc = _rc
+log close h103
+quietly cd "`here'"
+global t_want "append: whole numbers kept"
+global t_without ""
+quietly do "`here'/logsays.do" "`W'/h103.log"
+do "`rec'" "`out'" H103 "a Python chair_append keeps a whole number that another input lacks the column for" 0 `=`rc' + 1000 * !`said''
 global t_want ""
