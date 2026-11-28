@@ -37,7 +37,7 @@ Claude proposes the smallest change at the cause, and waits for your word:
 
 ## Check the fix
 
-A full run that fails during a step has cleared `temp/` and `paper/results/`. Do not commit that state: the next full run makes the exhibits again.
+A full run that fails during a step has cleared `temp/` and `paper/results/`, and marks the data flow page, `code/README.md`, not current. Do not commit that state: the next full run makes the exhibits and the page again.
 
 A run clears nothing in `temp/` or `paper/results/` when it stops on a check before the steps:
 

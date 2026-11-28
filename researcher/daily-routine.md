@@ -42,4 +42,4 @@ One case needs no question: when the pull before a commit or push you asked for 
 
 ## What a single step does not tell you
 
-A single step runs on the working files as they were: the files in `temp/` that earlier steps saved. So it cannot show whether other results changed. Report a number only after a full run. See also [What never to do](../reference/never-do.md).
+A single step runs on the working files as they were: the files in `temp/` that earlier steps saved. So it cannot show whether other results changed, and it marks the data flow page, `code/README.md`, not current. Report a number only after a full run. See also [What never to do](../reference/never-do.md).

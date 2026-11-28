@@ -15,6 +15,7 @@ The layout of a project, of `data-processing` and of a replication package. [The
 ├── code/
 │   ├── master.do          runs everything
 │   ├── pins.do            the versions and deliveries to read
+│   ├── README.md          the data flow page, written by each full run
 │   ├── dataprep/          steps that save working files
 │   ├── analysis/          steps that write exhibits
 │   ├── explore/           explore files
@@ -41,7 +42,7 @@ A project with R steps also holds `renv.lock` (and its `renv/` files) at the top
 - compiled PDFs in `paper/draft/` and `paper/presentation/`
 - data files
 
-Only code writes `paper/results/` and `temp/`, and a full run empties `temp/` first.
+Only code writes `paper/results/`, `code/README.md` and `temp/`, and a full run empties `temp/` first.
 
 ## data-processing
 

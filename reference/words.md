@@ -17,6 +17,7 @@ Each thing on the platform has one name.
 | Working files | What a step saves in `temp/` for a later step. |
 | Explore file | A file that looks at data and changes no result. |
 | Exhibit | A table, a figure or a number that code writes for the paper. |
+| Data flow page | `code/README.md`: what the last full run read, saved, merged and appended, with keys and counts. |
 | D-number | The number of a choice in `decisions.md`. |
 | Data root | The folder of shared data on Dropbox, `chair-research-data`. |
 | Delivery | A source's files as received. |

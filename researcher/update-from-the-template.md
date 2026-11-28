@@ -31,6 +31,7 @@ Claude fetches the template from the chair's own organisation on GitHub. If noth
 - which files change, which are new and which go, each with what it brings;
 - where you edited one of the template's own files, that Claude replaces your edit;
 - each edit it proposes to `code/master.do`, outside your project's block, and to the files a project fills in: `README.md`, `decisions.md`, `checklist.md`, `replication/README.md` and `.gitignore`;
+- where your own text is in `code/README.md`, a move to `docs/`, since the run writes the data flow page there;
 - a pull first.
 
 The template's own files come together:
@@ -59,7 +60,7 @@ Claude asks you about any scientific choice and never proposes one.
 
 Claude pulls, takes the files, makes the edits you agreed to, and runs everything. On Windows, with R or Python steps, [you start that run yourself](work-with-r-steps.md#run-the-project-on-windows).
 
-**Check.** The run ends `Run complete`, and Claude names each exhibit that changed, is new or is gone, with the change of the template that may explain it. Claude commits nothing until you ask "Commit and push."
+**Check.** The run ends `Run complete`, and Claude names each exhibit that changed, is new or is gone, with the change of the template that may explain it, and each working file that the data flow page marks not recorded: its step saves or merges without `chair_save` or `chair_merge`, and changing that is a task of its own. Claude commits nothing until you ask "Commit and push."
 
 **What can go wrong.** One of your steps may still use a template file that the update removes. Claude names each affected step before you answer, and that step fails until it is changed afterwards, in a task of its own.
 

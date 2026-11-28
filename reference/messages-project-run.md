@@ -144,6 +144,30 @@ command <name> is unrecognized
 
 A step can also stop with Stata's own message `grmap not yet activated`, and the advice to type `grmap, activate`. Never type it: in Stata's window it writes to a folder that no run reads. **You:** tell Claude; with your yes, Claude activates the command inside the project.
 
+```text
+chair_save: <key> does not identify a row of <file>: a value repeats or is missing
+chair_merge: <n> rows are <result>, which expect(<results>) does not allow
+chair_merge: <n> rows are <result>, which expect does not allow
+```
+
+The data are not as the step expects: a key repeats, or a merge matched otherwise. The last line is an R or Python step's. **You:** ask Claude why; what the step should do then is your choice.
+
+```text
+chair_merge: <n> master only, <n> using only on <key>; listed in logs/qa/<step>_merge<n>.csv: <note>
+```
+
+Not a stop: the step expected these rows, and lists them.
+
+## After the steps
+
+```text
+Data flow page written: <folder>/code/README.md
+Data flow page marked not current.
+Data flow page not written: code/README.md is hand-written.
+```
+
+A step run alone, or a full run that stopped, marks [the data flow page](words.md) not current; the next full run writes it again. After the last line, **You:** ask Claude to move your text to `docs/`.
+
 ## R steps
 
 ```text

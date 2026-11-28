@@ -22,7 +22,7 @@ Claude opens each exhibit and checks every number typed in the text: its value, 
 
 ## Read the report
 
-Findings come first, each with the file and line, the checklist item, and what to change. Claude then marks every item of `checklist.md` as **holds**, **finding**, or **not judged** with the reason. If the results page marks the exhibits as provisional (inputs still read from an old folder), a paper review leads with that. A code review also reads every file in `code/helpers/` and `code/explore/`; it leaves `code/legacy/` out and says so.
+Findings come first, each with the file and line, the checklist item, and what to change. Claude then marks every item of `checklist.md` as **holds**, **finding**, or **not judged** with the reason. If the results page marks the exhibits as provisional (inputs still read from an old folder), a paper review leads with that. A code review also reads every file in `code/helpers/` and `code/explore/` and the data flow page, `code/README.md`, where a working file marked not recorded points to a save or merge without the chair's commands; it leaves `code/legacy/` out and says so.
 
 **Only you do.** Say which findings Claude should fix.
 

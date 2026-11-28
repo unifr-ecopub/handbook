@@ -54,7 +54,7 @@ Claude reads the log and tells you its last line:
 Run complete. Exhibits and the results page: <folder>
 ```
 
-The results page, `paper/results/README.md`, now lists your number and the step that made it.
+The results page, `paper/results/README.md`, now lists your number and the step that made it. The data flow page, `code/README.md`, shows what each step read and saved.
 
 ## 5. Commit and push
 
