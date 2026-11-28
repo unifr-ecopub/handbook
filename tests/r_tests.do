@@ -18,7 +18,7 @@ local R "`W'/data"
 local out "`here'/results.txt"
 local rec "`here'/record.do"
 local tmpl = substr("`here'", 1, strrpos(substr("`here'", 1, strrpos("`here'", "/") - 1), "/")) + "project-template"
-local rcases H30 H31 H32 H33 H34 H35 H36 H37 H38 H39 H41 H42 H43 H44 H45 H46 H47 H48 H49 H50 H51 H57 H58 H59 H64 H65 H66 H67 H68
+local rcases H30 H31 H32 H33 H34 H35 H36 H37 H38 H39 H41 H42 H43 H44 H45 H46 H47 H48 H49 H50 H51 H57 H58 H59 H64 H65 H66 H67 H68 H83 H84 H85
 local P "`W'/r toy"
 local C "`P'/code"
 quietly do "`here'/copytree.do" "`tmpl'" "`P'"
@@ -598,4 +598,40 @@ foreach f in 02_digit.do 02_digit.R {
 }
 mata: s = cat(st_local("C") + "/pins.do"); s = select(s, !ustrregexm(s, "^global pin__1toy ")); unlink(st_local("C") + "/pins.do"); fh = fopen(st_local("C") + "/pins.do", "w"); for (k = 1; k <= rows(s); k++) fput(fh, s[k]); fclose(fh)
 do "`rec'" "`out'" H50 "a dataset whose name begins with a digit pinned once loads the same version in Stata and in R" 0 `=`rcs' + 1000 * !`both''
+global t_want ""
+
+* ---- R steps on the data flow page ------------------------------------------------------------------
+* An R step saves with chair_save, merges twice against one file with chair_merge and appends with
+* chair_append; the page shows them in master and using words, and each merge keeps its list.
+mata: s = cat(st_local("C") + "/master.do"); s = subinstr(s, "local steps dataprep/01_load.do analysis/01_rtab.R", "local steps dataprep/01_load.do analysis/01_rtab.R analysis/02_rflow.R"); unlink(st_local("C") + "/master.do"); fh = fopen(st_local("C") + "/master.do", "w"); for (k = 1; k <= rows(s); k++) fput(fh, s[k]); fclose(fh)
+quietly do "`here'/rstep.do" "`P'" analysis/02_rflow.R flow
+sleep 1100
+quietly cd "`C'"
+capture noisily do master.do
+local rc = _rc
+quietly cd "`here'"
+mata: s = cat(st_local("C") + "/README.md"); st_local("ok", strofreal(sum(s :== "| rhalf | [02\_rflow](analysis/02_rflow.R) | ctn | 20 |") == 1 & sum(s :== "| rmerged | [02\_rflow](analysis/02_rflow.R) | ctn | 26 |") == 1 & sum(s :== "| [02\_rflow](analysis/02_rflow.R) · 1:1 on ctn<br>master: toy/toy<br>using: rhalf | 20 | 6 | 0 |") == 1 & sum(s :== "| [02\_rflow](analysis/02_rflow.R) · 1:1 on ctn<br>master: in memory<br>using: rhalf | 20 | 6 | 0 |") == 1 & sum(s :== "| [02\_rflow](analysis/02_rflow.R)<br>master: rhalf<br>using: rhalf | 20 | 20 |") == 1))
+do "`rec'" "`out'" H83 "an R step's chair_save and chair_merge and chair_append are rows of the data flow page in master and using words" 0 `=`rc' + 1000 * !`ok''
+mata: q = st_local("P") + "/logs/qa/02_rflow_merge"; st_local("ok", strofreal(fileexists(q + "1.csv") & fileexists(q + "2.csv") ? sum(strpos(cat(q + "1.csv"), "master only") :> 0 :& strpos(cat(q + "1.csv"), "R list.") :> 0) == 6 : 0))
+do "`rec'" "`out'" H84 "an R chair_merge keeps a tibble and the master's row order and each of two merges keeps its list with its note" 1 `=`ok' & !`rc''
+* chair_save refuses a key that repeats, and chair_merge an outcome expect does not allow.
+quietly do "`here'/rstep.do" "`P'" explore/03_rdup.R rdup
+quietly do "`here'/rstep.do" "`P'" explore/04_rbad.R rbad
+local said2 1
+foreach f in 03_rdup 04_rbad {
+    sleep 1100
+    quietly cd "`C'"
+    log using "`W'/h85.log", text name(h85) replace
+    capture noisily do master.do explore/`f'.R
+    log close h85
+    quietly cd "`here'"
+    global t_want = cond("`f'" == "03_rdup", "chair_save: ctn does not identify a row of dup.dta: a value repeats or is missing", "chair_merge: 6 rows are left_only, which expect does not allow")
+    quietly do "`here'/logsays.do" "`W'/h85.log"
+    local s1 = `said'
+    global t_want "Failed: explore/`f'.R"
+    quietly do "`here'/logsays.do" "`W'/h85.log"
+    local said2 = `said2' & `s1' & `said'
+}
+mata: st_local("nofile", strofreal(!fileexists(st_local("P") + "/temp/explore/dup.dta")))
+do "`rec'" "`out'" H85 "in R chair_save refuses a key that repeats and chair_merge an outcome expect does not allow" 1 `=`said2' & `nofile''
 global t_want ""

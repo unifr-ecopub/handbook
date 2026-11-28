@@ -1,0 +1,93 @@
+/*
+  The Python cases: do py_tests.do <tests folder>, from run_tests.do, after the R cases. A toy
+  project with one Python step, made from the template like the others, with the starter files of
+  code/templates/py-project/ at its top and its data root in data/ inside it. Its packages are put
+  into .venv/ once with  uv sync --frozen , which needs uv and, the first time, the network. Where
+  uv is not found or the sync fails, each case writes TEST SKIP. On Windows Python does not run in
+  Stata's batch mode: there too each case writes TEST SKIP.
+*/
+args here
+local W "`here'/_t"
+local R "`W'/data"
+local out "`here'/results.txt"
+local rec "`here'/record.do"
+local tmpl = substr("`here'", 1, strrpos(substr("`here'", 1, strrpos("`here'", "/") - 1), "/")) + "project-template"
+local pycases H86 H87
+local P "`W'/py"
+local C "`P'/code"
+quietly do "`here'/copytree.do" "`tmpl'" "`P'"
+quietly do "`here'/copytree.do" "`R'" "`P'/data"
+foreach f in pyproject.toml uv.lock .python-version {
+    copy "`tmpl'/code/templates/py-project/`f'" "`P'/`f'", replace
+}
+local why ""
+if c(os) == "Windows" local why "Python does not run in Stata's batch mode on Windows"
+else {
+    capture erase "`W'/uvsync.txt"
+    shell cd "`P'" && uv sync --frozen > "`W'/uvsync.txt" 2>&1 && echo synced >> "`W'/uvsync.txt"
+    mata: st_local("ok", strofreal(fileexists(st_local("W") + "/uvsync.txt") ? anyof(cat(st_local("W") + "/uvsync.txt"), "synced") : 0))
+    if !`ok' local why "uv sync --frozen did not finish (see _t/uvsync.txt): check that uv is installed and that this machine reaches the network"
+}
+if "`why'" != "" {
+    tempname fh
+    foreach id of local pycases {
+        file open `fh' using "`out'", write text append
+        file write `fh' "TEST SKIP `id': `why'" _n
+        file close `fh'
+        display as text "TEST SKIP `id': `why'"
+    }
+    exit
+}
+quietly do "`here'/setpin.do" "`C'/pins.do" pin_toy v1
+quietly do "`here'/setpin.do" "`C'/pins.do" raw_toy toy-raw/2026-01-01
+* A step begins with the lines of code/templates/step.py up to the line that marks it as a template.
+mata: t = cat(st_local("C") + "/templates/step.py"); m = selectindex(strpos(t, "raise SystemExit(" + char(34) + "templates/step.py is a template") :== 1); st_local("m", strofreal(rows(m) == 1 ? m[1] : 0))
+if "`m'" == "0" {
+    display as error "The line that marks code/templates/step.py as a template was not found: py_tests.do takes the lines above it."
+    exit 459
+}
+mata: q = char(34); b = "import pandas as pd" \ ("d = chair_use(" + q + "toy/toy" + q + ")") \ ("w = pd.read_csv(P.raw_toy / " + q + "weights.csv" + q + ")")
+mata: b = b \ ("chair_save(w[w[" + q + "ctn" + q + "] <= 20], P.temp / " + q + "phalf.dta" + q + ", key=[" + q + "ctn" + q + "])")
+mata: b = b \ ("d = d.sort_values(" + q + "ctn" + q + ", ascending=False).reset_index(drop=True)")
+mata: b = b \ ("m = chair_merge(d, P.temp / " + q + "phalf.dta" + q + ", type=" + q + "1:1" + q + ", on=[" + q + "ctn" + q + "], expect=[" + q + "both" + q + ", " + q + "left_only" + q + "], note=" + q + "Python list." + q + ")")
+mata: b = b \ ("assert list(m[" + q + "ctn" + q + "]) == list(d[" + q + "ctn" + q + "])")
+mata: b = b \ ("m3 = chair_merge(w[w[" + q + "ctn" + q + "] <= 20], d, type=" + q + "1:1" + q + ", on=[" + q + "ctn" + q + "], expect=[" + q + "both" + q + ", " + q + "right_only" + q + "], keep=" + q + "both" + q + ")")
+mata: b = b \ ("assert str(m3[" + q + "weight" + q + "].dtype) == " + q + "int64" + q + ", m3[" + q + "weight" + q + "].dtype")
+mata: b = b \ ("a = chair_append(P.temp / " + q + "phalf.dta" + q + ", P.temp / " + q + "phalf.dta" + q + ")") \ "assert len(a) == 40"
+mata: b = b \ ("chair_save(m, P.temp / " + q + "pmerged.dta" + q + ", key=[" + q + "ctn" + q + "])")
+mata: s = t[1..m[1] - 1] \ b; f = st_local("C") + "/analysis/01_pyflow.py"; if (fileexists(f)) unlink(f); fh = fopen(f, "w"); for (k = 1; k <= rows(s); k++) fput(fh, s[k]); fclose(fh)
+mata: s = t[1..m[1] - 1] \ ("import pandas as pd") \ ("chair_save(pd.DataFrame({" + q + "ctn" + q + ": [1, 1]}), P.temp / " + q + "explore" + q + " / " + q + "dup.dta" + q + ", key=[" + q + "ctn" + q + "])"); f = st_local("C") + "/explore/01_pydup.py"; if (fileexists(f)) unlink(f); fh = fopen(f, "w"); for (k = 1; k <= rows(s); k++) fput(fh, s[k]); fclose(fh)
+mata: s = t[1..m[1] - 1] \ ("chair_merge(chair_use(" + q + "toy/toy" + q + "), P.temp / " + q + "phalf.dta" + q + ", type=" + q + "1:1" + q + ", on=[" + q + "ctn" + q + "], expect=[" + q + "both" + q + "])"); f = st_local("C") + "/explore/02_pybad.py"; if (fileexists(f)) unlink(f); fh = fopen(f, "w"); for (k = 1; k <= rows(s); k++) fput(fh, s[k]); fclose(fh)
+mata: s = cat(st_local("C") + "/master.do"); s = subinstr(s, `"local steps """', "local steps analysis/01_pyflow.py"); unlink(st_local("C") + "/master.do"); fh = fopen(st_local("C") + "/master.do", "w"); for (k = 1; k <= rows(s); k++) fput(fh, s[k]); fclose(fh)
+
+* ---- A Python step on the data flow page ---------------------------------------------------------
+* chair_merge keeps the master's row order, and a whole-number column stays one where the rows kept
+* lack no value; the page shows the saves, the merges and the append in master and using words.
+sleep 1100
+quietly cd "`C'"
+capture noisily do master.do
+local rc = _rc
+quietly cd "`here'"
+mata: s = cat(st_local("C") + "/README.md"); st_local("ok", strofreal(sum(s :== "| phalf | [01\_pyflow](analysis/01_pyflow.py) | ctn | 20 |") == 1 & sum(s :== "| pmerged | [01\_pyflow](analysis/01_pyflow.py) | ctn | 26 |") == 1 & sum(s :== "| [01\_pyflow](analysis/01_pyflow.py) · 1:1 on ctn<br>master: toy/toy<br>using: phalf | 20 | 6 | 0 |") == 1 & sum(s :== "| [01\_pyflow](analysis/01_pyflow.py)<br>master: phalf<br>using: phalf | 20 | 20 |") == 1))
+mata: q = st_local("P") + "/logs/qa/01_pyflow_merge1.csv"; st_local("ok", strofreal(strtoreal(st_local("ok")) & (fileexists(q) ? sum(strpos(cat(q), "master only") :> 0 :& strpos(cat(q), "Python list.") :> 0) == 6 : 0)))
+do "`rec'" "`out'" H86 "a Python step's chair_save and chair_merge and chair_append are rows of the data flow page and chair_merge keeps row order and whole numbers" 0 `=`rc' + 1000 * !`ok''
+* chair_save refuses a key that repeats, and chair_merge an outcome expect does not allow.
+local said2 1
+foreach f in 01_pydup 02_pybad {
+    sleep 1100
+    quietly cd "`C'"
+    log using "`W'/h87.log", text name(h87) replace
+    capture noisily do master.do explore/`f'.py
+    log close h87
+    quietly cd "`here'"
+    global t_want = cond("`f'" == "01_pydup", "chair_save: ctn does not identify a row of dup.dta: a value repeats or is missing", "chair_merge: 6 rows are left_only, which expect does not allow")
+    global t_without ""
+    quietly do "`here'/logsays.do" "`W'/h87.log"
+    local s1 = `said'
+    global t_want "Failed: explore/`f'.py"
+    quietly do "`here'/logsays.do" "`W'/h87.log"
+    local said2 = `said2' & `s1' & `said'
+}
+mata: st_local("nofile", strofreal(!fileexists(st_local("P") + "/temp/explore/dup.dta")))
+do "`rec'" "`out'" H87 "in Python chair_save refuses a key that repeats and chair_merge an outcome expect does not allow" 1 `=`said2' & `nofile''
+global t_want ""

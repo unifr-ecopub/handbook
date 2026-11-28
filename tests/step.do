@@ -6,7 +6,12 @@
 * replace), figmore (fig, and a second figure <stem>_b.png), tab (a table and a number made from
 * both inputs), esttab (a regression on made-up numbers, its table written with esttab and no
 * replace), misnamed, explore, hand (the sum of a hand-made table in intermediate/toy/, as a table),
-* map (two squares drawn with grmap, Stata's own map command, which must be activated first)
+* map (two squares drawn with grmap, Stata's own map command, which must be activated first),
+* flowbuild (two working files with chair_save, and two chair_merge against one file, each with
+* six rows unmatched and its own note), flowmore (temporary files merged: one chair_use made, one
+* built and named, three in a loop; three files named from a value; clear all; a chair_append),
+* order (two numbers written b first, then a), dupkey (chair_save on a key that repeats), nokey
+* (chair_save on a key with a missing value), badmerge (chair_merge with an outcome expect() lacks)
 args P s kind
 tempname fh
 file open `fh' using "`P'/code/`s'", write text replace
@@ -33,6 +38,27 @@ if "`kind'" == "map" {
     file write `fh' "clear" _n "set obs 12" _n "generate _ID = 1 + (_n > 6)" _n "generate k = mod(_n - 1, 6)" _n "generate _X = cond(k == 0, ., cond(inlist(k, 1, 2, 5), 0, 1)) + _ID - 1" _n "generate _Y = cond(k == 0, ., cond(inlist(k, 2, 3), 1, 0))" _n "drop k" _n "sort _ID, stable" _n `"save "@{p_temp}/`stem'_shp.dta", replace"' _n
     file write `fh' "clear" _n "set obs 2" _n "generate _ID = _n" _n "generate value = 4 * _n" _n "isid _ID" _n `"grmap value using "@{p_temp}/`stem'_shp.dta", id(_ID) clmethod(unique)"' _n `"graph export "@{p_results}/figures/`stem'.png", width(400)"' _n
 }
+if "`kind'" == "flowbuild" {
+    file write `fh' `"import delimited using "@{p_raw}/@{raw_toy}/weights.csv", clear"' _n `"chair_save "@{p_temp}/weights.dta", key(ctn)"' _n "keep if ctn <= 20" _n `"chair_save "@{p_temp}/half.dta", key(ctn)"' _n
+    file write `fh' "chair_use toy/toy, clear" _n `"chair_merge 1:1 ctn using "@{p_temp}/half.dta", expect(master match) nogenerate note(First list.)"' _n
+    file write `fh' `"chair_merge 1:1 ctn using "@{p_temp}/half.dta", expect(master match) nogenerate note(Second list.)"' _n `"chair_save "@{p_temp}/toy.dta", key(ctn)"' _n
+}
+if "`kind'" == "flowmore" {
+    file write `fh' `"use "@{p_temp}/toy.dta", clear"' _n "preserve" _n "chair_use toy/toy, clear" _n "rename value value2" _n "tempfile st" _n "save @Qst@E" _n "restore" _n "chair_merge 1:1 ctn using @Qst@E, expect(match) nogenerate" _n
+    file write `fh' "preserve" _n "clear" _n "set obs 26" _n "generate ctn = _n" _n "generate flag = 1" _n "tempfile built" _n "save @Qbuilt@E" _n "restore" _n "chair_merge 1:1 ctn using @Qbuilt@E, expect(match) nogenerate name(built)" _n
+    file write `fh' "forvalues k = 1/3 {" _n "    preserve" _n "    chair_use toy/toy, clear" _n "    rename value v@Qk@E" _n "    tempfile p@Qk@E" _n "    save @Qp@Qk@E@E" _n "    restore" _n "    chair_merge 1:1 ctn using @Qp@Qk@E@E, expect(match) nogenerate" _n "}" _n
+    file write `fh' "generate grp = mod(ctn, 3)" _n "forvalues g = 0/2 {" _n "    preserve" _n "    keep if grp == @Qg@E" _n `"    chair_save "@{p_temp}/bygrp_@Qg@E.dta", key(ctn)"' _n "    restore" _n "}" _n
+    file write `fh' "clear all" _n `"use "@{p_temp}/bygrp_0.dta", clear"' _n `"chair_append using "@{p_temp}/bygrp_1.dta""' _n `"chair_save "@{p_temp}/joined.dta", key(ctn)"' _n
+}
+if "`kind'" == "order" {
+    file write `fh' "tempname t" _n
+    foreach x in b a {
+        file write `fh' `"file open @T using "@{p_results}/numbers/`stem'_`x'.txt", write text"' _n `"file write @T "`x'" _n"' _n "file close @T" _n
+    }
+}
+if "`kind'" == "dupkey" file write `fh' `"use "@{p_temp}/toy.dta", clear"' _n "replace ctn = 1 in 2" _n `"chair_save "@{p_temp}/dup.dta", key(ctn)"' _n
+if "`kind'" == "nokey" file write `fh' `"use "@{p_temp}/toy.dta", clear"' _n "replace ctn = . in 2" _n `"chair_save "@{p_temp}/dup.dta", key(ctn)"' _n
+if "`kind'" == "badmerge" file write `fh' "chair_use toy/toy, clear" _n `"chair_merge 1:1 ctn using "@{p_temp}/half.dta", expect(match) nogenerate"' _n
 if "`kind'" == "explore" file write `fh' "chair_use toy/toy, clear" _n `"display as text "explore: " _N " rows; data root @{data}""' _n
 file close `fh'
 * "@{" stands for a dollar sign and a brace, which file write would expand.
@@ -41,4 +67,4 @@ if "`m'" == "0" {
     display as error "The line that marks code/templates/step.do as a template was not found: step.do takes the lines above it."
     exit 459
 }
-mata: s = cat(st_local("P") + "/code/" + st_local("s")); s = subinstr(s, "@{", char(36) + "{"); s = subinstr(s, "@T", char(96) + "t" + char(39)); s = t[1..m[1] - 1] \ s; unlink(st_local("P") + "/code/" + st_local("s")); fh = fopen(st_local("P") + "/code/" + st_local("s"), "w"); for (k = 1; k <= rows(s); k++) fput(fh, s[k]); fclose(fh)
+mata: s = cat(st_local("P") + "/code/" + st_local("s")); s = subinstr(s, "@{", char(36) + "{"); s = subinstr(s, "@T", char(96) + "t" + char(39)); s = subinstr(subinstr(s, "@Q", char(96)), "@E", char(39)); s = t[1..m[1] - 1] \ s; unlink(st_local("P") + "/code/" + st_local("s")); fh = fopen(st_local("P") + "/code/" + st_local("s"), "w"); for (k = 1; k <= rows(s); k++) fput(fh, s[k]); fclose(fh)

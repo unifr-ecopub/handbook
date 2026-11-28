@@ -6,9 +6,9 @@
   root inside its own folder, <project>/data/, holding one raw delivery and two toy versions
   (made once in _t/data/ and copied in). master.do takes a folder named data inside the project
   folder for the data root, as in a replication package, so the machine's own data-root file is
-  not read. The Stata cases are in s_tests.do and the R cases in r_tests.do; this file runs both,
-  and a stop inside either that no case catches is itself a TEST FAIL line. Each case writes
-  TEST PASS, TEST FAIL or TEST SKIP. Besides tests/_t/, the run writes two files in tests/:
+  not read. The Stata cases are in s_tests.do, the R cases in r_tests.do and the Python cases in
+  py_tests.do; this file runs all three, and a stop inside one that no case catches is itself a
+  TEST FAIL line. Each case writes TEST PASS, TEST FAIL or TEST SKIP. Besides tests/_t/, the run writes two files in tests/:
   results.txt, which holds every case and ends with the summary line, and Stata's batch log,
   run_tests.log. Git ignores all three. The R cases run on a toy project with R steps: they need
   R at the version the template's renv.lock names and, for their one restore, the network; where
@@ -16,7 +16,7 @@
   the packages into the toy project, never links into renv's cache, so that no link lies under
   _t/. Outside the two repos the run writes only what R and renv write on any machine: renv's
   package cache and its sandbox (where RENV_PATHS_ROOT points, else renv's own folders in the
-  home folder), and the session folder in the system's temp folder that an R killed on purpose
+  home folder), uv's package cache, and the session folder in the system's temp folder that an R killed on purpose
   (H36) leaves behind. Nothing else.
   Two clones run at once and a machine without its data-root file are not tested here: one Stata
   cannot start two runs, nor give itself another home folder, so they stay with a shell script.
@@ -50,7 +50,7 @@ local pers "`c(sysdir_personal)'"
 quietly cd "`here'"
 capture noisily do "`here'/s_tests.do" "`here'"
 local rc = _rc
-forvalues i = 1/67 {
+forvalues i = 1/82 {
     capture log close `=cond(`i' < 10, "h0", "h")'`i'
 }
 capture log close master
@@ -62,7 +62,7 @@ if `rc' do "`rec'" "`out'" S "the Stata cases in s_tests.do ran to their end" 0 
 quietly cd "`here'"
 capture noisily do "`here'/r_tests.do" "`here'"
 local rc = _rc
-forvalues i = 30/68 {
+forvalues i = 30/85 {
     capture log close h`i'
 }
 capture log close h68b
@@ -70,6 +70,15 @@ capture log close rversion
 capture log close master
 quietly cd "`here'"
 if `rc' do "`rec'" "`out'" R "the R cases in r_tests.do ran to their end" 0 `rc'
+
+* ---- Python steps: the cases in py_tests.do ------------------------------------------------------
+quietly cd "`here'"
+capture noisily do "`here'/py_tests.do" "`here'"
+local rc = _rc
+capture log close h87
+capture log close master
+quietly cd "`here'"
+if `rc' do "`rec'" "`out'" P "the Python cases in py_tests.do ran to their end" 0 `rc'
 sysdir set PERSONAL "`pers'"
 
 * ---- Summary -------------------------------------------------------------------------------------
